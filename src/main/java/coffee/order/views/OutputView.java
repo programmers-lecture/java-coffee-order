@@ -46,9 +46,9 @@ public class OutputView {
         System.out.println("주문 내역은 아래와 같습니다.");
         int sum = 0;
         for(Order order: orders) {
-            sum += order.getMenuPrice();
+            sum += order.getIsCouponUsed() ? 0 : order.getMenuPrice() * order.getCount();
             System.out.print(order.getMenuName() + " " + order.getCount() + "개 ");
-            System.out.print(order.getIsCouponUsed() ? "쿠폰사용" : order.getMenuPrice() + "원");
+            System.out.print(order.getIsCouponUsed() ? "쿠폰사용" : order.getMenuPrice() * order.getCount() + "원");
             System.out.println();
         }
         System.out.println();
