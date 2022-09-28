@@ -1,6 +1,7 @@
 package coffee.order.domain.food;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
@@ -8,9 +9,30 @@ import static coffee.order.message.MessageUnit.WON;
 
 public enum FoodCategory {
 
-    COFFEE(new Foods(), "커피", 1L),
-    TEA(new Foods(), "티", 2L),
-    DESSERT(new Foods(), "디저트", 3L);
+    COFFEE(
+            new Foods(List.of(
+                    new Food(1L, "에스프레소", 2000, 999),
+                    new Food(2L, "아메리카노", 3000, 999),
+                    new Food(3L, "콜드블루", 4000, 999),
+                    new Food(4L, "카페라떼", 4000, 999)
+            )),
+            "커피",
+            1L
+    ),
+    TEA(
+            new Foods(List.of(
+                    new Food(1L, "그린티", 3000, 999)
+            )),
+            "티",
+            2L
+    ),
+    DESSERT(
+            new Foods(List.of(
+                    new Food(1L, "케익", 6000, 999)
+            )),
+            "디저트",
+            3L
+    );
 
     private Foods foods;
     private final String name;
@@ -20,10 +42,6 @@ public enum FoodCategory {
         this.foods = foods;
         this.name = name;
         this.id = id;
-    }
-
-    public static Foods findFoodsByCategoryName(String categoryName) {
-        return findFoodCategoryByCategoryName(categoryName).foods;
     }
 
     public static Foods findFoodsByCategoryId(Long categoryId) {

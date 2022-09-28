@@ -10,12 +10,8 @@ public class Foods {
 
     private List<Food> foods;
 
-    public Foods() {
-        this.foods = List.of(
-                new Food(1L, "아메리카노", 10000, 10),
-                new Food(2L, "아아2", 10000, 10),
-                new Food(3L, "아아3", 10000, 10)
-        );
+    public Foods(List<Food> foods) {
+        this.foods = foods;
     }
 
     public Food findFoodByFoodId(Long id) {

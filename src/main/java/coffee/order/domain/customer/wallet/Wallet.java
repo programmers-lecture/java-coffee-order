@@ -6,7 +6,7 @@ public class Wallet {
     private Coupon coupon;
 
     public Wallet() {
-        this.cash = new Cash(20000);
+        this.cash = new Cash(Integer.MAX_VALUE);
         this.coupon = new Coupon();
     }
 
