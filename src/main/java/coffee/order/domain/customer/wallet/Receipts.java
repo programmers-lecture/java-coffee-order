@@ -1,4 +1,4 @@
-package coffee.order.domain.customer;
+package coffee.order.domain.customer.wallet;
 
 import coffee.order.domain.order.Orders;
 

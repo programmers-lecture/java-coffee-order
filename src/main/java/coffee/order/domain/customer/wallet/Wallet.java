@@ -5,8 +5,8 @@ public class Wallet {
     private Cash cash;
     private Coupon coupon;
 
-    public Wallet(Cash cash, Coupon coupon) {
-        this.cash = cash;
-        this.coupon = coupon;
+    public Wallet() {
+        this.cash = new Cash(20000L);
+        this.coupon = new Coupon();
     }
 }
