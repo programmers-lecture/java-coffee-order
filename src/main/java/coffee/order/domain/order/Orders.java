@@ -20,18 +20,19 @@ public class Orders {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        createOrderListMessage(sb);
-        createTotalPriceMessage(sb);
-        return sb.toString();
+        StringBuilder messageBuilder = new StringBuilder();
+        createOrderListMessage(messageBuilder);
+        createTotalPriceMessage(messageBuilder);
+        return messageBuilder.toString();
     }
 
-    private void createOrderListMessage(StringBuilder sb) {
-        orders.forEach(order -> sb.append(order.createOrderHistory()));
+    private void createOrderListMessage(StringBuilder messageBuilder) {
+        orders.forEach(order -> messageBuilder.append(order.createOrderHistory()));
     }
 
-    private StringBuilder createTotalPriceMessage(StringBuilder sb) {
-        return sb.append(TOTAL_PRICE.message)
+    private void createTotalPriceMessage(StringBuilder messageBuilder) {
+        messageBuilder
+                .append(TOTAL_PRICE.message)
                 .append(orders.stream()
                         .mapToInt(Order::sumTotalPrice)
                         .sum())
