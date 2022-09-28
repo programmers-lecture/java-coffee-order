@@ -1,6 +1,6 @@
 package coffee.order.domain;
 
-import coffee.order.domain.food.Food;
+import coffee.order.domain.food.temp.Food;
 
 import java.util.List;
 
