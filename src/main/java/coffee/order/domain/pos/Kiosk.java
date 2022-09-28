@@ -2,14 +2,11 @@ package coffee.order.domain.pos;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.food.Food;
-import coffee.order.domain.food.FoodCategory;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
 
-import java.util.Arrays;
-
-import static coffee.order.domain.food.FoodCategory.*;
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
+import static coffee.order.domain.food.FoodCategory.getMenuMessage;
 import static coffee.order.message.InputMessage.INPUT_CUSTOMER_SELECT_MENU;
 import static coffee.order.view.OutputView.print;
 

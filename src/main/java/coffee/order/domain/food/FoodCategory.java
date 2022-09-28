@@ -1,12 +1,10 @@
 package coffee.order.domain.food;
 
-import coffee.order.message.MessageUnit;
-
 import java.util.Arrays;
 import java.util.Optional;
 
 import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
-import static coffee.order.message.MessageUnit.*;
+import static coffee.order.message.MessageUnit.WON;
 
 public enum FoodCategory {
 

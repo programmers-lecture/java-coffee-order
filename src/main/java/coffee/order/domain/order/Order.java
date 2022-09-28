@@ -15,7 +15,7 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public StringBuilder createOrderHistory() {
+    protected StringBuilder createOrderHistory() {
         return new StringBuilder()
                 .append(this.food.getName())
                 .append(" ")
@@ -27,7 +27,7 @@ public class Order {
                 .append("\n");
     }
 
-    private int sumTotalPrice() {
+    protected int sumTotalPrice() {
         return food.getPrice() * quantity;
     }
 

@@ -5,6 +5,8 @@ import coffee.order.domain.customer.wallet.Wallet;
 import coffee.order.domain.order.Orders;
 import coffee.order.view.InputView;
 
+import static coffee.order.view.OutputView.print;
+
 public class Customer {
 
     private static final Long id = 1L;

@@ -2,12 +2,10 @@ package coffee.order.controller;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.pos.Kiosk;
-import coffee.order.message.InputMessage;
 import coffee.order.view.InputView;
-import coffee.order.view.OutputView;
 
-import static coffee.order.message.InputMessage.*;
-import static coffee.order.view.OutputView.*;
+import static coffee.order.message.InputMessage.INPUT_USER_SELECT;
+import static coffee.order.view.OutputView.print;
 
 public class CafeController {
 
