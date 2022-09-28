@@ -5,14 +5,14 @@ import coffee.order.domain.pos.Kiosk;
 import coffee.order.view.InputView;
 
 import static coffee.order.domain.pos.KioskCommand.*;
-import static coffee.order.message.InputMessage.INPUT_USER_SELECT;
+import static coffee.order.message.KioskMessage.KIOSK_INPUT_USER_SELECT;
 import static coffee.order.view.OutputView.print;
 
 public class CafeController {
 
     public static void main(String[] args) {
         while (true) {
-            print(INPUT_USER_SELECT.message);
+            print(KIOSK_INPUT_USER_SELECT.message);
             String command = InputView.read();
 
             if (command.equals(END_KIOSK.selectedCommand)) {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static coffee.order.message.MessageUnit.WON;
-import static coffee.order.message.OrderMessage.TOTAL_PRICE;
+import static coffee.order.message.KioskMessage.KIOSK_TOTAL_PRICE;
 
 public class Orders {
 
@@ -43,7 +43,7 @@ public class Orders {
 
     private void createTotalPriceMessage(StringBuilder messageBuilder) {
         messageBuilder
-                .append(TOTAL_PRICE.message)
+                .append(KIOSK_TOTAL_PRICE.message)
                 .append(orders.stream()
                         .mapToInt(Order::sumTotalPrice)
                         .sum())

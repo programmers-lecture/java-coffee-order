@@ -7,13 +7,13 @@ import coffee.order.domain.order.Orders;
 
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
 import static coffee.order.domain.food.FoodCategory.getMenuMessage;
-import static coffee.order.message.InputMessage.INPUT_CUSTOMER_SELECT_MENU;
+import static coffee.order.message.KioskMessage.KIOSK_INPUT_CUSTOMER_SELECT_MENU;
 import static coffee.order.view.OutputView.print;
 
 public class KioskOrder {
 
     public Orders askOrder(Customer customer) {
-        print(INPUT_CUSTOMER_SELECT_MENU.message);
+        print(KIOSK_INPUT_CUSTOMER_SELECT_MENU.message);
         print(getMenuMessage());
         return getOrders(customer);
 //        customer.addMyOrder(customerOrders);
