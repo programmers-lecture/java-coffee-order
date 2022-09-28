@@ -6,7 +6,15 @@ public class Wallet {
     private Coupon coupon;
 
     public Wallet() {
-        this.cash = new Cash(20000L);
+        this.cash = new Cash(20000);
         this.coupon = new Coupon();
+    }
+
+    public int getMyCash() {
+        return this.cash.getCash();
+    }
+
+    public void spend(int money) {
+        this.cash.spend(money);
     }
 }

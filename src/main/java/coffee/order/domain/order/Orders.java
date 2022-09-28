@@ -18,6 +18,13 @@ public class Orders {
         orders.add(order);
     }
 
+    public int getTotalPrice() {
+        return this.orders
+                .stream()
+                .mapToInt(Order::sumTotalPrice)
+                .sum();
+    }
+
     @Override
     public String toString() {
         StringBuilder messageBuilder = new StringBuilder();

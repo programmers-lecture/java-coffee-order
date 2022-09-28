@@ -5,7 +5,7 @@ import coffee.order.domain.customer.wallet.Wallet;
 import coffee.order.domain.order.Orders;
 import coffee.order.view.InputView;
 
-import static coffee.order.view.OutputView.print;
+import static coffee.order.exception.CustomerException.NOT_ENOUGH_MONEY;
 
 public class Customer {
 
@@ -25,6 +25,13 @@ public class Customer {
     }
 
     public void addMyOrder(Orders orders) {
+        if (checkNotEnoughMoney(orders)) {
+            throw NOT_ENOUGH_MONEY.throwMyException();
+        }
         receipts.addReceipt(orders);
+    }
+
+    private boolean checkNotEnoughMoney(Orders orders) {
+        return wallet.getMyCash() - orders.getTotalPrice() < 0;
     }
 }

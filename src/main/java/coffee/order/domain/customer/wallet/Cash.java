@@ -2,9 +2,17 @@ package coffee.order.domain.customer.wallet;
 
 public class Cash {
 
-    private Long cash;
+    private int cash;
 
-    public Cash(Long cash) {
+    public Cash(int cash) {
         this.cash = cash;
+    }
+
+    protected int getCash() {
+        return cash;
+    }
+
+    protected void spend(int money) {
+        this.cash -= money;
     }
 }
