@@ -6,6 +6,9 @@ import coffee.order.domain.food.FoodCategory;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
 
+import java.util.Arrays;
+
+import static coffee.order.domain.food.FoodCategory.*;
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
 import static coffee.order.message.InputMessage.INPUT_CUSTOMER_SELECT_MENU;
 import static coffee.order.view.OutputView.print;
@@ -14,7 +17,7 @@ public class Kiosk {
 
     public void takeOrders(Customer customer) {
         print(INPUT_CUSTOMER_SELECT_MENU.message);
-        print(FoodCategory.COFFEE.toString());
+        print(getMenuMessage());
         Orders orders = new Orders();
         orders.addOrder(makeOrder(customer.order()));
         customer.addMyOrder(orders);

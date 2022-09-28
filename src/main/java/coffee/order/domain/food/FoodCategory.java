@@ -71,8 +71,7 @@ public enum FoodCategory {
         return this.id;
     }
 
-    @Override
-    public String toString() {
+    public static String getMenuMessage() {
         StringBuilder menuBuilder = new StringBuilder();
         Arrays.stream(FoodCategory.values())
                 .forEach(category -> { menuBuilder
