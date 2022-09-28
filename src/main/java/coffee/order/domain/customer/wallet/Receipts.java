@@ -13,7 +13,7 @@ public class Receipts {
         this.receipts = new ArrayList<>();
     }
 
-    protected void addReceipt(Orders orders) {
+    public void addReceipt(Orders orders) {
         receipts.add(orders);
     }
 }

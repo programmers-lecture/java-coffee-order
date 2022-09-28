@@ -2,14 +2,19 @@ package coffee.order.domain.pos;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.food.Food;
+import coffee.order.domain.food.FoodCategory;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
 
-import static coffee.order.domain.food.FoodCategory.findTypeFoodsByCategoryId;
+import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
+import static coffee.order.message.InputMessage.INPUT_CUSTOMER_SELECT_MENU;
+import static coffee.order.view.OutputView.print;
 
 public class Kiosk {
 
     public void takeOrders(Customer customer) {
+        print(INPUT_CUSTOMER_SELECT_MENU.message);
+        print(FoodCategory.COFFEE.toString());
         Orders orders = new Orders();
         orders.addOrder(makeOrder(customer.order()));
         customer.addMyOrder(orders);
@@ -25,7 +30,7 @@ public class Kiosk {
     }
 
     private Food findFoodByCategoryIdAndFoodId(Long foodCategoryId, Long foodId) {
-        return findTypeFoodsByCategoryId(foodCategoryId)
+        return findFoodsByCategoryId(foodCategoryId)
                 .findFoodByFoodId(foodId);
     }
 
@@ -38,7 +43,7 @@ public class Kiosk {
     }
 
     private int findOrderedFoodQuantity(String orderCommand) {
-        return Integer.parseInt(orderCommand.substring(6).trim());
+        return Integer.parseInt(orderCommand.substring(5).trim());
     }
 
     private void askSaveCoupon() {

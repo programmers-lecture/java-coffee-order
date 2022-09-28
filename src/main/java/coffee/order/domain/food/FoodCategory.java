@@ -1,8 +1,12 @@
 package coffee.order.domain.food;
 
-import java.util.*;
+import coffee.order.message.MessageUnit;
 
-import static coffee.order.exception.FoodException.FOODS_GET_NULL_POINTER_EXCEPTION;
+import java.util.Arrays;
+import java.util.Optional;
+
+import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
+import static coffee.order.message.MessageUnit.*;
 
 public enum FoodCategory {
 
@@ -20,42 +24,43 @@ public enum FoodCategory {
         this.id = id;
     }
 
-    public static Foods findTypeFoodsByCategoryName(String categoryName) {
-        return findFoodsByCategoryName(categoryName).foods;
+    public static Foods findFoodsByCategoryName(String categoryName) {
+        return findFoodCategoryByCategoryName(categoryName).foods;
     }
 
-    public static Foods findTypeFoodsByCategoryId(Long categoryId) {
-        return findFoodsByCategoryId(categoryId).foods;
+    public static Foods findFoodsByCategoryId(Long categoryId) {
+        return findFoodCategoryByCategoryId(categoryId).foods;
     }
 
-    public static FoodCategory findFoodsByCategoryName(String categoryName) {
-        return findOptionalFoodsByCategoryName(categoryName)
-                .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
+    public static FoodCategory findFoodCategoryByCategoryName(String categoryName) {
+        return findOptionalFoodCategoryByCategoryName(categoryName)
+                .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
-    public static FoodCategory findFoodsByCategoryId(Long categoryId) {
-        return findOptionalFoodsByCategoryId(categoryId)
-                .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
+    public static FoodCategory findFoodCategoryByCategoryId(Long categoryId) {
+        return findOptionalFoodCategoryByCategoryId(categoryId)
+                .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
-    private static Optional<FoodCategory> findOptionalFoodsByCategoryName(String categoryName) {
+    private static Optional<FoodCategory> findOptionalFoodCategoryByCategoryName(String categoryName) {
         return Arrays.stream(FoodCategory.values())
-                .filter(category -> checkSameFoodTypeName(categoryName, category))
+                .filter(category -> checkSameFoodCategoryName(categoryName, category.name))
                 .findFirst();
     }
 
-    private static Optional<FoodCategory> findOptionalFoodsByCategoryId(Long categoryId) {
+    private static Optional<FoodCategory> findOptionalFoodCategoryByCategoryId(Long categoryId) {
         return Arrays.stream(FoodCategory.values())
-                .filter(category -> checkSameFoodTypeId(categoryId, category))
+                .filter(category -> checkSameFoodCategoryId(categoryId, category.id))
                 .findFirst();
+
     }
 
-    private static boolean checkSameFoodTypeName(String foodsTypeName, FoodCategory category) {
-        return category.name.equals(foodsTypeName);
+    private static boolean checkSameFoodCategoryName(String foodsTypeName, String categoryName) {
+        return categoryName.equals(foodsTypeName);
     }
 
-    private static boolean checkSameFoodTypeId(Long categoryId, FoodCategory category) {
-        return Objects.equals(category.id, categoryId);
+    private static boolean checkSameFoodCategoryId(Long findCategoryId, Long categoryId) {
+        return categoryId.longValue() == findCategoryId.longValue();
     }
 
     public String findName() {
@@ -66,4 +71,35 @@ public enum FoodCategory {
         return this.id;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder menuBuilder = new StringBuilder();
+        Arrays.stream(FoodCategory.values())
+                .forEach(category -> { menuBuilder
+                            .append(category.id)
+                            .append(" ")
+                            .append(category.name)
+                            .append("\n");
+
+                    category.foods
+                            .getFoods()
+                            .forEach(food -> { menuBuilder
+                                        .append(category.id)
+                                        .append("-")
+                                        .append(food.getId())
+                                        .append(" ")
+                                        .append(food.getName())
+                                        .append(" ")
+                                        .append("//")
+                                        .append(" ")
+                                        .append(food.getPrice())
+                                        .append(WON.unit)
+                                        .append("\n");
+                            });
+
+                    menuBuilder.append("\n\n");
+                });
+
+        return menuBuilder.toString();
+    }
 }
