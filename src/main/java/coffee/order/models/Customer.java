@@ -1,12 +1,10 @@
 package coffee.order.models;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Customer {
-    private String phoneNumber;
-    private Coupon coupon;
+    private static Set<Coupon> coupons = new HashSet<>();
+
     private List<Order> orders;
 
     public Customer() {
@@ -38,12 +36,18 @@ public class Customer {
         order.useCouponForOrder();
     }
 
-    public void createCoupons(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        coupon = new Coupon(orders.size());
-    }
-
-    public Coupon getCoupon() {
+    public Coupon createCoupons(String phoneNumber) {
+        Coupon coupon = coupons.stream()
+                .filter(c -> c.getPhoneNumber().equals(phoneNumber))
+                .findFirst()
+                .orElse(null);
+        if(coupon == null) {
+            coupon = new Coupon(phoneNumber);
+            coupons.add(coupon);
+            return coupon;
+        }
+        coupon.earnCoupon();
         return coupon;
     }
+
 }
