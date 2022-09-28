@@ -14,11 +14,18 @@ public class Food {
         this.quantity = new FoodQuantity(quantity);
     }
 
-    public void decreasePrice(int price) {
-        this.price.decreasePrice(price);
+    public void decreasePrice(int inputPrice) {
+        this.price.decreasePrice(inputPrice);
     }
 
-    public void increasePrice(int price) {
-        this.price.increasePrice(price);
+    public void increasePrice(int inputPrice) {
+        this.price.increasePrice(inputPrice);
     }
-}
+
+    public void decreaseQuantity(int inputQuantity) {
+        this.quantity.decreaseQuantity(inputQuantity);
+    }
+
+    public void increaseQuantity(int inputQuantity) {
+        this.quantity.increaseQuantity(inputQuantity);
+    }}

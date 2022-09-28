@@ -1,6 +1,6 @@
 package coffee.order.domain.food;
 
-import static coffee.order.exception.PriceException.PRICE_MINUS_EXCEPTION;
+import static coffee.order.exception.FoodException.PRICE_MINUS_EXCEPTION;
 
 public class FoodPrice {
 
