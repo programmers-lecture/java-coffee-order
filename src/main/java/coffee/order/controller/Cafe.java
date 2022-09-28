@@ -12,22 +12,25 @@ public class Cafe {
     private Cafe() {}
 
     public static void runCafe() {
-        OutputView.printMenu();
-        List<String> orders = InputView.inputOrder();
-        Customer customer = new Customer();
-        customer.createOrders(orders);
-        OutputView.printOrders(customer.getOrders());
-        String phoneNumber = InputView.inputPhoneNumberForEarnCoupon();
-        customer.createCoupons(phoneNumber);
-        Coupon coupon = customer.getCoupon();
-        OutputView.printCouponCnt(coupon.getCount());
-        if(coupon.isCouponUsePossible()) {
-            String couponUseMenu = InputView.inputCouponUseForMenu(customer.getOrders());
-            coupon.useCoupon();
-            customer.useCouponForOrderedMenu(couponUseMenu);
-            OutputView.printCouponUse();
+        boolean isOrderEnd = false;
+        while(!isOrderEnd) {
+            OutputView.printMenu();
+            List<String> orders = InputView.inputOrder();
+            Customer customer = new Customer();
+            customer.createOrders(orders);
             OutputView.printOrders(customer.getOrders());
+            String phoneNumber = InputView.inputPhoneNumberForEarnCoupon();
+            Coupon coupon = customer.createCoupons(phoneNumber);
+            OutputView.printCouponCnt(coupon.getCount());
+            if (coupon.isCouponUsePossible()) {
+                String couponUseMenu = InputView.inputCouponUseForMenu(customer.getOrders());
+                coupon.useCoupon();
+                customer.useCouponForOrderedMenu(couponUseMenu);
+                OutputView.printCouponUse();
+                OutputView.printOrders(customer.getOrders());
+            }
+            OutputView.printOrderEnd();
+            isOrderEnd = InputView.inputOrderEnd();
         }
-        OutputView.printOrderEnd();
     }
 }

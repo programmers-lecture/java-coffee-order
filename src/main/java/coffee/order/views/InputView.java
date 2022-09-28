@@ -51,4 +51,12 @@ public class InputView {
         return "";
     }
 
+    public static boolean inputOrderEnd() {
+        System.out.println();
+        System.out.println("주문을 새로 하시겠습니까?");
+        System.out.println("1. 네 / 2. 아니요");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.next().equals("2");
+    }
+
 }
