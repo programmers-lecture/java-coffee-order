@@ -10,11 +10,23 @@ public class Wallet {
         this.coupon = new Coupon();
     }
 
+    public boolean checkCouponEnoughToUse() {
+        return this.coupon.checkCouponEnoughToUse();
+    }
+
     public int getMyCash() {
         return this.cash.getCash();
     }
 
+    public void useCoupon() {
+        this.coupon.setQuantityZero();
+    }
+
     public void spend(int money) {
         this.cash.spend(money);
+    }
+
+    public void increaseCouponQuantity() {
+        this.coupon.increaseQuantity();
     }
 }

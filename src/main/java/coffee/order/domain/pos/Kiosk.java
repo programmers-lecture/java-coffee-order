@@ -5,22 +5,32 @@ import coffee.order.domain.food.Food;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
 
+import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
 import static coffee.order.domain.food.FoodCategory.getMenuMessage;
+import static coffee.order.domain.pos.KioskCommand.YES;
+import static coffee.order.message.CouponMessage.*;
 import static coffee.order.message.InputMessage.INPUT_CUSTOMER_SELECT_MENU;
 import static coffee.order.view.OutputView.print;
 
 public class Kiosk {
 
-    public void takeOrders(Customer customer) {
+    public void process(Customer customer) {
+        order(customer);
+        askSaveCoupon(customer);
+        askUseCoupon(customer);
+    }
+
+    private void order(Customer customer) {
         print(INPUT_CUSTOMER_SELECT_MENU.message);
         print(getMenuMessage());
         Orders orders = new Orders();
-        orders.addOrder(makeOrder(customer.order()));
+        orders.addOrder(
+                createOrder(customer.commands()));
         customer.addMyOrder(orders);
     }
 
-    private Order makeOrder(String orderCommand) {
+    private Order createOrder(String orderCommand) {
         return new Order(
                 findFoodByCategoryIdAndFoodId(
                         findFoodCategoryId(orderCommand),
@@ -46,8 +56,36 @@ public class Kiosk {
         return Integer.parseInt(orderCommand.substring(5).trim());
     }
 
-    private void askSaveCoupon() {
+    private boolean checkCustomersCommandYes(String command) {
+        return command.equals(YES.selectedCommand);
+    }
 
+    private void askSaveCoupon(Customer customer) {
+        print(KIOSK_ASK_SAVE_COUPON.message);
+        print(KIOSK_SELECT_YES_OR_NO.message);
+        if (checkCustomersCommandYes(customer.commands())) {
+            askPhoneNumber(customer);
+            customer.saveCoupon();
+        }
+    }
+
+    private void askPhoneNumber(Customer customer) {
+        print(KIOSK_ASK_PHONE_NUMBER.message);
+        String phoneNumber = customer.commands();
+        if (CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber)) {
+            customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
+        }
+        if (!CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber)) {
+            CUSTOMERS_DATA.saveCustomerWithPhoneNumber(customer, phoneNumber);
+        }
+    }
+
+    private void askUseCoupon(Customer customer) {
+        print(KIOSK_ASK_USE_COUPON.message);
+        print(KIOSK_SELECT_YES_OR_NO.message);
+        if (checkCustomersCommandYes(customer.commands())) {
+            customer.useCoupon();
+        }
     }
 
 }

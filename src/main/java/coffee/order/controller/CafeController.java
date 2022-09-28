@@ -16,7 +16,7 @@ public class CafeController {
         if (command.equals("1")) {
             Kiosk kiosk = new Kiosk();
             Customer customer = new Customer();
-            kiosk.takeOrders(customer);
+            kiosk.process(customer);
 
         }
 

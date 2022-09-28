@@ -5,7 +5,7 @@ import coffee.order.domain.customer.wallet.Wallet;
 import coffee.order.domain.order.Orders;
 import coffee.order.view.InputView;
 
-import static coffee.order.exception.CustomerException.NOT_ENOUGH_MONEY;
+import static coffee.order.exception.CustomerException.CUSTOMER_NOT_ENOUGH_MONEY;
 
 public class Customer {
 
@@ -20,18 +20,37 @@ public class Customer {
         this.receipts = new Receipts();
     }
 
-    public String order() {
+    public String commands() {
         return InputView.read();
+    }
+
+    public void useCoupon() {
+        if (checkMyCouponEnough()) {
+            wallet.useCoupon();
+        }
     }
 
     public void addMyOrder(Orders orders) {
         if (checkNotEnoughMoney(orders)) {
-            throw NOT_ENOUGH_MONEY.throwMyException();
+            throw CUSTOMER_NOT_ENOUGH_MONEY.throwMyException();
         }
         receipts.addReceipt(orders);
+    }
+
+    public void savePhoneNumber(String phoneNumber) {
+        phone = new Phone(phoneNumber);
+    }
+
+    public void saveCoupon() {
+        wallet.increaseCouponQuantity();;
+    }
+
+    private boolean checkMyCouponEnough() {
+        return wallet.checkCouponEnoughToUse();
     }
 
     private boolean checkNotEnoughMoney(Orders orders) {
         return wallet.getMyCash() - orders.getTotalPrice() < 0;
     }
+
 }
