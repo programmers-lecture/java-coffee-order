@@ -9,10 +9,12 @@ public class Order {
 
     private Food food;
     private int quantity;
+    private boolean usedCoupon;
 
-    public Order(Food food, int quantity) {
+    public Order(Food food, int quantity, boolean usedCoupon) {
         this.food = food;
         this.quantity = quantity;
+        this.usedCoupon = false;
     }
 
     protected StringBuilder createOrderHistory() {
