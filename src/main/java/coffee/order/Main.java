@@ -1,7 +1,9 @@
 package coffee.order;
 
+import coffee.order.controller.Cafe;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Cafe.runCafe();
     }
 }
