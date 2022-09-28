@@ -3,6 +3,7 @@ package coffee.order.domain.food;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static coffee.order.exception.FoodsException.FOODS_GET_NULL_POINTER_EXCEPTION;
 
@@ -31,17 +32,25 @@ public enum Foods {
     }
 
     private Foods findFoodsByName(String foodsTypeName) {
-        return Arrays.stream(Foods.values())
-                .dropWhile(typeFoods -> checkSameFoodTypeName(foodsTypeName, typeFoods))
-                .findFirst()
+        return findOptionalFoodsByName(foodsTypeName)
                 .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
+    private Optional<Foods> findOptionalFoodsByName(String foodsTypeName) {
+        return Arrays.stream(Foods.values())
+                .dropWhile(typeFoods -> checkSameFoodTypeName(foodsTypeName, typeFoods))
+                .findFirst();
+    }
+
     private Foods findFoodsByTypeId(int foodTypeId) {
+        return findOptionalFoodsByTypeId(foodTypeId)
+                .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
+    }
+
+    private Optional<Foods> findOptionalFoodsByTypeId(int foodTypeId) {
         return Arrays.stream(Foods.values())
                 .dropWhile(typeFoods -> checkSameFoodTypeId(foodTypeId, typeFoods))
-                .findFirst()
-                .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
+                .findFirst();
     }
 
     private boolean checkSameFoodTypeName(String foodsTypeName, Foods typeFoods) {
