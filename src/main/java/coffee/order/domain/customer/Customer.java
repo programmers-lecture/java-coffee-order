@@ -24,6 +24,10 @@ public class Customer {
         return InputView.read();
     }
 
+    public int findCouponQuantity() {
+        return wallet.findCouponQuantity();
+    }
+
     public void useCoupon() {
         if (checkMyCouponEnough()) {
             wallet.useCoupon();

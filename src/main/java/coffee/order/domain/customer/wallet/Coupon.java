@@ -5,7 +5,11 @@ public class Coupon {
     private int quantity;
 
     public Coupon() {
-        this.quantity = 9;
+        this.quantity = 0;
+    }
+
+    protected int getQuantity() {
+        return this.quantity;
     }
 
     protected boolean checkCouponEnoughToUse() {

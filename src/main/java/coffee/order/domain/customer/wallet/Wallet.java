@@ -22,6 +22,10 @@ public class Wallet {
         this.coupon.setQuantityZero();
     }
 
+    public int findCouponQuantity() {
+        return this.coupon.getQuantity();
+    }
+
     public void spend(int money) {
         this.cash.spend(money);
     }

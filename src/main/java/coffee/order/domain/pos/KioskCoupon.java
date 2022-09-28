@@ -20,6 +20,9 @@ public class KioskCoupon {
         if (checkCustomersCommandYes(customer.commands())) {
             askPhoneNumber(customer);
             customer.saveCoupon();
+            print(KIOSK_NOTICE_CURRENT_COUPON_QUANTITY.message);
+            print(String.valueOf(customer.findCouponQuantity()));
+            print(KIOSK_NOTICE_CURRENT_COUPON_QUANTITY_LAST_SENTENCE.message);
         }
     }
 
