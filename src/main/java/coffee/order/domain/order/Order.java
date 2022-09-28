@@ -1,10 +1,8 @@
 package coffee.order.domain.order;
 
 import coffee.order.domain.food.Food;
-import coffee.order.domain.pos.Kiosk;
-import coffee.order.message.CouponMessage;
 
-import static coffee.order.message.CouponMessage.*;
+import static coffee.order.message.CouponMessage.KIOSK_COUPON_USE;
 import static coffee.order.message.MessageUnit.COUNT;
 import static coffee.order.message.MessageUnit.WON;
 
@@ -14,7 +12,7 @@ public class Order {
     private int quantity;
     private boolean usedCoupon;
 
-    public Order(Food food, int quantity, boolean usedCoupon) {
+    public Order(Food food, int quantity) {
         this.food = food;
         this.quantity = quantity;
         this.usedCoupon = false;

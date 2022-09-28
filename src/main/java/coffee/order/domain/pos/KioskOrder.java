@@ -36,8 +36,7 @@ public class KioskOrder {
                         findFoodCategoryId(orderCommand),
                         findFoodId(orderCommand)
                 ),
-                findOrderedFoodQuantity(orderCommand),
-                false);
+                findOrderedFoodQuantity(orderCommand));
     }
 
     private Food findFoodByCategoryIdAndFoodId(Long foodCategoryId, Long foodId) {
