@@ -72,18 +72,22 @@ public enum FoodCategory {
     public static String getMenuMessage() {
         StringBuilder menuBuilder = new StringBuilder();
         Arrays.stream(FoodCategory.values())
-                .forEach(category -> { menuBuilder
+                .forEach(category -> {
+                    menuBuilder
                             .append(category.id)
+                            .append(".")
                             .append(" ")
                             .append(category.name)
                             .append("\n");
 
                     category.foods
                             .getFoods()
-                            .forEach(food -> { menuBuilder
+                            .forEach(food -> {
+                                menuBuilder
                                         .append(category.id)
                                         .append("-")
                                         .append(food.getId())
+                                        .append(".")
                                         .append(" ")
                                         .append(food.getName())
                                         .append(" ")
