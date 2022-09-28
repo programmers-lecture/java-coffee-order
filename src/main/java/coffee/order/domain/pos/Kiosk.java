@@ -5,12 +5,9 @@ import coffee.order.domain.order.Orders;
 
 public class Kiosk {
 
-    private final KioskOrder kioskOrder = new KioskOrder();
-    private final KioskCoupon kioskCoupon = new KioskCoupon();
-
-    public void process(Customer customer) {
-        Orders customerOrders = kioskOrder.askOrder(customer);
-        boolean checkCouponUsed = kioskCoupon.askCoupon(customer);
+    public void orderProcess(Customer customer) {
+        Orders customerOrders = new KioskOrder(customer).askOrder();
+        boolean checkCouponUsed = new KioskCoupon(customer).askCoupon();
 
         if (checkCouponUsed) {
             customerOrders

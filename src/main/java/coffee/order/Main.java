@@ -1,7 +1,10 @@
 package coffee.order;
 
+import coffee.order.controller.CafeController;
+
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        new CafeController().openCafe();
     }
 }

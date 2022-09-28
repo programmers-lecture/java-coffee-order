@@ -9,16 +9,22 @@ import static coffee.order.view.OutputView.print;
 
 public class KioskCoupon {
 
-    public boolean askCoupon(Customer customer) {
-        askSaveCoupon(customer);
-        return askUseCoupon(customer);
+    private Customer customer;
+
+    public KioskCoupon(Customer customer) {
+        this.customer = customer;
     }
 
-    private void askSaveCoupon(Customer customer) {
+    public boolean askCoupon() {
+        askSaveCoupon();
+        return askUseCoupon();
+    }
+
+    private void askSaveCoupon() {
         print(KIOSK_ASK_SAVE_COUPON.message);
         print(KIOSK_SELECT_YES_OR_NO.message);
         if (checkCustomersCommandYes(customer.commands())) {
-            askPhoneNumber(customer);
+            customer = askPhoneNumber();
             customer.saveCoupon();
             print(KIOSK_NOTICE_CURRENT_COUPON_QUANTITY.message);
             print(String.valueOf(customer.findCouponQuantity()));
@@ -26,7 +32,7 @@ public class KioskCoupon {
         }
     }
 
-    private boolean askUseCoupon(Customer customer) {
+    private boolean askUseCoupon() {
         if (!customer.checkMyCouponEnough()) return false;
 
         print(KIOSK_ASK_USE_COUPON.message);
@@ -38,18 +44,20 @@ public class KioskCoupon {
         return false;
     }
 
-    private void askPhoneNumber(Customer customer) {
+    private Customer askPhoneNumber() {
         print(KIOSK_ASK_PHONE_NUMBER.message);
         String phoneNumber = customer.commands();
-        if (CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber)) {
-            customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
-        }
         if (!CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber)) {
             CUSTOMERS_DATA.saveCustomerWithPhoneNumber(customer, phoneNumber);
         }
+        return CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
     }
 
     private boolean checkCustomersCommandYes(String command) {
         return command.equals(YES.selectedCommand);
+    }
+
+    private void findCustomerFromDataByPhoneNumber(String phoneNumber) {
+        customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
     }
 }

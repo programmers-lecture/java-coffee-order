@@ -10,7 +10,7 @@ import static coffee.order.view.OutputView.print;
 
 public class CafeController {
 
-    public static void main(String[] args) {
+    public void openCafe() {
         while (true) {
             print(KIOSK_INPUT_USER_SELECT.message);
             String command = InputView.read();
@@ -22,7 +22,7 @@ public class CafeController {
             if (command.equals(CUSTOMER.selectedCommand)) {
                 Kiosk kiosk = new Kiosk();
                 Customer customer = new Customer();
-                kiosk.process(customer);
+                kiosk.orderProcess(customer);
             }
 
             if (command.equals(BARISTA.selectedCommand)) {

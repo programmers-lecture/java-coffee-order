@@ -16,7 +16,7 @@ public class Phone {
         this.phoneNumber = phoneNumber;
     }
 
-    protected boolean checkPhoneNumberEmpty(String phoneNumber) {
+    private boolean checkPhoneNumberEmpty(String phoneNumber) {
         return phoneNumber.length() == 0;
     }
 

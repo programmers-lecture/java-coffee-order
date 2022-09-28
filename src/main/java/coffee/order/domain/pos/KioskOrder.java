@@ -12,22 +12,30 @@ import static coffee.order.view.OutputView.print;
 
 public class KioskOrder {
 
-    public Orders askOrder(Customer customer) {
-        print(KIOSK_INPUT_CUSTOMER_SELECT_MENU.message);
-        print(getMenuMessage());
-        return getOrders(customer);
-//        customer.addMyOrder(customerOrders);
-//        return customerOrders;
+    private Customer customer;
+
+    public KioskOrder(Customer customer) {
+        this.customer = customer;
     }
 
-    private Orders getOrders(Customer customer) {
+    public Orders askOrder() {
+        print(KIOSK_INPUT_CUSTOMER_SELECT_MENU.message);
+        print(getMenuMessage());
+        return getOrders();
+    }
+
+    private Orders getOrders() {
         Orders orders = new Orders();
         while (true) {
             String command = customer.commands();
-            if (command.equals("")) break;
+            if (checkEndCommand(command)) break;
             orders.addOrder(createOrder(command));
         }
         return orders;
+    }
+
+    private boolean checkEndCommand(String command) {
+        return command.equals("");
     }
 
     private Order createOrder(String orderCommand) {
