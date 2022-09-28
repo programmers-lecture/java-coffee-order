@@ -1,5 +1,7 @@
 package coffee.order.domain.customer;
 
+import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM;
+
 public class Phone {
 
     private String phoneNumber;
@@ -8,15 +10,17 @@ public class Phone {
     }
 
     public Phone(String phoneNumber) {
+        if (checkPhoneNumberEmpty(phoneNumber) || !checkPhoneNumberForm(phoneNumber)) {
+            throw CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM.throwMyException();
+        }
         this.phoneNumber = phoneNumber;
     }
 
-    protected boolean checkPhoneNumberEmpty() {
+    protected boolean checkPhoneNumberEmpty(String phoneNumber) {
         return phoneNumber.length() == 0;
     }
 
     private boolean checkPhoneNumberForm(String phoneNumber) {
-        // TODO : 정규 표현식을 이용하여 핸드폰 번호 형식 검증
-        return false;
+        return phoneNumber.matches("^010-[0-9]{4}-[0-9]{4}");
     }
 }

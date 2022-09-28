@@ -9,7 +9,6 @@ import static coffee.order.exception.CustomerException.CUSTOMER_NOT_ENOUGH_MONEY
 
 public class Customer {
 
-    private static final Long id = 1L;
     private Phone phone;
     private Wallet wallet;
     private Receipts receipts;
