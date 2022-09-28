@@ -2,29 +2,29 @@ package coffee.order.domain.food;
 
 import java.util.*;
 
-import static coffee.order.exception.FoodCategoryException.FOODS_GET_NULL_POINTER_EXCEPTION;
+import static coffee.order.exception.FoodException.FOODS_GET_NULL_POINTER_EXCEPTION;
 
 public enum FoodCategory {
 
-    COFFEE(new ArrayList<>(), "커피", 1L),
-    TEA(new ArrayList<>(), "티", 2L),
-    DESSERT(new ArrayList<>(), "디저트", 3L);
+    COFFEE(new Foods(), "커피", 1L),
+    TEA(new Foods(), "티", 2L),
+    DESSERT(new Foods(), "디저트", 3L);
 
-    private List<Food> foods;
+    private Foods foods;
     private final String name;
     private final Long id;
 
-    FoodCategory(List<Food> category, String name, Long id) {
-        this.foods = category;
+    FoodCategory(Foods foods, String name, Long id) {
+        this.foods = foods;
         this.name = name;
         this.id = id;
     }
 
-    public static List<Food> findTypeFoodsByCategoryName(String categoryName) {
+    public static Foods findTypeFoodsByCategoryName(String categoryName) {
         return findFoodsByCategoryName(categoryName).foods;
     }
 
-    public static List<Food> findTypeFoodsByCategoryId(Long categoryId) {
+    public static Foods findTypeFoodsByCategoryId(Long categoryId) {
         return findFoodsByCategoryId(categoryId).foods;
     }
 

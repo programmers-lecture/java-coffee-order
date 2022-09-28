@@ -10,6 +10,10 @@ public class FoodPrice {
         this.price = price;
     }
 
+    protected int getPrice() {
+        return this.price;
+    }
+
     protected void increasePrice(int inputPrice) {
         this.price += inputPrice;
     }

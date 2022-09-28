@@ -29,4 +29,16 @@ public class Food {
     public void increaseQuantity(int inputQuantity) {
         this.quantity.increaseQuantity(inputQuantity);
     }
+
+    public String getName() {
+        return this.name.getName();
+    }
+
+    public int getPrice() {
+        return this.price.getPrice();
+    }
+
+    public Long getId() {
+        return this.id;
+    }
 }

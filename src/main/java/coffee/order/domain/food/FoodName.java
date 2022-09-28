@@ -7,4 +7,8 @@ public class FoodName {
     public FoodName(String name) {
         this.name = name;
     }
+
+    protected String getName() {
+        return this.name;
+    }
 }
