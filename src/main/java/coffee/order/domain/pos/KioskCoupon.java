@@ -9,9 +9,9 @@ import static coffee.order.view.OutputView.print;
 
 public class KioskCoupon {
 
-    public void askCoupon(Customer customer) {
+    public boolean askCoupon(Customer customer) {
         askSaveCoupon(customer);
-        askUseCoupon(customer);
+        return askUseCoupon(customer);
     }
 
     private void askSaveCoupon(Customer customer) {
@@ -23,12 +23,14 @@ public class KioskCoupon {
         }
     }
 
-    private void askUseCoupon(Customer customer) {
+    private boolean askUseCoupon(Customer customer) {
         print(KIOSK_ASK_USE_COUPON.message);
         print(KIOSK_SELECT_YES_OR_NO.message);
         if (checkCustomersCommandYes(customer.commands())) {
             customer.useCoupon();
+            return true;
         }
+        return false;
     }
 
     private void askPhoneNumber(Customer customer) {

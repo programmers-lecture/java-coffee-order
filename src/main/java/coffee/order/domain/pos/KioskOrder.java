@@ -12,10 +12,12 @@ import static coffee.order.view.OutputView.print;
 
 public class KioskOrder {
 
-    public void askOrder(Customer customer) {
+    public Orders askOrder(Customer customer) {
         print(INPUT_CUSTOMER_SELECT_MENU.message);
         print(getMenuMessage());
-        customer.addMyOrder(getOrders(customer));
+        return getOrders(customer);
+//        customer.addMyOrder(customerOrders);
+//        return customerOrders;
     }
 
     private Orders getOrders(Customer customer) {

@@ -7,7 +7,8 @@ public enum CouponMessage {
     KIOSK_NOTICE_CURRENT_COUPON_QUANTITY("현재 쿠폰 갯수는"),
     KIOSK_NOTICE_CURRENT_COUPON_QUANTITY_LAST_SENTENCE(" 입니다. \n"),
     KIOSK_ASK_USE_COUPON("쿠폰을 사용하시겠습니까?\n"),
-    KIOSK_ASK_PHONE_NUMBER("전화번호를 입력해주세요. (형식 : 000-0000-0000)\n");
+    KIOSK_ASK_PHONE_NUMBER("전화번호를 입력해주세요. (형식 : 000-0000-0000)\n"),
+    KIOSK_COUPON_USE("쿠폰 사용");
 
     public final String message;
 

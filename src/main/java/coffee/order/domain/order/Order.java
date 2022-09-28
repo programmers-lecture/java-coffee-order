@@ -1,7 +1,10 @@
 package coffee.order.domain.order;
 
 import coffee.order.domain.food.Food;
+import coffee.order.domain.pos.Kiosk;
+import coffee.order.message.CouponMessage;
 
+import static coffee.order.message.CouponMessage.*;
 import static coffee.order.message.MessageUnit.COUNT;
 import static coffee.order.message.MessageUnit.WON;
 
@@ -17,20 +20,44 @@ public class Order {
         this.usedCoupon = false;
     }
 
+    public void changeCouponUsed() {
+        usedCoupon = true;
+    }
+
     protected StringBuilder createOrderHistory() {
-        return new StringBuilder()
-                .append(this.food.getName())
-                .append(" ")
-                .append(this.quantity)
-                .append(COUNT.unit)
-                .append(" ")
-                .append(this.sumTotalPrice())
-                .append(WON.unit)
-                .append("\n");
+        StringBuilder orderHistoryBuilder = new StringBuilder();
+        if (usedCoupon) {
+            orderHistoryBuilder
+                    .append(this.food.getName())
+                    .append(" ")
+                    .append(1)
+                    .append(COUNT.unit)
+                    .append(" ")
+                    .append(KIOSK_COUPON_USE.message)
+                    .append("\n");
+        }
+
+        if (!usedCoupon || quantity != 1) {
+            orderHistoryBuilder
+                    .append(this.food.getName())
+                    .append(" ")
+                    .append(this.quantity)
+                    .append(COUNT.unit)
+                    .append(" ")
+                    .append(this.sumTotalPrice())
+                    .append(WON.unit)
+                    .append("\n");
+        }
+
+        return orderHistoryBuilder;
     }
 
     protected int sumTotalPrice() {
-        return food.getPrice() * quantity;
+        int totalPrice = food.getPrice() * quantity;
+        if (usedCoupon) {
+            totalPrice -= food.getPrice();
+        }
+        return totalPrice;
     }
 
 }

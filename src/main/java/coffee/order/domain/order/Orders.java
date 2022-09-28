@@ -25,6 +25,10 @@ public class Orders {
                 .sum();
     }
 
+    public Order getFirstOrder() {
+        return orders.get(0);
+    }
+
     @Override
     public String toString() {
         StringBuilder messageBuilder = new StringBuilder();
