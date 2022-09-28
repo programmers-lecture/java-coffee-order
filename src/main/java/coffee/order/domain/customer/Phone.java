@@ -1,4 +1,4 @@
-package coffee.order.domain;
+package coffee.order.domain.customer;
 
 public class Phone {
 
