@@ -27,6 +27,8 @@ public class KioskCoupon {
     }
 
     private boolean askUseCoupon(Customer customer) {
+        if (!customer.checkMyCouponEnough()) return false;
+
         print(KIOSK_ASK_USE_COUPON.message);
         print(KIOSK_SELECT_YES_OR_NO.message);
         if (checkCustomersCommandYes(customer.commands())) {

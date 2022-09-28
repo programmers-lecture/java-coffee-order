@@ -13,7 +13,9 @@ public class Kiosk {
         boolean checkCouponUsed = kioskCoupon.askCoupon(customer);
 
         if (checkCouponUsed) {
-            customerOrders.getFirstOrder().changeCouponUsed();
+            customerOrders
+                    .getFirstOrder()
+                    .changeCouponUsed();
         }
 
         customer.addMyOrder(customerOrders);

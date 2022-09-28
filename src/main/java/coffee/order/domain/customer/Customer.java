@@ -28,10 +28,12 @@ public class Customer {
         return wallet.findCouponQuantity();
     }
 
+    public boolean checkMyCouponEnough() {
+        return wallet.checkCouponEnoughToUse();
+    }
+
     public void useCoupon() {
-        if (checkMyCouponEnough()) {
-            wallet.useCoupon();
-        }
+        wallet.useCoupon();
     }
 
     public void addMyOrder(Orders orders) {
@@ -46,11 +48,8 @@ public class Customer {
     }
 
     public void saveCoupon() {
-        wallet.increaseCouponQuantity();;
-    }
-
-    private boolean checkMyCouponEnough() {
-        return wallet.checkCouponEnoughToUse();
+        wallet.increaseCouponQuantity();
+        ;
     }
 
     private boolean checkNotEnoughMoney(Orders orders) {
