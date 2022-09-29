@@ -42,6 +42,10 @@ public class Order {
         this.food.decreaseQuantity(quantity);
     }
 
+    protected void changeFoodQuantityWhenDuplicated(Order order) {
+        this.quantity += order.quantity;
+    }
+
     private void createHistory(StringBuilder orderHistoryBuilder) {
         if (!usedCoupon || quantity != 1) {
             orderHistoryBuilder

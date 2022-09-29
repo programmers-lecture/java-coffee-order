@@ -12,14 +12,28 @@ import static coffee.order.view.OutputView.print;
 
 public class Orders {
 
-    private List<Order> orders;
+    private Map<String, Order> orders;
 
     public Orders() {
-        this.orders = new ArrayList<>();
+        this.orders = new HashMap<>();
     }
 
     public void addOrder(Order order) {
-        orders.add(order);
+        addOrderWhenThisFoodHasBeenChosen(order);
+        addOrderWhenThisFoodHasNotBeenChosen(order);
+    }
+
+    private void addOrderWhenThisFoodHasBeenChosen(Order order) {
+        if (orders.containsKey(order.getFoodName())) {
+            orders.get(order.getFoodName())
+                    .changeFoodQuantityWhenDuplicated(order);
+        }
+    }
+
+    private void addOrderWhenThisFoodHasNotBeenChosen(Order order) {
+        if (!orders.containsKey(order.getFoodName())) {
+            orders.put(order.getFoodName(), order);
+        }
     }
 
     public Order findOrderPurchasedByCoupon(Customer customer) {
@@ -33,30 +47,33 @@ public class Orders {
 
     public int getTotalPrice() {
         return this.orders
+                .values()
                 .stream()
                 .mapToInt(Order::sumTotalPrice)
                 .sum();
     }
 
     public void changeFoodQuantityByThisOrders() {
-        this.orders.forEach(Order::changeFoodQuantityByThisOrder);
+        this.orders.values()
+                .forEach(Order::changeFoodQuantityByThisOrder);
     }
 
     private String toStringOrdersToChoice(Map<String, Order> myOrders) {
         StringBuilder ordersToChoiceBuilder = new StringBuilder();
-        orders.forEach(order -> {
-                    String selectNumber = createMyOrdersSelectNumber(myOrders);
-                    myOrders.put(
-                            selectNumber,
-                            order
-                    );
-                    ordersToChoiceBuilder
-                            .append(selectNumber)
-                            .append(". ")
-                            .append(order.getFoodName())
-                            .append("\n");
-                }
-        );
+        orders.values()
+                .forEach(order -> {
+                            String selectNumber = createMyOrdersSelectNumber(myOrders);
+                            myOrders.put(
+                                    selectNumber,
+                                    order
+                            );
+                            ordersToChoiceBuilder
+                                    .append(selectNumber)
+                                    .append(". ")
+                                    .append(order.getFoodName())
+                                    .append("\n");
+                        }
+                );
         return ordersToChoiceBuilder.toString();
     }
 
@@ -65,14 +82,16 @@ public class Orders {
     }
 
     private void createOrderListMessage(StringBuilder messageBuilder) {
-        orders.forEach(order -> messageBuilder.append(order.createOrderHistory()));
+        orders.values()
+                .forEach(order -> messageBuilder.append(order.createOrderHistory()));
     }
 
     private void createTotalPriceMessage(StringBuilder messageBuilder) {
         messageBuilder
                 .append("\n")
                 .append(KIOSK_TOTAL_PRICE.message)
-                .append(orders.stream()
+                .append(orders.values()
+                        .stream()
                         .mapToInt(Order::sumTotalPrice)
                         .sum())
                 .append(WON.unit)
