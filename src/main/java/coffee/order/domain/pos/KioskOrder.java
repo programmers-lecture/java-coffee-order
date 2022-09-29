@@ -7,6 +7,7 @@ import coffee.order.domain.order.Orders;
 
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
 import static coffee.order.domain.food.FoodCategory.getMenuMessage;
+import static coffee.order.message.KioskMessage.KIOSK_AFTER_ORDER;
 import static coffee.order.message.KioskMessage.KIOSK_INPUT_CUSTOMER_SELECT_MENU;
 import static coffee.order.view.OutputView.print;
 
@@ -31,6 +32,8 @@ public class KioskOrder {
             if (checkEndCommand(command)) break;
             orders.addOrder(createOrder(command));
         }
+        print(KIOSK_AFTER_ORDER.message);
+        print(orders.toString());
         return orders;
     }
 

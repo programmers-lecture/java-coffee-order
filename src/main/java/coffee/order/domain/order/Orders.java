@@ -39,6 +39,7 @@ public class Orders {
 
     private void createTotalPriceMessage(StringBuilder messageBuilder) {
         messageBuilder
+                .append("\n")
                 .append(KIOSK_TOTAL_PRICE.message)
                 .append(orders.stream()
                         .mapToInt(Order::sumTotalPrice)
