@@ -1,5 +1,9 @@
 package coffee.order.domain.food;
 
+import java.util.Objects;
+
+import static coffee.order.message.MessageUnit.WON;
+
 public class Food {
 
     private final Long id;
@@ -12,6 +16,10 @@ public class Food {
         this.name = new FoodName(name);
         this.price = new FoodPrice(price);
         this.quantity = new FoodQuantity(quantity);
+    }
+
+    public int getFoodTotalPrice(int quantity) {
+        return price.getPrice() * quantity;
     }
 
     public void decreaseQuantity(int inputQuantity) {
@@ -30,15 +38,25 @@ public class Food {
         this.price.increasePrice(inputPrice);
     }
 
-    public String getName() {
-        return this.name.getName();
+    protected boolean checkSameId(Long foodId) {
+        return Objects.equals(this.id, foodId);
     }
 
-    public int getPrice() {
-        return this.price.getPrice();
+    public void toFoodMenuStringBuilder(StringBuilder foodMenuBuilder) {
+        foodMenuBuilder
+                .append(id)
+                .append(".")
+                .append(" ")
+                .append(name)
+                .append(" ")
+                .append("//")
+                .append(" ")
+                .append(price)
+                .append(WON.unit)
+                .append("\n");
     }
 
-//    public Long getId() {
-//        return this.id;
-//    }
+    public String toFoodNameString() {
+        return name.toString();
+    }
 }

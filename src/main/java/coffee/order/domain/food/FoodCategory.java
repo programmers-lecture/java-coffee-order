@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
-import static coffee.order.message.MessageUnit.WON;
 
 public enum FoodCategory {
 
@@ -91,46 +90,24 @@ public enum FoodCategory {
         return categoryId.longValue() == findCategoryId.longValue();
     }
 
-//    public String findName() {
-//        return this.name;
-//    }
-//
-//    public Long findId() {
-//        return this.id;
-//    }
-
     public static String getMenuMessage() {
         StringBuilder menuBuilder = new StringBuilder();
         Arrays.stream(FoodCategory.values())
                 .forEach(category -> {
-                    menuBuilder
-                            .append(category.id)
-                            .append(".")
-                            .append(" ")
-                            .append(category.name)
-                            .append("\n");
-
-                    category.foods
-                            .getFoods()
-                            .forEach(food -> {
-                                menuBuilder
-                                        .append(category.id)
-                                        .append("-")
-                                        .append(food.getId())
-                                        .append(".")
-                                        .append(" ")
-                                        .append(food.getName())
-                                        .append(" ")
-                                        .append("//")
-                                        .append(" ")
-                                        .append(food.getPrice())
-                                        .append(WON.unit)
-                                        .append("\n");
-                            });
-
+                    category.toFoodCategoryStringBuilder(menuBuilder);
+                    category.foods.toFoodsMenuStringBuilder(menuBuilder);
                     menuBuilder.append("\n\n");
                 });
 
         return menuBuilder.toString();
+    }
+
+    public void toFoodCategoryStringBuilder(StringBuilder categoryMenu) {
+        categoryMenu
+                .append(this.id)
+                .append(".")
+                .append(" ")
+                .append(this.name)
+                .append("\n");
     }
 }

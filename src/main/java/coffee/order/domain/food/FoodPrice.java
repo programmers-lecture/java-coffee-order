@@ -11,7 +11,7 @@ public class FoodPrice {
     }
 
     protected int getPrice() {
-        return this.price;
+        return price;
     }
 
     protected void increasePrice(int inputPrice) {
@@ -27,5 +27,10 @@ public class FoodPrice {
 
     protected boolean checkMinusPrice(int price) {
         return price < 0;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(price);
     }
 }

@@ -1,7 +1,6 @@
 package coffee.order.domain.order;
 
 import coffee.order.domain.food.Food;
-import coffee.order.domain.food.FoodCategory;
 
 import static coffee.order.message.CouponMessage.KIOSK_COUPON_USE;
 import static coffee.order.message.MessageUnit.COUNT;
@@ -24,9 +23,9 @@ public class Order {
     }
 
     protected int sumTotalPrice() {
-        int totalPrice = food.getPrice() * quantity;
+        int totalPrice = food.getFoodTotalPrice(quantity);
         if (usedCoupon) {
-            totalPrice -= food.getPrice();
+            totalPrice -= food.getFoodTotalPrice(1);
         }
         return totalPrice;
     }
@@ -45,12 +44,12 @@ public class Order {
     private void createHistory(StringBuilder orderHistoryBuilder) {
         if (!usedCoupon || quantity != 1) {
             orderHistoryBuilder
-                    .append(this.food.getName())
+                    .append(food.toFoodNameString())
                     .append(" ")
-                    .append(this.quantity)
+                    .append(quantity)
                     .append(COUNT.unit)
                     .append(" ")
-                    .append(this.sumTotalPrice())
+                    .append(sumTotalPrice())
                     .append(WON.unit)
                     .append("\n");
         }
@@ -59,7 +58,7 @@ public class Order {
     private void createHistoryWhenCouponUsed(StringBuilder orderHistoryBuilder) {
         if (usedCoupon) {
             orderHistoryBuilder
-                    .append(this.food.getName())
+                    .append(food.toFoodNameString())
                     .append(" ")
                     .append(1)
                     .append(COUNT.unit)

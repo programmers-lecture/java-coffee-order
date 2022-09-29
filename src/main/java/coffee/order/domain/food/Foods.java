@@ -2,7 +2,6 @@ package coffee.order.domain.food;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import static coffee.order.exception.FoodException.FOODS_GET_NULL_POINTER_EXCEPTION;
 
@@ -36,15 +35,11 @@ public class Foods {
 
     private Optional<Food> findOptionalFoodByFoodId(Long foodId) {
         return foods.stream()
-                .filter(checkSameFoodById(foodId))
+                .filter(food -> food.checkSameId(foodId))
                 .findFirst();
     }
 
-    private Predicate<Food> checkSameFoodById(Long id) {
-        return food -> food.getId().longValue() == id.longValue();
+    public void toFoodsMenuStringBuilder(StringBuilder foodsMenu) {
+        foods.forEach(food -> food.toFoodMenuStringBuilder(foodsMenu));
     }
-
-//    public List<Food> getFoods() {
-//        return foods;
-//    }
 }
