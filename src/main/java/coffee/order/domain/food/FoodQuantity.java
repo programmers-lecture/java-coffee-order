@@ -21,7 +21,7 @@ public class FoodQuantity {
         this.quantity -= inputQuantity;
     }
 
-    private boolean checkMinusQuantity(int quantity) {
+    protected boolean checkMinusQuantity(int quantity) {
         return quantity < 0;
     }
 }

@@ -25,7 +25,7 @@ public class FoodPrice {
         this.price -= inputPrice;
     }
 
-    private boolean checkMinusPrice(int price) {
+    protected boolean checkMinusPrice(int price) {
         return price < 0;
     }
 }

@@ -16,6 +16,7 @@ public class Receipts {
     }
 
     public void addReceipt(Orders orders) {
+        changeFoodQuantity(orders);
         receipts.add(orders);
         print(createRecentReceiptMessage());
     }
@@ -24,5 +25,9 @@ public class Receipts {
         return receipts
                 .get(receipts.size() - 1)
                 .toString();
+    }
+
+    private void changeFoodQuantity(Orders orders) {
+        orders.changeFoodQuantityByThisOrders();
     }
 }

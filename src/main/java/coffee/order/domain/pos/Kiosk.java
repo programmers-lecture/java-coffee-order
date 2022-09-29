@@ -15,7 +15,7 @@ public class Kiosk {
                     .changeCouponUsed();
         }
 
-        customer.addMyOrder(customerOrders);
+        customer.addMyOrders(customerOrders);
     }
 
 }

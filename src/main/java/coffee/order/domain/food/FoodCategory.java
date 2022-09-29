@@ -44,6 +44,18 @@ public enum FoodCategory {
         this.id = id;
     }
 
+    public static Foods findFoodsByFood(Food food) {
+        return Arrays.stream(FoodCategory.values())
+                .filter(foodCategory -> checkFoodInFoods(food, foodCategory))
+                .findFirst()
+                .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException)
+                .foods;
+    }
+
+    private static boolean checkFoodInFoods(Food food, FoodCategory foodCategory) {
+        return foodCategory.foods.checkFoodInFoods(food);
+    }
+
     public static Foods findFoodsByCategoryId(Long categoryId) {
         return findFoodCategoryByCategoryId(categoryId).foods;
     }
@@ -79,13 +91,13 @@ public enum FoodCategory {
         return categoryId.longValue() == findCategoryId.longValue();
     }
 
-    public String findName() {
-        return this.name;
-    }
-
-    public Long findId() {
-        return this.id;
-    }
+//    public String findName() {
+//        return this.name;
+//    }
+//
+//    public Long findId() {
+//        return this.id;
+//    }
 
     public static String getMenuMessage() {
         StringBuilder menuBuilder = new StringBuilder();

@@ -29,6 +29,10 @@ public class Orders {
         return orders.get(0);
     }
 
+    public void changeFoodQuantityByThisOrders() {
+        this.orders.forEach(Order::changeFoodQuantityByThisOrder);
+    }
+
     @Override
     public String toString() {
         StringBuilder messageBuilder = new StringBuilder();

@@ -14,20 +14,20 @@ public class Food {
         this.quantity = new FoodQuantity(quantity);
     }
 
-    public void decreasePrice(int inputPrice) {
-        this.price.decreasePrice(inputPrice);
-    }
-
-    public void increasePrice(int inputPrice) {
-        this.price.increasePrice(inputPrice);
-    }
-
     public void decreaseQuantity(int inputQuantity) {
         this.quantity.decreaseQuantity(inputQuantity);
     }
 
-    public void increaseQuantity(int inputQuantity) {
+    private void increaseQuantity(int inputQuantity) {
         this.quantity.increaseQuantity(inputQuantity);
+    }
+
+    private void decreasePrice(int inputPrice) {
+        this.price.decreasePrice(inputPrice);
+    }
+
+    private void increasePrice(int inputPrice) {
+        this.price.increasePrice(inputPrice);
     }
 
     public String getName() {
@@ -38,7 +38,7 @@ public class Food {
         return this.price.getPrice();
     }
 
-    public Long getId() {
-        return this.id;
-    }
+//    public Long getId() {
+//        return this.id;
+//    }
 }

@@ -14,14 +14,29 @@ public class Foods {
         this.foods = foods;
     }
 
-    public Food findFoodByFoodId(Long id) {
-        return findOptionalFoodByFoodId(id)
+    public Food findFoodByFoodId(Long foodId) {
+        return findOptionalFoodByFoodId(foodId)
                 .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
-    private Optional<Food> findOptionalFoodByFoodId(Long id) {
+    public Food findFood(Food findFood) {
+        return findOptionalFood(findFood)
+                .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
+    }
+
+    public boolean checkFoodInFoods(Food findFood) {
+        return findOptionalFood(findFood).isPresent();
+    }
+
+    private Optional<Food> findOptionalFood(Food findFood) {
         return foods.stream()
-                .filter(checkSameFoodById(id))
+                .filter(food -> food.equals(findFood))
+                .findFirst();
+    }
+
+    private Optional<Food> findOptionalFoodByFoodId(Long foodId) {
+        return foods.stream()
+                .filter(checkSameFoodById(foodId))
                 .findFirst();
     }
 
@@ -29,7 +44,7 @@ public class Foods {
         return food -> food.getId().longValue() == id.longValue();
     }
 
-    public List<Food> getFoods() {
-        return foods;
-    }
+//    public List<Food> getFoods() {
+//        return foods;
+//    }
 }

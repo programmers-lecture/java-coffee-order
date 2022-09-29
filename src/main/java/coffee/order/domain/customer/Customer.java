@@ -35,7 +35,7 @@ public class Customer {
         wallet.useCoupon();
     }
 
-    public void addMyOrder(Orders orders) {
+    public void addMyOrders(Orders orders) {
         if (checkNotEnoughMoney(orders)) {
             throw CUSTOMER_NOT_ENOUGH_MONEY.throwMyException();
         }
