@@ -48,7 +48,6 @@ public class Customer {
 
     public void saveCoupon() {
         wallet.increaseCouponQuantity();
-        ;
     }
 
     private boolean checkNotEnoughMoney(Orders orders) {
