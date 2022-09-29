@@ -47,7 +47,7 @@ public class Order {
     }
 
     private void createHistory(StringBuilder orderHistoryBuilder) {
-        if (!usedCoupon || quantity != 1) {
+        if (!usedCoupon || quantity != 0) {
             orderHistoryBuilder
                     .append(food.toFoodNameString())
                     .append(" ")
