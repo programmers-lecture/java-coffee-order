@@ -43,25 +43,8 @@ public enum FoodCategory {
         this.id = id;
     }
 
-    public static Foods findFoodsByFood(Food food) {
-        return Arrays.stream(FoodCategory.values())
-                .filter(foodCategory -> checkFoodInFoods(food, foodCategory))
-                .findFirst()
-                .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException)
-                .foods;
-    }
-
-    private static boolean checkFoodInFoods(Food food, FoodCategory foodCategory) {
-        return foodCategory.foods.checkFoodInFoods(food);
-    }
-
     public static Foods findFoodsByCategoryId(Long categoryId) {
         return findFoodCategoryByCategoryId(categoryId).foods;
-    }
-
-    public static FoodCategory findFoodCategoryByCategoryName(String categoryName) {
-        return findOptionalFoodCategoryByCategoryName(categoryName)
-                .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
     public static FoodCategory findFoodCategoryByCategoryId(Long categoryId) {
@@ -69,21 +52,10 @@ public enum FoodCategory {
                 .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
-    private static Optional<FoodCategory> findOptionalFoodCategoryByCategoryName(String categoryName) {
-        return Arrays.stream(FoodCategory.values())
-                .filter(category -> checkSameFoodCategoryName(categoryName, category.name))
-                .findFirst();
-    }
-
     private static Optional<FoodCategory> findOptionalFoodCategoryByCategoryId(Long categoryId) {
         return Arrays.stream(FoodCategory.values())
                 .filter(category -> checkSameFoodCategoryId(categoryId, category.id))
                 .findFirst();
-
-    }
-
-    private static boolean checkSameFoodCategoryName(String foodsTypeName, String categoryName) {
-        return categoryName.equals(foodsTypeName);
     }
 
     private static boolean checkSameFoodCategoryId(Long findCategoryId, Long categoryId) {
@@ -98,7 +70,6 @@ public enum FoodCategory {
                     category.foods.toFoodsMenuStringBuilder(menuBuilder);
                     menuBuilder.append("\n\n");
                 });
-
         return menuBuilder.toString();
     }
 

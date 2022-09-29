@@ -57,7 +57,4 @@ public class KioskCoupon {
         return command.equals(YES.selectedCommand);
     }
 
-    private void findCustomerFromDataByPhoneNumber(String phoneNumber) {
-        customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
-    }
 }

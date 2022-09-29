@@ -18,28 +18,13 @@ public class Foods {
                 .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
-    public Food findFood(Food findFood) {
-        return findOptionalFood(findFood)
-                .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
-    }
-
-    public boolean checkFoodInFoods(Food findFood) {
-        return findOptionalFood(findFood).isPresent();
-    }
-
-    private Optional<Food> findOptionalFood(Food findFood) {
-        return foods.stream()
-                .filter(food -> food.equals(findFood))
-                .findFirst();
+    public void toFoodsMenuStringBuilder(StringBuilder foodsMenu) {
+        foods.forEach(food -> food.toFoodMenuStringBuilder(foodsMenu));
     }
 
     private Optional<Food> findOptionalFoodByFoodId(Long foodId) {
         return foods.stream()
                 .filter(food -> food.checkSameId(foodId))
                 .findFirst();
-    }
-
-    public void toFoodsMenuStringBuilder(StringBuilder foodsMenu) {
-        foods.forEach(food -> food.toFoodMenuStringBuilder(foodsMenu));
     }
 }

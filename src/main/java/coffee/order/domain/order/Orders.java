@@ -33,14 +33,6 @@ public class Orders {
         this.orders.forEach(Order::changeFoodQuantityByThisOrder);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder messageBuilder = new StringBuilder();
-        createOrderListMessage(messageBuilder);
-        createTotalPriceMessage(messageBuilder);
-        return messageBuilder.toString();
-    }
-
     private void createOrderListMessage(StringBuilder messageBuilder) {
         orders.forEach(order -> messageBuilder.append(order.createOrderHistory()));
     }
@@ -53,5 +45,13 @@ public class Orders {
                         .sum())
                 .append(WON.unit)
                 .append("\n");
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder messageBuilder = new StringBuilder();
+        createOrderListMessage(messageBuilder);
+        createTotalPriceMessage(messageBuilder);
+        return messageBuilder.toString();
     }
 }
