@@ -1,13 +1,17 @@
 package coffee.order.domain.customer.wallet;
 
+import coffee.order.domain.order.Orders;
+
 public class Wallet {
 
     private Cash cash;
     private Coupon coupon;
+    private Receipts receipts;
 
     public Wallet() {
         this.cash = new Cash(Integer.MAX_VALUE);
         this.coupon = new Coupon();
+        this.receipts = new Receipts();
     }
 
     public boolean checkCouponEnoughToUse() {
@@ -18,12 +22,12 @@ public class Wallet {
         return this.cash.getCash();
     }
 
-    public void useCoupon() {
-        this.coupon.setQuantityZero();
-    }
-
     public int findCouponQuantity() {
         return this.coupon.getQuantity();
+    }
+
+    public void useCoupon() {
+        this.coupon.setQuantityZero();
     }
 
     public void spend(int money) {
@@ -32,5 +36,9 @@ public class Wallet {
 
     public void increaseCouponQuantity() {
         this.coupon.increaseQuantity();
+    }
+
+    public void addReceipt(Orders orders) {
+        receipts.addReceipt(orders);
     }
 }

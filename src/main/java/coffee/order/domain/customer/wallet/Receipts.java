@@ -17,7 +17,7 @@ public class Receipts {
         this.receipts = new ArrayList<>();
     }
 
-    public void addReceipt(Orders orders) {
+    protected void addReceipt(Orders orders) {
         changeFoodQuantity(orders);
         receipts.add(orders);
         print(KIOSK_AFTER_ORDER.message);
@@ -25,7 +25,7 @@ public class Receipts {
         print(KIOSK_FINISH_ORDER.message);
     }
 
-    public String createRecentReceiptMessage() {
+    private String createRecentReceiptMessage() {
         return receipts
                 .get(receipts.size() - 1)
                 .toString();
