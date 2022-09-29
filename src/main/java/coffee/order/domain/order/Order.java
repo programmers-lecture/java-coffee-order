@@ -20,14 +20,15 @@ public class Order {
 
     public void changeCouponUsed() {
         usedCoupon = true;
+        --quantity;
     }
 
     protected int sumTotalPrice() {
-        int totalPrice = food.getFoodTotalPrice(quantity);
-        if (usedCoupon) {
-            totalPrice -= food.getFoodTotalPrice(1);
-        }
-        return totalPrice;
+        return food.getFoodTotalPrice(quantity);
+    }
+
+    protected String getFoodName() {
+        return this.food.toFoodNameString();
     }
 
     protected StringBuilder createOrderHistory() {

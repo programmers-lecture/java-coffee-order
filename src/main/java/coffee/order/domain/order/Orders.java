@@ -1,10 +1,14 @@
 package coffee.order.domain.order;
 
-import java.util.ArrayList;
-import java.util.List;
+import coffee.order.domain.customer.Customer;
 
-import static coffee.order.message.MessageUnit.WON;
+import java.util.*;
+
+import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
+import static coffee.order.message.CouponMessage.KIOSK_ASK_TO_CHOOSE_ORDER;
 import static coffee.order.message.KioskMessage.KIOSK_TOTAL_PRICE;
+import static coffee.order.message.MessageUnit.WON;
+import static coffee.order.view.OutputView.print;
 
 public class Orders {
 
@@ -18,6 +22,15 @@ public class Orders {
         orders.add(order);
     }
 
+    public Order findOrderPurchasedByCoupon(Customer customer) {
+        Map<String, Order> myOrders = new HashMap<>();
+        print(KIOSK_ASK_TO_CHOOSE_ORDER.message);
+        print(toStringOrdersToChoice(myOrders));
+        return Optional.of(myOrders)
+                .orElseThrow(CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER::throwMyException)
+                .get(customer.commands());
+    }
+
     public int getTotalPrice() {
         return this.orders
                 .stream()
@@ -25,12 +38,30 @@ public class Orders {
                 .sum();
     }
 
-    public Order getFirstOrder() {
-        return orders.get(0);
-    }
-
     public void changeFoodQuantityByThisOrders() {
         this.orders.forEach(Order::changeFoodQuantityByThisOrder);
+    }
+
+    private String toStringOrdersToChoice(Map<String, Order> myOrders) {
+        StringBuilder ordersToChoiceBuilder = new StringBuilder();
+        orders.forEach(order -> {
+                    String selectNumber = createMyOrdersSelectNumber(myOrders);
+                    myOrders.put(
+                            selectNumber,
+                            order
+                    );
+                    ordersToChoiceBuilder
+                            .append(selectNumber)
+                            .append(". ")
+                            .append(order.getFoodName())
+                            .append("\n");
+                }
+        );
+        return ordersToChoiceBuilder.toString();
+    }
+
+    private String createMyOrdersSelectNumber(Map<String, Order> myOrders) {
+        return 1 + "-" + (myOrders.size() + 1);
     }
 
     private void createOrderListMessage(StringBuilder messageBuilder) {

@@ -33,15 +33,19 @@ public class KioskCoupon {
     }
 
     private boolean askUseCoupon() {
-        if (!customer.checkMyCouponEnough()) return false;
+        if (!customer.checkMyCouponEnough()) {
+            return false;
+        }
 
         print(KIOSK_ASK_USE_COUPON.message);
         print(KIOSK_SELECT_YES_OR_NO.message);
-        if (checkCustomersCommandYes(customer.commands())) {
-            customer.useCoupon();
-            return true;
+
+        if (!checkCustomersCommandYes(customer.commands())) {
+            return false;
         }
-        return false;
+
+        customer.useCoupon();
+        return true;
     }
 
     private Customer askPhoneNumber() {

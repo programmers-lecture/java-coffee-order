@@ -11,7 +11,7 @@ public class Kiosk {
 
         if (checkCouponUsed) {
             customerOrders
-                    .getFirstOrder()
+                    .findOrderPurchasedByCoupon(customer)
                     .changeCouponUsed();
         }
 
