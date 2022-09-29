@@ -42,8 +42,10 @@ public class Food {
         return Objects.equals(this.id, foodId);
     }
 
-    public void toFoodMenuStringBuilder(StringBuilder foodMenuBuilder) {
+    public void toFoodMenuStringBuilder(StringBuilder foodMenuBuilder, Long categoryId) {
         foodMenuBuilder
+                .append(categoryId)
+                .append("-")
                 .append(id)
                 .append(".")
                 .append(" ")

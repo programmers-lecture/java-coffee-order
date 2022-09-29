@@ -18,8 +18,8 @@ public class Foods {
                 .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
 
-    public void toFoodsMenuStringBuilder(StringBuilder foodsMenu) {
-        foods.forEach(food -> food.toFoodMenuStringBuilder(foodsMenu));
+    public void toFoodsMenuStringBuilder(StringBuilder foodsMenu, Long categoryId) {
+        foods.forEach(food -> food.toFoodMenuStringBuilder(foodsMenu, categoryId));
     }
 
     private Optional<Food> findOptionalFoodByFoodId(Long foodId) {

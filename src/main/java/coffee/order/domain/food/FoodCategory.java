@@ -67,7 +67,7 @@ public enum FoodCategory {
         Arrays.stream(FoodCategory.values())
                 .forEach(category -> {
                     category.toFoodCategoryStringBuilder(menuBuilder);
-                    category.foods.toFoodsMenuStringBuilder(menuBuilder);
+                    category.foods.toFoodsMenuStringBuilder(menuBuilder, category.id);
                     menuBuilder.append("\n\n");
                 });
         return menuBuilder.toString();
