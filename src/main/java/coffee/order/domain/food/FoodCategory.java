@@ -44,18 +44,11 @@ public enum FoodCategory {
     }
 
     public static Foods findFoodsByCategoryId(Long categoryId) {
-        return findFoodCategoryByCategoryId(categoryId).foods;
-    }
-
-    private static FoodCategory findFoodCategoryByCategoryId(Long categoryId) {
-        return findOptionalFoodCategoryByCategoryId(categoryId)
-                .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException);
-    }
-
-    private static Optional<FoodCategory> findOptionalFoodCategoryByCategoryId(Long categoryId) {
         return Arrays.stream(FoodCategory.values())
                 .filter(category -> checkSameFoodCategoryId(categoryId, category.id))
-                .findFirst();
+                .map(category -> category.foods)
+                .findFirst()
+                .orElseThrow();
     }
 
     private static boolean checkSameFoodCategoryId(Long findCategoryId, Long categoryId) {
