@@ -34,7 +34,7 @@ public class Customer {
 
     public void addMyOrders(Orders orders) {
         if (checkNotEnoughMoney(orders)) {
-            throw CUSTOMER_NOT_ENOUGH_MONEY.throwMyException();
+            throw new IllegalArgumentException(CUSTOMER_NOT_ENOUGH_MONEY.getMessage());
         }
         wallet.addReceipt(orders);
     }

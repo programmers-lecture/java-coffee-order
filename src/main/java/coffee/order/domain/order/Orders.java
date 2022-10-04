@@ -41,7 +41,7 @@ public class Orders {
         print(KIOSK_ASK_TO_CHOOSE_ORDER.message);
         print(toStringOrdersToChoice(myOrders));
         return Optional.of(myOrders)
-                .orElseThrow(CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER::throwMyException)
+                .orElseThrow(() -> new NullPointerException(CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER.getMessage()))
                 .get(customer.commands());
     }
 
@@ -50,7 +50,6 @@ public class Orders {
                 .values()
                 .stream()
                 .mapToInt(Order::getTotalPrice)
-//                .mapToInt(order -> order.)
                 .sum();
     }
 

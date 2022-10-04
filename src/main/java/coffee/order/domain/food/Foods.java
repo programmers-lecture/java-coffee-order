@@ -15,7 +15,7 @@ public class Foods {
 
     public Food findFoodByFoodId(Long foodId) {
         return findOptionalFoodByFoodId(foodId)
-                .orElseThrow(FOODS_GET_NULL_POINTER_EXCEPTION::throwMyException);
+                .orElseThrow(() -> new NullPointerException(FOODS_GET_NULL_POINTER_EXCEPTION.getMessage()));
     }
 
     public void toFoodsMenuStringBuilder(StringBuilder foodsMenu, Long categoryId) {

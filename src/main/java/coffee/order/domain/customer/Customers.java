@@ -18,7 +18,7 @@ public enum Customers {
 
     public Customer findCustomerByPhoneNumber(String phoneNumber) {
         return findOptionalCustomer(phoneNumber)
-                .orElseThrow(CUSTOMER_NO_SUCH_PHONE_NUMBER::throwMyException)
+                .orElseThrow(() -> new NullPointerException(CUSTOMER_NO_SUCH_PHONE_NUMBER.getMessage())
                 .getValue();
     }
 

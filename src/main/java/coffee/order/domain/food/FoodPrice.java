@@ -21,7 +21,7 @@ public class FoodPrice {
 
     protected void decreasePrice(int inputPrice) {
         if (checkMinusPrice(this.price - inputPrice)) {
-            throw PRICE_MINUS_EXCEPTION.throwMyException();
+            throw new IllegalArgumentException(PRICE_MINUS_EXCEPTION.getMessage());
         }
         this.price -= inputPrice;
     }

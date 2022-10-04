@@ -1,10 +1,11 @@
 package coffee.order.domain.food;
 
+import coffee.order.exception.FoodException;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
+import static coffee.order.exception.FoodException.*;
 
 public enum FoodCategory {
 
@@ -48,7 +49,7 @@ public enum FoodCategory {
                 .filter(category -> checkSameFoodCategoryId(categoryId, category.id))
                 .map(category -> category.foods)
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new NullPointerException(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION.getMessage()));
     }
 
     private static boolean checkSameFoodCategoryId(Long findCategoryId, Long categoryId) {

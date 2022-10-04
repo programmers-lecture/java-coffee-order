@@ -11,7 +11,7 @@ public class Phone {
 
     public Phone(String phoneNumber) {
         if (checkPhoneNumberEmpty(phoneNumber) || !checkPhoneNumberForm(phoneNumber)) {
-            throw CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM.throwMyException();
+            throw new IllegalArgumentException(CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM.getMessage());
         }
         this.phoneNumber = phoneNumber;
     }

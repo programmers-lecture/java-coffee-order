@@ -16,7 +16,7 @@ public class FoodQuantity {
 
     protected void decreaseQuantity(int inputQuantity) {
         if (checkMinusQuantity(this.quantity - inputQuantity)) {
-            throw QUANTITY_MINUS_EXCEPTION.throwMyException();
+            throw new IllegalArgumentException(QUANTITY_MINUS_EXCEPTION.getMessage());
         }
         this.quantity -= inputQuantity;
     }
