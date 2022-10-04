@@ -43,27 +43,27 @@ public class KioskOrder {
 
     private Order createOrder(String orderCommand) {
         return new Order(
-                findFoodByCategoryIdAndFoodId(
-                        findFoodCategoryId(orderCommand),
-                        findFoodId(orderCommand)
-                ),
-                findOrderedFoodQuantity(orderCommand));
+                findFoodByOrderCommand(orderCommand),
+                parseOrderCommandToFoodQuantity(orderCommand));
     }
 
-    private Food findFoodByCategoryIdAndFoodId(Long foodCategoryId, Long foodId) {
-        return findFoodsByCategoryId(foodCategoryId)
-                .findFoodByFoodId(foodId);
+    private Food findFoodByOrderCommand(String orderCommand) {
+        Long findCategoryId = parseOrderCommandToFoodCategoryId(orderCommand);
+        Long findFoodId = parseOrderCommandToFoodId(orderCommand);
+
+        return findFoodsByCategoryId(findCategoryId)
+                .findFoodByFoodId(findFoodId);
     }
 
-    private Long findFoodCategoryId(String orderCommand) {
+    private Long parseOrderCommandToFoodCategoryId(String orderCommand) {
         return Long.parseLong(orderCommand.substring(0, 1));
     }
 
-    private Long findFoodId(String orderCommand) {
+    private Long parseOrderCommandToFoodId(String orderCommand) {
         return Long.parseLong(orderCommand.substring(2, 3));
     }
 
-    private int findOrderedFoodQuantity(String orderCommand) {
+    private int parseOrderCommandToFoodQuantity(String orderCommand) {
         return Integer.parseInt(orderCommand.substring(5).trim());
     }
 }
