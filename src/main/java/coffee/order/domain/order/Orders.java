@@ -12,7 +12,7 @@ import static coffee.order.view.OutputView.print;
 
 public class Orders {
 
-    private Map<String, Order> orders;
+    private final Map<String, Order> orders;
 
     public Orders() {
         this.orders = new HashMap<>();
@@ -49,7 +49,8 @@ public class Orders {
         return this.orders
                 .values()
                 .stream()
-                .mapToInt(Order::sumTotalPrice)
+                .mapToInt(Order::getTotalPrice)
+//                .mapToInt(order -> order.)
                 .sum();
     }
 
@@ -92,7 +93,7 @@ public class Orders {
                 .append(KIOSK_TOTAL_PRICE.message)
                 .append(orders.values()
                         .stream()
-                        .mapToInt(Order::sumTotalPrice)
+                        .mapToInt(Order::getTotalPrice)
                         .sum())
                 .append(WON.unit)
                 .append("\n");

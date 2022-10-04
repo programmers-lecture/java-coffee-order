@@ -9,22 +9,29 @@ import static coffee.order.message.MessageUnit.WON;
 public class Order {
 
     private Food food;
-    private int quantity;
-    private boolean usedCoupon;
+    private Integer quantity;
+    private Integer totalPrice;
+    private Boolean usedCoupon;
 
     public Order(Food food, int quantity) {
         this.food = food;
         this.quantity = quantity;
+        this.totalPrice = changeTotalPrice();
         this.usedCoupon = false;
     }
 
     public void changeCouponUsed() {
-        usedCoupon = true;
         --quantity;
+        usedCoupon = true;
+        this.totalPrice = changeTotalPrice();
     }
 
-    protected int sumTotalPrice() {
-        return food.getFoodTotalPrice(quantity);
+    Integer getTotalPrice() {
+        return totalPrice;
+    }
+
+    private Integer changeTotalPrice() {
+        return food.getPrice() * quantity;
     }
 
     protected String getFoodName() {
@@ -54,7 +61,7 @@ public class Order {
                     .append(quantity)
                     .append(COUNT.unit)
                     .append(" ")
-                    .append(sumTotalPrice())
+                    .append(changeTotalPrice())
                     .append(WON.unit)
                     .append("\n");
         }

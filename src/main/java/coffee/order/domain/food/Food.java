@@ -18,8 +18,8 @@ public class Food {
         this.quantity = new FoodQuantity(quantity);
     }
 
-    public int getFoodTotalPrice(int quantity) {
-        return price.getPrice() * quantity;
+    public int getPrice() {
+        return price.getPrice();
     }
 
     public void decreaseQuantity(int inputQuantity) {
