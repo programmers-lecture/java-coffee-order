@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class CustomersTest {
 
     @BeforeAll()
-    static void save_Customer() {
+    static void save_Customer_Test() {
         List<String> phoneNumbers = List.of(
                 "010-0000-0000",
                 "010-0000-0001",

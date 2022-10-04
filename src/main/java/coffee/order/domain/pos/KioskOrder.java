@@ -13,7 +13,7 @@ import static coffee.order.view.OutputView.print;
 
 public class KioskOrder {
 
-    private Customer customer;
+    private final Customer customer;
 
     public KioskOrder(Customer customer) {
         this.customer = customer;

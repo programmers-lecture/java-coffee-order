@@ -4,6 +4,7 @@ import static coffee.order.exception.FoodException.PRICE_MINUS_EXCEPTION;
 
 public class FoodPrice {
 
+    // Integer Null
     private int price;
 
     public FoodPrice(int price) {

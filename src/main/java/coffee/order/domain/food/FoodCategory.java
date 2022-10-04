@@ -47,7 +47,7 @@ public enum FoodCategory {
         return findFoodCategoryByCategoryId(categoryId).foods;
     }
 
-    public static FoodCategory findFoodCategoryByCategoryId(Long categoryId) {
+    private static FoodCategory findFoodCategoryByCategoryId(Long categoryId) {
         return findOptionalFoodCategoryByCategoryId(categoryId)
                 .orElseThrow(FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION::throwMyException);
     }
@@ -62,6 +62,10 @@ public enum FoodCategory {
         return categoryId.longValue() == findCategoryId.longValue();
     }
 
+    /**
+     * view
+     * 변경할 시에 -> 도메인에서 수정 ? -> 여기 역할이 아니다.
+     */
     public static String getMenuMessage() {
         StringBuilder menuBuilder = new StringBuilder();
         Arrays.stream(FoodCategory.values())
