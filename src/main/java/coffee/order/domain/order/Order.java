@@ -34,22 +34,22 @@ public class Order {
         return food.getPrice() * quantity;
     }
 
-    protected String getFoodName() {
+    String getFoodName() {
         return this.food.toFoodNameString();
     }
 
-    protected StringBuilder createOrderHistory() {
+    StringBuilder createOrderHistory() {
         StringBuilder orderHistoryBuilder = new StringBuilder();
         createHistoryWhenCouponUsed(orderHistoryBuilder);
         createHistory(orderHistoryBuilder);
         return orderHistoryBuilder;
     }
 
-    protected void changeFoodQuantityByThisOrder() {
+    void changeFoodQuantityByThisOrder() {
         this.food.decreaseQuantity(quantity);
     }
 
-    protected void changeFoodQuantityWhenDuplicated(Order order) {
+    void changeFoodQuantityWhenDuplicated(Order order) {
         this.quantity += order.quantity;
     }
 
