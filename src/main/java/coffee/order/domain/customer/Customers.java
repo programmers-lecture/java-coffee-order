@@ -10,7 +10,7 @@ public enum Customers {
 
     CUSTOMERS_DATA(new HashMap<>());
 
-    private Map<String, Customer> customers;
+    private final Map<String, Customer> customers;
 
     Customers(Map<String, Customer> customers) {
         this.customers = customers;
@@ -18,7 +18,7 @@ public enum Customers {
 
     public Customer findCustomerByPhoneNumber(String phoneNumber) {
         return findOptionalCustomer(phoneNumber)
-                .orElseThrow(() -> new NullPointerException(CUSTOMER_NO_SUCH_PHONE_NUMBER.getMessage())
+                .orElseThrow(() -> new NullPointerException(CUSTOMER_NO_SUCH_PHONE_NUMBER.getMessage()))
                 .getValue();
     }
 
