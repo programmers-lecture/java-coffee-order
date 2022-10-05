@@ -1,11 +1,9 @@
 package coffee.order.domain.food;
 
-import coffee.order.exception.FoodException;
-
 import java.util.Arrays;
 import java.util.List;
 
-import static coffee.order.exception.FoodException.*;
+import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
 
 public enum FoodCategory {
 
@@ -34,7 +32,7 @@ public enum FoodCategory {
             3L
     );
 
-    private Foods foods;
+    private final Foods foods;
     private final String name;
     private final Long id;
 
