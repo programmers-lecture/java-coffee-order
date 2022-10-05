@@ -3,8 +3,10 @@ package coffee.order.domain.order;
 import coffee.order.domain.customer.Customer;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
+import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_ANSWER;
 import static coffee.order.message.CouponMessage.KIOSK_ASK_TO_CHOOSE_ORDER;
 import static coffee.order.message.KioskMessage.KIOSK_TOTAL_PRICE;
 import static coffee.order.message.MessageUnit.WON;
@@ -37,12 +39,29 @@ public class Orders {
     }
 
     public Order findOrderPurchasedByCoupon(Customer customer) {
-        Map<String, Order> myOrders = new HashMap<>();
+        Map<String, Order> myOrders = createSelectMenuToUseCoupon();
         print(KIOSK_ASK_TO_CHOOSE_ORDER.message);
-        print(toStringOrdersToChoice(myOrders));
+        print(messageSelectMenusToUseCoupon(myOrders));
+        String customerAnswer = askCustomerToUserCoupon(customer);
         return Optional.of(myOrders)
                 .orElseThrow(() -> new NullPointerException(CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER.getMessage()))
-                .get(customer.commands());
+                .get(customerAnswer);
+    }
+
+    private Map<String, Order> createSelectMenuToUseCoupon() {
+        Map<String, Order> myOrders = new HashMap<>();
+        orders.values()
+                .forEach(order -> {
+                            String selectNumber = createMyOrdersSelectNumber(myOrders);
+                            myOrders.put(selectNumber, order);
+                        }
+                );
+        return myOrders;
+    }
+
+    private String askCustomerToUserCoupon(Customer customer) {
+        return Optional.of(customer.commands())
+                .orElseThrow(() -> new IllegalArgumentException(CUSTOMER_NOT_CORRECT_ANSWER.getMessage()));
     }
 
     public int getTotalPrice() {
@@ -58,22 +77,17 @@ public class Orders {
                 .forEach(Order::changeFoodQuantityByThisOrder);
     }
 
-    private String toStringOrdersToChoice(Map<String, Order> myOrders) {
+    private String messageSelectMenusToUseCoupon(Map<String, Order> myOrders) {
         StringBuilder ordersToChoiceBuilder = new StringBuilder();
-        orders.values()
-                .forEach(order -> {
-                            String selectNumber = createMyOrdersSelectNumber(myOrders);
-                            myOrders.put(
-                                    selectNumber,
-                                    order
-                            );
-                            ordersToChoiceBuilder
-                                    .append(selectNumber)
-                                    .append(". ")
-                                    .append(order.getFoodName())
-                                    .append("\n");
-                        }
-                );
+
+        int number = 0;
+        for (String foodName : myOrders.keySet()) {
+            ordersToChoiceBuilder
+                    .append(number)
+                    .append(". ")
+                    .append(orders.get(foodName))
+                    .append("\n");
+        }
         return ordersToChoiceBuilder.toString();
     }
 

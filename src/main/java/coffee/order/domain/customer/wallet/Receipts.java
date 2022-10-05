@@ -11,7 +11,7 @@ import static coffee.order.view.OutputView.print;
 
 public class Receipts {
 
-    private List<Orders> receipts;
+    private final List<Orders> receipts;
 
     public Receipts() {
         this.receipts = new ArrayList<>();

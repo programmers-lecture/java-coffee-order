@@ -26,16 +26,20 @@ public class Order {
         this.totalPrice = changeTotalPrice();
     }
 
+    String getFoodName() {
+        return this.food.toFoodNameString();
+    }
+
     Integer getTotalPrice() {
         return totalPrice;
     }
 
-    private Integer changeTotalPrice() {
-        return food.getPrice() * quantity;
+    void changeFoodQuantityByThisOrder() {
+        this.food.decreaseQuantity(quantity);
     }
 
-    String getFoodName() {
-        return this.food.toFoodNameString();
+    void changeFoodQuantityWhenDuplicated(Order order) {
+        this.quantity += order.quantity;
     }
 
     StringBuilder createOrderHistory() {
@@ -45,12 +49,8 @@ public class Order {
         return orderHistoryBuilder;
     }
 
-    void changeFoodQuantityByThisOrder() {
-        this.food.decreaseQuantity(quantity);
-    }
-
-    void changeFoodQuantityWhenDuplicated(Order order) {
-        this.quantity += order.quantity;
+    private Integer changeTotalPrice() {
+        return food.getPrice() * quantity;
     }
 
     private void createHistory(StringBuilder orderHistoryBuilder) {
