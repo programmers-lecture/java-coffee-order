@@ -1,4 +1,4 @@
-package coffee.order.view;
+package coffee.order.view.output;
 
 public class OutputView {
 

@@ -2,14 +2,14 @@ package coffee.order.domain.customer;
 
 import coffee.order.domain.customer.wallet.Wallet;
 import coffee.order.domain.order.Orders;
-import coffee.order.view.InputView;
+import coffee.order.view.input.InputView;
 
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_ENOUGH_MONEY;
 
 public class Customer {
 
     private Phone phone;
-    private Wallet wallet;
+    private final Wallet wallet;
 
     public Customer() {
         this.phone = new Phone();

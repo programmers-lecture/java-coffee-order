@@ -1,16 +1,15 @@
 package coffee.order.domain.order;
 
 import coffee.order.domain.customer.Customer;
+import coffee.order.view.output.order.OrdersHistoryMessage;
 
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
-import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_ANSWER;
-import static coffee.order.message.CouponMessage.KIOSK_ASK_TO_CHOOSE_ORDER;
-import static coffee.order.message.KioskMessage.KIOSK_TOTAL_PRICE;
-import static coffee.order.message.MessageUnit.WON;
-import static coffee.order.view.OutputView.print;
+import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
 
 public class Orders {
 
@@ -18,6 +17,10 @@ public class Orders {
 
     public Orders() {
         this.orders = new HashMap<>();
+    }
+
+    public OrdersHistoryMessage ordersHistory() {
+        return new OrdersHistoryMessage(this);
     }
 
     public void addOrder(Order order) {
@@ -40,8 +43,8 @@ public class Orders {
 
     public Order findOrderPurchasedByCoupon(Customer customer) {
         Map<String, Order> myOrders = createSelectMenuToUseCoupon();
-        print(KIOSK_ASK_TO_CHOOSE_ORDER.message);
-        print(messageSelectMenusToUseCoupon(myOrders));
+        ordersHistory().printKioskToChoose();
+        ordersHistory().printToSelectMenuToUseCoupon(myOrders);
         String customerAnswer = askCustomerToUserCoupon(customer);
         return Optional.of(myOrders)
                 .orElseThrow(() -> new NullPointerException(CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER.getMessage()))
@@ -77,46 +80,12 @@ public class Orders {
                 .forEach(Order::changeFoodQuantityByThisOrder);
     }
 
-    private String messageSelectMenusToUseCoupon(Map<String, Order> myOrders) {
-        StringBuilder ordersToChoiceBuilder = new StringBuilder();
-
-        int number = 0;
-        for (String foodName : myOrders.keySet()) {
-            ordersToChoiceBuilder
-                    .append(number)
-                    .append(". ")
-                    .append(orders.get(foodName))
-                    .append("\n");
-        }
-        return ordersToChoiceBuilder.toString();
-    }
-
     private String createMyOrdersSelectNumber(Map<String, Order> myOrders) {
         return 1 + "-" + (myOrders.size() + 1);
     }
 
-    private void createOrderListMessage(StringBuilder messageBuilder) {
-        orders.values()
-                .forEach(order -> messageBuilder.append(order.createOrderHistory()));
+    public Collection<Order> getOrders() {
+        return orders.values();
     }
 
-    private void createTotalPriceMessage(StringBuilder messageBuilder) {
-        messageBuilder
-                .append("\n")
-                .append(KIOSK_TOTAL_PRICE.message)
-                .append(orders.values()
-                        .stream()
-                        .mapToInt(Order::getTotalPrice)
-                        .sum())
-                .append(WON.unit)
-                .append("\n");
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder messageBuilder = new StringBuilder();
-        createOrderListMessage(messageBuilder);
-        createTotalPriceMessage(messageBuilder);
-        return messageBuilder.toString();
-    }
 }

@@ -4,9 +4,9 @@ import coffee.order.domain.order.Orders;
 
 public class Wallet {
 
-    private Cash cash;
-    private Coupon coupon;
-    private Receipts receipts;
+    private final Cash cash;
+    private final Coupon coupon;
+    private final Receipts receipts;
 
     public Wallet() {
         this.cash = new Cash(Integer.MAX_VALUE);

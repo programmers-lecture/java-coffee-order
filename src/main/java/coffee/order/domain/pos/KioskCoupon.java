@@ -1,11 +1,10 @@
 package coffee.order.domain.pos;
 
 import coffee.order.domain.customer.Customer;
+import coffee.order.view.output.pos.KioskCouponHistoryMessage;
 
 import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
 import static coffee.order.domain.pos.KioskCommand.YES;
-import static coffee.order.message.CouponMessage.*;
-import static coffee.order.view.OutputView.print;
 
 public class KioskCoupon {
 
@@ -15,21 +14,29 @@ public class KioskCoupon {
         this.customer = customer;
     }
 
+    public KioskCouponHistoryMessage kioskCouponHistory() {
+        return new KioskCouponHistoryMessage();
+    }
+
     public boolean askCoupon() {
         askSaveCoupon();
         return askUseCoupon();
     }
 
     private void askSaveCoupon() {
-        print(KIOSK_ASK_SAVE_COUPON.message);
-        print(KIOSK_SELECT_YES_OR_NO.message);
+        kioskCouponHistory().printWhenAskSaveCoupon();
+        kioskCouponHistory().printWhenAskYesOrNo();
         if (checkCustomersCommandYes(customer.commands())) {
             customer = askPhoneNumber();
             customer.saveCoupon();
-            print(KIOSK_NOTICE_CURRENT_COUPON_QUANTITY.message);
-            print(String.valueOf(customer.findCouponQuantity()));
-            print(KIOSK_NOTICE_CURRENT_COUPON_QUANTITY_LAST_SENTENCE.message);
+            kioskCouponHistory().printWhenNoticeCurrentCouponQuantity();
+            kioskCouponHistory().printCurrentCouponQuantity(askCouponQuantity());
+            kioskCouponHistory().printAfterNoticeCurrentCouponQuantity();
         }
+    }
+
+    public String askCouponQuantity() {
+        return String.valueOf(customer.findCouponQuantity());
     }
 
     private boolean askUseCoupon() {
@@ -37,8 +44,8 @@ public class KioskCoupon {
             return false;
         }
 
-        print(KIOSK_ASK_USE_COUPON.message);
-        print(KIOSK_SELECT_YES_OR_NO.message);
+        kioskCouponHistory().printWhenAskUseCoupon();
+        kioskCouponHistory().printWhenAskYesOrNo();
 
         if (!checkCustomersCommandYes(customer.commands())) {
             return false;
@@ -49,7 +56,7 @@ public class KioskCoupon {
     }
 
     private Customer askPhoneNumber() {
-        print(KIOSK_ASK_PHONE_NUMBER.message);
+        kioskCouponHistory().printWhenAskPhoneNumber();
         String phoneNumber = customer.commands();
         if (!CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber)) {
             CUSTOMERS_DATA.saveCustomerWithPhoneNumber(customer, phoneNumber);

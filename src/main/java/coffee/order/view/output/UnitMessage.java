@@ -1,13 +1,13 @@
-package coffee.order.message;
+package coffee.order.view.output;
 
-public enum MessageUnit {
+public enum UnitMessage {
 
     COUNT("개"),
     WON("원");
 
     public final String unit;
 
-    MessageUnit(String unit) {
+    UnitMessage(String unit) {
         this.unit = unit;
     }
 

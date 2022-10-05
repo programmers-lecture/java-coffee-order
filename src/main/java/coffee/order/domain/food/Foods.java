@@ -18,13 +18,16 @@ public class Foods {
                 .orElseThrow(() -> new NullPointerException(FOODS_GET_NULL_POINTER_EXCEPTION.getMessage()));
     }
 
-    public void toFoodsMenuStringBuilder(StringBuilder foodsMenu, Long categoryId) {
-        foods.forEach(food -> food.toFoodMenuStringBuilder(foodsMenu, categoryId));
-    }
-
     private Optional<Food> findOptionalFoodByFoodId(Long foodId) {
         return foods.stream()
                 .filter(food -> food.checkSameId(foodId))
                 .findFirst();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        foods.forEach(food -> sb.append(food.toString()));
+        return sb.toString();
     }
 }

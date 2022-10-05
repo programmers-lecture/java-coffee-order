@@ -1,14 +1,14 @@
 package coffee.order.domain.order;
 
 import coffee.order.domain.food.Food;
+import coffee.order.view.output.order.OrderHistoryMessage;
 
-import static coffee.order.message.CouponMessage.KIOSK_COUPON_USE;
-import static coffee.order.message.MessageUnit.COUNT;
-import static coffee.order.message.MessageUnit.WON;
+import static coffee.order.view.output.UnitMessage.COUNT;
+import static coffee.order.view.output.UnitMessage.WON;
 
 public class Order {
 
-    private Food food;
+    private final Food food;
     private Integer quantity;
     private Integer totalPrice;
     private Boolean usedCoupon;
@@ -20,13 +20,17 @@ public class Order {
         this.usedCoupon = false;
     }
 
+    public OrderHistoryMessage orderHistory() {
+        return new OrderHistoryMessage(this);
+    }
+
     public void changeCouponUsed() {
         --quantity;
         usedCoupon = true;
         this.totalPrice = changeTotalPrice();
     }
 
-    String getFoodName() {
+    public String getFoodName() {
         return this.food.toFoodNameString();
     }
 
@@ -42,42 +46,21 @@ public class Order {
         this.quantity += order.quantity;
     }
 
-    StringBuilder createOrderHistory() {
-        StringBuilder orderHistoryBuilder = new StringBuilder();
-        createHistoryWhenCouponUsed(orderHistoryBuilder);
-        createHistory(orderHistoryBuilder);
-        return orderHistoryBuilder;
-    }
-
     private Integer changeTotalPrice() {
         return food.getPrice() * quantity;
     }
 
-    private void createHistory(StringBuilder orderHistoryBuilder) {
-        if (!usedCoupon || quantity != 0) {
-            orderHistoryBuilder
-                    .append(food.toFoodNameString())
-                    .append(" ")
-                    .append(quantity)
-                    .append(COUNT.unit)
-                    .append(" ")
-                    .append(changeTotalPrice())
-                    .append(WON.unit)
-                    .append("\n");
-        }
+    public boolean checkCouponNotUsedOrNotZeroQuantity() {
+        return !usedCoupon ||quantity != 0;
     }
 
-    private void createHistoryWhenCouponUsed(StringBuilder orderHistoryBuilder) {
-        if (usedCoupon) {
-            orderHistoryBuilder
-                    .append(food.toFoodNameString())
-                    .append(" ")
-                    .append(1)
-                    .append(COUNT.unit)
-                    .append(" ")
-                    .append(KIOSK_COUPON_USE.message)
-                    .append("\n");
-        }
+    public boolean checkCouponUsed() {
+        return usedCoupon;
+    }
+
+    @Override
+    public String toString() {
+        return getFoodName() + " " + quantity + COUNT.unit + " " + changeTotalPrice() + WON.unit + "\n";
     }
 
 }

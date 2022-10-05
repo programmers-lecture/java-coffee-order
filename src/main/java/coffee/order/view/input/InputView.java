@@ -1,4 +1,4 @@
-package coffee.order.view;
+package coffee.order.view.input;
 
 import java.io.BufferedReader;
 import java.io.IOException;

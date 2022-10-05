@@ -1,13 +1,10 @@
 package coffee.order.domain.customer.wallet;
 
 import coffee.order.domain.order.Orders;
+import coffee.order.view.output.customer.ReceiptsHistoryMessage;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static coffee.order.message.KioskMessage.KIOSK_AFTER_ORDER;
-import static coffee.order.message.KioskMessage.KIOSK_FINISH_ORDER;
-import static coffee.order.view.OutputView.print;
 
 public class Receipts {
 
@@ -17,18 +14,20 @@ public class Receipts {
         this.receipts = new ArrayList<>();
     }
 
+    public ReceiptsHistoryMessage receiptsHistory() {
+        return new ReceiptsHistoryMessage(this);
+    }
+
     protected void addReceipt(Orders orders) {
         changeFoodQuantity(orders);
         receipts.add(orders);
-        print(KIOSK_AFTER_ORDER.message);
-        print(createRecentReceiptMessage());
-        print(KIOSK_FINISH_ORDER.message);
+        receiptsHistory().printBeforeGetReceipt();
+        receiptsHistory().printLastReceipt();
+        receiptsHistory().printAfterGetReceipt();
     }
 
-    private String createRecentReceiptMessage() {
-        return receipts
-                .get(receipts.size() - 1)
-                .toString();
+    public Orders getLastReceipt() {
+        return receipts.get(receipts.size() - 1);
     }
 
     private void changeFoodQuantity(Orders orders) {

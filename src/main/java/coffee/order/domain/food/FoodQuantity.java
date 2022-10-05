@@ -1,6 +1,6 @@
 package coffee.order.domain.food;
 
-import static coffee.order.exception.FoodException.*;
+import static coffee.order.exception.FoodException.QUANTITY_MINUS_EXCEPTION;
 
 public class FoodQuantity {
 

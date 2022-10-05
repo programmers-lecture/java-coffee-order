@@ -4,12 +4,9 @@ import coffee.order.domain.customer.Customer;
 import coffee.order.domain.food.Food;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
+import coffee.order.view.output.pos.KioskOrderHistoryMessage;
 
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
-import static coffee.order.domain.food.FoodCategory.getMenuMessage;
-import static coffee.order.message.KioskMessage.KIOSK_AFTER_ORDER;
-import static coffee.order.message.KioskMessage.KIOSK_INPUT_CUSTOMER_SELECT_MENU;
-import static coffee.order.view.OutputView.print;
 
 public class KioskOrder {
 
@@ -19,9 +16,13 @@ public class KioskOrder {
         this.customer = customer;
     }
 
+    public KioskOrderHistoryMessage kioskOrderHistory() {
+        return new KioskOrderHistoryMessage();
+    }
+
     public Orders askOrder() {
-        print(KIOSK_INPUT_CUSTOMER_SELECT_MENU.message);
-        print(getMenuMessage());
+        kioskOrderHistory().printAsksCustomerToSelectMenu();
+        kioskOrderHistory().printShowMenuToCustomer();
         return getOrders();
     }
 
@@ -32,8 +33,8 @@ public class KioskOrder {
             if (checkEndCommand(command)) break;
             orders.addOrder(createOrder(command));
         }
-        print(KIOSK_AFTER_ORDER.message);
-        print(orders.toString());
+        kioskOrderHistory().printAfterSelectMenu();
+        orders.ordersHistory().printOrders();
         return orders;
     }
 
