@@ -12,6 +12,7 @@ public class OutputView {
 
     private static final String HYPHEN = "-";
     private static final String BLANK = " ";
+    private static final String MENU_TYPE_DELIMITER = ". ";
     private static final int INDEX_BOUNDARY = 1;
 
     public void printGreetingMessage() {
@@ -23,11 +24,16 @@ public class OutputView {
         System.out.println(MENU_GUIDE_MESSAGE);
 
         for (MenuType menuType : menuTypes) {
-            System.out.println(menuType.getOrder() + ". " + menuType.getKoreanName());
+            System.out.println(menuTypeFormat(menuType));
+
             ArrayList<? super Menu> menuList = menuDatabase.get(menuType);
             menuList.forEach(menu -> System.out.println(menuFormat(menuType, menuList, menu)));
             System.out.println();
         }
+    }
+
+    private String menuTypeFormat(MenuType menuType) {
+        return menuType.getOrder() + MENU_TYPE_DELIMITER + menuType.getKoreanName();
     }
 
     private String menuFormat(MenuType menuType, ArrayList<? super Menu> menuList, Object menu) {
