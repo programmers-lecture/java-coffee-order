@@ -1,6 +1,6 @@
 package coffee.order.dto.order;
 
-import coffee.order.domain.food.Food;
+import coffee.order.dto.food.FoodDto;
 
 import static coffee.order.view.output.UnitMessage.COUNT;
 import static coffee.order.view.output.UnitMessage.WON;
@@ -8,20 +8,16 @@ import static coffee.order.view.output.order.OrderMessage.ORDER_COUPON_USE;
 
 public class OrderDto {
 
-    private final Food food;
+    private final FoodDto foodDto;
     private final Integer quantity;
     private final Integer totalPrice;
     private final Boolean usedCoupon;
 
-    public OrderDto(Food food, Integer quantity, Integer totalPrice, Boolean usedCoupon) {
-        this.food = food;
+    public OrderDto(FoodDto food, Integer quantity, Integer totalPrice, Boolean usedCoupon) {
+        this.foodDto = food;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.usedCoupon = usedCoupon;
-    }
-
-    public String getFoodName() {
-        return this.food.toFoodNameString();
     }
 
     public Integer getTotalPrice() {
@@ -33,12 +29,12 @@ public class OrderDto {
     }
 
     public String getOrderHistoryWhenUsedCoupon() {
-        return food.toFoodNameString() + " " + 1 + COUNT.unit + " " + ORDER_COUPON_USE.message + "\n";
+        return foodDto.getName() + " " + 1 + COUNT.unit + " " + ORDER_COUPON_USE.message + "\n";
     }
 
     @Override
     public String toString() {
-        return getFoodName() + " " + quantity + COUNT.unit + " " + totalPrice + WON.unit + "\n";
+        return foodDto.getName() + " " + quantity + COUNT.unit + " " + totalPrice + WON.unit + "\n";
     }
 
     public boolean checkCouponNotUsedOrNotZeroQuantity() {

@@ -25,8 +25,7 @@ public class Food {
                 id,
                 categoryId,
                 name.toFoodNameDto(),
-                price.toFoodPriceDto(),
-                quantity.toFoodQuantityDto()
+                price.toFoodPriceDto()
         );
     }
 

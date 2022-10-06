@@ -2,7 +2,6 @@ package coffee.order.domain.order;
 
 import coffee.order.domain.food.Food;
 import coffee.order.dto.order.OrderDto;
-import coffee.order.view.output.order.OrderHistoryMessage;
 
 public class Order {
 
@@ -18,12 +17,12 @@ public class Order {
         this.usedCoupon = false;
     }
 
-    public OrderHistoryMessage orderHistory() {
-        return new OrderHistoryMessage(this.toOrderDto());
-    }
-
     public OrderDto toOrderDto() {
-        return new OrderDto(food, quantity, totalPrice, usedCoupon);
+        return new OrderDto(
+                food.toFoodDto(),
+                quantity.intValue(),
+                totalPrice.intValue(),
+                usedCoupon.booleanValue());
     }
 
     public void changeCouponUsed() {

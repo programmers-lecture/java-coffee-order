@@ -37,9 +37,5 @@ public class FoodPrice {
     boolean checkMinusPrice(int price) {
         return price < 0;
     }
-
-    @Override
-    public String toString() {
-        return String.valueOf(price);
-    }
+    
 }
