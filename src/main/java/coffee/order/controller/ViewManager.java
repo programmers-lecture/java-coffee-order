@@ -24,4 +24,8 @@ public class ViewManager {
     public void showMenu(MenuType[] menuTypes, HashMap<MenuType, ArrayList<? super Menu>> menu) {
         outputView.printMenu(menuTypes, menu);
     }
+
+    public HashMap<String, Integer> readMenuChoice() {
+        return inputView.readMenuChoice();
+    }
 }
