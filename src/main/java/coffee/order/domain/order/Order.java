@@ -4,9 +4,6 @@ import coffee.order.domain.food.Food;
 import coffee.order.dto.order.OrderDto;
 import coffee.order.view.output.order.OrderHistoryMessage;
 
-import static coffee.order.view.output.UnitMessage.COUNT;
-import static coffee.order.view.output.UnitMessage.WON;
-
 public class Order {
 
     private final Food food;
@@ -53,11 +50,6 @@ public class Order {
 
     private Integer changeTotalPrice() {
         return food.getPrice() * quantity;
-    }
-
-    @Override
-    public String toString() {
-        return getFoodName() + " " + quantity + COUNT.unit + " " + changeTotalPrice() + WON.unit + "\n";
     }
 
 }
