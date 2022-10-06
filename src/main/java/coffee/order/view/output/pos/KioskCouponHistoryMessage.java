@@ -42,7 +42,7 @@ public class KioskCouponHistoryMessage {
         print(ORDER_ASK_TO_CHOOSE_ORDER.message);
     }
 
-    public void printToSelectMenuToUseCoupon(Map<String, Order> myOrders) {
+    public void printToSelectMenuToApplyCoupon(Map<String, Order> myOrders) {
         StringBuilder ordersToChoiceBuilder = new StringBuilder();
         for (Map.Entry<String, Order> entry : myOrders.entrySet()) {
             ordersToChoiceBuilder

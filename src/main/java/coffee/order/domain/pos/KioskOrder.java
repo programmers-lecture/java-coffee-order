@@ -4,6 +4,7 @@ import coffee.order.domain.customer.Customer;
 import coffee.order.domain.food.Food;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
+import coffee.order.view.input.pos.KioskOrderInput;
 import coffee.order.view.output.pos.KioskOrderHistoryMessage;
 
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
@@ -20,6 +21,10 @@ public class KioskOrder {
         return new KioskOrderHistoryMessage();
     }
 
+    public KioskOrderInput kioskOrderInput() {
+        return new KioskOrderInput();
+    }
+
     public Orders askOrder() {
         kioskOrderHistory().printAsksCustomerToSelectMenu();
         kioskOrderHistory().printShowMenuToCustomer();
@@ -29,8 +34,7 @@ public class KioskOrder {
     private Orders getOrders() {
         Orders orders = new Orders();
         while (true) {
-            // TODO : OutputView
-            String command = customer.commands();
+            String command = kioskOrderInput().askCustomerToChooseFood();
             if (checkEndCommand(command)) break;
             orders.addOrder(createOrder(command));
         }

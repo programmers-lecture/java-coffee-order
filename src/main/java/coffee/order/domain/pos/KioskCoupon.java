@@ -2,6 +2,7 @@ package coffee.order.domain.pos;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.order.Order;
+import coffee.order.view.input.pos.KioskCouponInput;
 import coffee.order.view.output.pos.KioskCouponHistoryMessage;
 
 import java.util.Map;
@@ -24,16 +25,20 @@ public class KioskCoupon {
         return new KioskCouponHistoryMessage();
     }
 
+    public KioskCouponInput kioskCouponInput() {
+        return new KioskCouponInput();
+    }
+
     public boolean askCoupon() {
         askSaveCoupon();
         return askUseCoupon();
     }
 
-    // TODO : OutputView
     private void askSaveCoupon() {
         kioskCouponHistory().printWhenAskSaveCoupon();
         kioskCouponHistory().printWhenAskYesOrNo();
-        if (checkCustomersCommandYes(customer.commands())) {
+        String customerAnswered = kioskCouponInput().askCustomerYesOrNo();
+        if (checkCustomersCommandYes(customerAnswered)) {
             customer = askPhoneNumber();
             customer.saveCoupon();
             kioskCouponHistory().printWhenNoticeCurrentCouponQuantity();
@@ -54,7 +59,8 @@ public class KioskCoupon {
         kioskCouponHistory().printWhenAskUseCoupon();
         kioskCouponHistory().printWhenAskYesOrNo();
 
-        if (!checkCustomersCommandYes(customer.commands())) {
+        String customerAnswered = kioskCouponInput().askCustomerYesOrNo();
+        if (!checkCustomersCommandYes(customerAnswered)) {
             return false;
         }
 
@@ -64,30 +70,28 @@ public class KioskCoupon {
 
     private Customer askPhoneNumber() {
         kioskCouponHistory().printWhenAskPhoneNumber();
-        String phoneNumber = customer.commands();
+        String phoneNumber = kioskCouponInput().askCustomerPhoneNumber();
         if (!CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber)) {
             CUSTOMERS_DATA.saveCustomerWithPhoneNumber(customer, phoneNumber);
         }
         return CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
     }
 
-    // TODO : OutputView
-    private boolean checkCustomersCommandYes(String command) {
-        return command.equals(YES.selectedCommand);
+    private boolean checkCustomersCommandYes(String answer) {
+        return answer.equals(YES.selectedCommand);
     }
 
     public Order findOrderPurchasedByCoupon(Map<String, Order> customerOrders) {
         kioskCouponHistory().printKioskToChoose();
-        kioskCouponHistory().printToSelectMenuToUseCoupon(customerOrders);
-        String customerAnswer = askCustomerToUseCoupon(customer);
+        kioskCouponHistory().printToSelectMenuToApplyCoupon(customerOrders);
+        String customerSelectedMenu = askCustomerMenuNumberToApplyCoupon();
         return Optional.of(customerOrders)
                 .orElseThrow(() -> new NullPointerException(CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER.getMessage()))
-                .get(customerAnswer);
+                .get(customerSelectedMenu);
     }
 
-    // TODO : OutputView
-    private String askCustomerToUseCoupon(Customer customer) {
-        return Optional.of(customer.commands())
+    private String askCustomerMenuNumberToApplyCoupon() {
+        return Optional.of(kioskCouponInput().askCustomerMenuNumberToApplyCoupon())
                 .orElseThrow(() -> new IllegalArgumentException(CUSTOMER_NOT_CORRECT_ANSWER.getMessage()));
     }
 

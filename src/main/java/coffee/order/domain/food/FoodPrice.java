@@ -16,7 +16,6 @@ public class FoodPrice {
         return new FoodPriceDto(price);
     }
 
-
     int getPrice() {
         return price;
     }
@@ -25,7 +24,6 @@ public class FoodPrice {
     void increasePrice(int inputPrice) {
         this.price += inputPrice;
     }
-
 
     void decreasePrice(int inputPrice) {
         if (checkMinusPrice(this.price - inputPrice)) {
@@ -37,5 +35,5 @@ public class FoodPrice {
     boolean checkMinusPrice(int price) {
         return price < 0;
     }
-    
+
 }

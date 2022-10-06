@@ -2,7 +2,6 @@ package coffee.order.domain.customer;
 
 import coffee.order.domain.customer.wallet.Wallet;
 import coffee.order.domain.order.Orders;
-import coffee.order.view.input.InputView;
 
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_ENOUGH_MONEY;
 
@@ -14,10 +13,6 @@ public class Customer {
     public Customer() {
         this.phone = new Phone();
         this.wallet = new Wallet();
-    }
-
-    public String commands() {
-        return InputView.read();
     }
 
     public int findCouponQuantity() {
