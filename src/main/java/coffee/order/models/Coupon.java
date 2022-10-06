@@ -2,34 +2,30 @@ package coffee.order.models;
 
 public class Coupon {
     private static final int COUPON_USE_COUNT = 10;
-    private static final int COUPON_INIT_COUNT = 1;
-    private static final int COUPON_EARN_COUNT = 1;
+    private static final int COUPON_INIT_COUNT = 0;
 
-    private String phoneNumber;
     private int count;
 
-    public Coupon(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public Coupon() {
         this.count = COUPON_INIT_COUNT;
     }
 
-    public String getPhoneNumber() {
-        return this.phoneNumber;
+    public static boolean isCouponUsePossible(int couponsCnt) {
+        return couponsCnt >= COUPON_USE_COUNT;
+    }
+
+    public void addCouponCnt(int count) {
+        if(count < 0)
+            throw new IllegalArgumentException("적립할 쿠폰의 갯수는 음수가 될 수 없습니다.");
+        this.count += count;
+    }
+    public int useCoupon(int orderFoodCnt) {
+        int couponUsableCnt = Math.min(count / COUPON_USE_COUNT, orderFoodCnt);
+        count -= COUPON_USE_COUNT * couponUsableCnt;
+        return couponUsableCnt;
     }
 
     public int getCount() {
-        return this.count;
-    }
-
-    public boolean isCouponUsePossible() {
-        return count >= COUPON_USE_COUNT;
-    }
-
-    public void useCoupon() {
-        count -= COUPON_USE_COUNT;
-    }
-
-    public void earnCoupon() {
-        count += COUPON_EARN_COUNT;
+        return count;
     }
 }
