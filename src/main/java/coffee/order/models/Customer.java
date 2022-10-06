@@ -1,53 +1,31 @@
 package coffee.order.models;
 
-import java.util.*;
+import java.util.regex.Pattern;
 
 public class Customer {
-    private static Set<Coupon> coupons = new HashSet<>();
+    private String phoneNumber;
 
-    private List<Order> orders;
+    public Customer() {}
 
-    public Customer() {
-        this.orders = new ArrayList<>();
-    }
-
-    public void createOrders(List<String> orders) {
-        for(String order: orders) {
-            String[] orderInfo = order.split(", ");
-            this.orders.add(new Order(orderInfo[0], Integer.parseInt(orderInfo[1])));
+    public void addPhoneNumberInfo(String phoneNumber) {
+        String regEx = "(\\d{3})-(\\d{4})-(\\d{4})";
+        if(!Pattern.matches(regEx, phoneNumber)){
+           throw new IllegalArgumentException("전화번호 형식이 알맞지 않습니다.");
         }
-        checkOrderIsEmpty();
+        this.phoneNumber = phoneNumber;
     }
 
-    private void checkOrderIsEmpty() {
-        if(orders.isEmpty())
-            throw new IllegalArgumentException("메뉴 주문을 하지 않았습니다.");
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj || (this.phoneNumber.equals(((Customer) obj).phoneNumber));
     }
 
-    public List<Order> getOrders() {
-        return Collections.unmodifiableList(orders);
+    @Override
+    public int hashCode() {
+        return phoneNumber.hashCode();
     }
 
-    public void useCouponForOrderedMenu(String number) {
-        Order order = orders.stream()
-                .filter(o -> o.getMenuNumber().equals(number))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 메뉴입니다."));
-        order.useCouponForOrder();
+    public boolean isSameObject(Object obj) {
+        return this == obj;
     }
-
-    public Coupon createCoupons(String phoneNumber) {
-        Coupon coupon = coupons.stream()
-                .filter(c -> c.getPhoneNumber().equals(phoneNumber))
-                .findFirst()
-                .orElse(null);
-        if(coupon == null) {
-            coupon = new Coupon(phoneNumber);
-            coupons.add(coupon);
-            return coupon;
-        }
-        coupon.earnCoupon();
-        return coupon;
-    }
-
 }
