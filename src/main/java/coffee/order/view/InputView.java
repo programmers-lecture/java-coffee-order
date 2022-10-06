@@ -2,12 +2,16 @@ package coffee.order.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
     private static final String MENU_CHOICE_DELIMITER = ",";
+    private static final String MENU_INDEX_DELIMITER = "-";
+    private static final int MENU_NUMBER_INDEX = 0;
+    private static final int ORDER_AMOUNT_INDEX = 1;
+    private static final int MENU_TYPE_INDEX = 0;
+    private static final int MENU_SUB_NUMBER_INDEX = 1;
 
     private final Scanner scanner;
 
@@ -15,21 +19,25 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public HashMap<String, Integer> readMenuChoice() {
+    public MenuChoice readMenuChoice() {
         // TODO: 유저가 그만둘 때까지 계속 입력받기
         String menuChoice = scanner.nextLine();
-        return convertToTransactionFormat(menuChoice);
+        return createNewMenuChoice(menuChoice);
     }
 
-    public HashMap<String, Integer> convertToTransactionFormat(String menuChoice) {
+    public MenuChoice createNewMenuChoice(String menuChoice) {
         String[] tokens = menuChoice.split(MENU_CHOICE_DELIMITER);
         ArrayList<String> trimmedTokens = Arrays.stream(tokens)
                 .map(String::trim)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        HashMap<String, Integer> transactionFormat = new HashMap<>();
-        transactionFormat.put(trimmedTokens.get(0), Integer.valueOf(trimmedTokens.get(1)));
-        return transactionFormat;
-    }
+        String menuNumber = trimmedTokens.get(MENU_NUMBER_INDEX);
+        String[] menuIndexes = menuNumber.split(MENU_INDEX_DELIMITER);
 
+        int menuType = Integer.parseInt(menuIndexes[MENU_TYPE_INDEX]);
+        int menuName = Integer.parseInt(menuIndexes[MENU_SUB_NUMBER_INDEX]);
+        int orderAmount = Integer.parseInt(trimmedTokens.get(ORDER_AMOUNT_INDEX));
+
+        return new MenuChoice(menuType, menuName, orderAmount);
+    }
 }

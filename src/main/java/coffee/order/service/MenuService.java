@@ -19,7 +19,11 @@ public class MenuService {
         menuInitializer.initializeMenu(menuRepository);
     }
 
-    public HashMap<MenuType, ArrayList<? super Menu>> getMenu() {
+    public HashMap<MenuType, ArrayList<? super Menu>> getMenuDatabase() {
         return menuRepository.getMenuDatabase();
+    }
+
+    public String findMenuName(MenuType menuType, int menuName) {
+        return menuRepository.findMenuName(menuType, menuName);
     }
 }

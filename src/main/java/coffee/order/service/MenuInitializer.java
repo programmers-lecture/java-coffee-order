@@ -10,7 +10,7 @@ public class MenuInitializer {
         menuRepository.addMenu(new Coffee("에스프레소", 3000));
         menuRepository.addMenu(new Coffee("카페라떼", 4000));
         menuRepository.addMenu(new Coffee("카푸치노", 4500));
-        menuRepository.addMenu(new Coffee("에스프레소", 2000));
+        menuRepository.addMenu(new Coffee("콜드브루", 2000));
 
         menuRepository.addMenu(new Tea("그린티", 2500));
 

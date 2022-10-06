@@ -38,4 +38,9 @@ public class MenuRepository {
     public HashMap<MenuType, ArrayList<? super Menu>> getMenuDatabase() {
         return menuDatabase;
     }
+
+    public String findMenuName(MenuType menuType, int menuName) {
+        ArrayList<? super Menu> menus = menuDatabase.get(menuType);
+        return menus.get(menuName - 1).toString();
+    }
 }

@@ -1,5 +1,8 @@
 package coffee.order.model;
 
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
 public enum MenuType {
     COFFEE("커피", 1),
     TEA("티", 2),
@@ -23,5 +26,12 @@ public enum MenuType {
 
     public int getOrder() {
         return order;
+    }
+
+    public static MenuType findMenuType(int order) {
+        return Arrays.stream(MenuType.values())
+                .filter(menuType -> menuType.getOrder() == order)
+                .findAny()
+                .orElseThrow(NoSuchElementException::new);
     }
 }
