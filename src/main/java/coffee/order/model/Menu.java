@@ -1,19 +1,16 @@
 package coffee.order.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Menu {
-    private final Map<String, Integer> menu;
+    private String menuName;
+    private int price;
 
-    public Menu() {
-        menu = new HashMap<>();
+    public Menu(String menuName, int price) {
+        this.menuName = menuName;
+        this.price = price;
     }
 
-    public void createDefaultMenu() {
-        menu.put("에스프레소", 2000);
-        menu.put("아메리카노", 3000);
-        menu.put("콜드브루", 4000);
-        menu.put("카페라떼", 5000);
+    @Override
+    public String toString() {
+        return menuName;
     }
 }
