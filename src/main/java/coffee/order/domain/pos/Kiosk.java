@@ -3,6 +3,7 @@ package coffee.order.domain.pos;
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
+import coffee.order.view.output.pos.KioskHistoryMessage;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,6 +25,13 @@ public class Kiosk {
         }
 
         customer.addMyOrders(customerOrders);
+        kioskHistory().printBeforeGiveReceipt();
+        kioskHistory().printLastReceipt(customerOrders);
+        kioskHistory().printAfterGiveReceipt();
+    }
+
+    public KioskHistoryMessage kioskHistory() {
+        return new KioskHistoryMessage();
     }
 
     private Map<String, Order> createSelectedMenu(Collection<Order> orders) {
