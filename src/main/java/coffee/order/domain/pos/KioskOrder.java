@@ -29,6 +29,7 @@ public class KioskOrder {
     private Orders getOrders() {
         Orders orders = new Orders();
         while (true) {
+            // TODO : OutputView
             String command = customer.commands();
             if (checkEndCommand(command)) break;
             orders.addOrder(createOrder(command));

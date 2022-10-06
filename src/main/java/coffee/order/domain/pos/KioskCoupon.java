@@ -1,10 +1,16 @@
 package coffee.order.domain.pos;
 
 import coffee.order.domain.customer.Customer;
+import coffee.order.domain.order.Order;
 import coffee.order.view.output.pos.KioskCouponHistoryMessage;
+
+import java.util.Map;
+import java.util.Optional;
 
 import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
 import static coffee.order.domain.pos.KioskCommand.YES;
+import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_ANSWER;
+import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
 
 public class KioskCoupon {
 
@@ -23,6 +29,7 @@ public class KioskCoupon {
         return askUseCoupon();
     }
 
+    // TODO : OutputView
     private void askSaveCoupon() {
         kioskCouponHistory().printWhenAskSaveCoupon();
         kioskCouponHistory().printWhenAskYesOrNo();
@@ -64,8 +71,24 @@ public class KioskCoupon {
         return CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
     }
 
+    // TODO : OutputView
     private boolean checkCustomersCommandYes(String command) {
         return command.equals(YES.selectedCommand);
+    }
+
+    public Order findOrderPurchasedByCoupon(Map<String, Order> customerOrders) {
+        kioskCouponHistory().printKioskToChoose();
+        kioskCouponHistory().printToSelectMenuToUseCoupon(customerOrders);
+        String customerAnswer = askCustomerToUseCoupon(customer);
+        return Optional.of(customerOrders)
+                .orElseThrow(() -> new NullPointerException(CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER.getMessage()))
+                .get(customerAnswer);
+    }
+
+    // TODO : OutputView
+    private String askCustomerToUseCoupon(Customer customer) {
+        return Optional.of(customer.commands())
+                .orElseThrow(() -> new IllegalArgumentException(CUSTOMER_NOT_CORRECT_ANSWER.getMessage()));
     }
 
 }

@@ -1,28 +1,13 @@
 package coffee.order.view.output.order;
 
-import coffee.order.domain.order.Order;
-
-import static coffee.order.view.output.OutputView.print;
-import static coffee.order.view.output.UnitMessage.COUNT;
-import static coffee.order.view.output.order.OrderMessage.ORDER_COUPON_USE;
+import coffee.order.dto.order.OrderDto;
 
 public class OrderHistoryMessage {
 
-    private final Order order;
+    private final OrderDto orderDto;
 
-    public OrderHistoryMessage(Order order) {
-        this.order = order;
+    public OrderHistoryMessage(OrderDto orderDto) {
+        this.orderDto = orderDto;
     }
 
-    public void printOrderHistory() {
-        if (order.checkCouponNotUsedOrNotZeroQuantity()) {
-            print(order.toString());
-        }
-    }
-
-    public void printOrderCouponHistoryWhenCouponUsed() {
-        if (order.checkCouponUsed()) {
-            print(order.getFoodName() + " " + 1 + COUNT.unit + " " + ORDER_COUPON_USE.message + "\n");
-        }
-    }
 }

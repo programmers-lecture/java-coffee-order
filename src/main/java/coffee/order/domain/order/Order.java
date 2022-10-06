@@ -1,6 +1,7 @@
 package coffee.order.domain.order;
 
 import coffee.order.domain.food.Food;
+import coffee.order.dto.order.OrderDto;
 import coffee.order.view.output.order.OrderHistoryMessage;
 
 import static coffee.order.view.output.UnitMessage.COUNT;
@@ -21,7 +22,11 @@ public class Order {
     }
 
     public OrderHistoryMessage orderHistory() {
-        return new OrderHistoryMessage(this);
+        return new OrderHistoryMessage(this.toOrderDto());
+    }
+
+    public OrderDto toOrderDto() {
+        return new OrderDto(food, quantity, totalPrice, usedCoupon);
     }
 
     public void changeCouponUsed() {
@@ -48,14 +53,6 @@ public class Order {
 
     private Integer changeTotalPrice() {
         return food.getPrice() * quantity;
-    }
-
-    public boolean checkCouponNotUsedOrNotZeroQuantity() {
-        return !usedCoupon ||quantity != 0;
-    }
-
-    public boolean checkCouponUsed() {
-        return usedCoupon;
     }
 
     @Override
