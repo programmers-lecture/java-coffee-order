@@ -1,8 +1,8 @@
 package coffee.order.domain.food;
 
-import java.util.Objects;
+import coffee.order.dto.food.FoodDto;
 
-import static coffee.order.view.output.UnitMessage.WON;
+import java.util.Objects;
 
 public class Food {
 
@@ -18,6 +18,16 @@ public class Food {
         this.name = new FoodName(name);
         this.price = new FoodPrice(price);
         this.quantity = new FoodQuantity(quantity);
+    }
+
+    public FoodDto toFoodDto() {
+        return new FoodDto(
+                id,
+                categoryId,
+                name.toFoodNameDto(),
+                price.toFoodPriceDto(),
+                quantity.toFoodQuantityDto()
+        );
     }
 
     public int getPrice() {
@@ -44,28 +54,8 @@ public class Food {
         return Objects.equals(this.id, foodId);
     }
 
-//    public void toFoodMenuStringBuilder(StringBuilder foodMenuBuilder, Long categoryId) {
-//        foodMenuBuilder
-//                .append(categoryId)
-//                .append("-")
-//                .append(id)
-//                .append(".")
-//                .append(" ")
-//                .append(name)
-//                .append(" ")
-//                .append("//")
-//                .append(" ")
-//                .append(price)
-//                .append(WON.unit)
-//                .append("\n");
-//    }
-
     public String toFoodNameString() {
         return name.toString();
     }
 
-    @Override
-    public String toString() {
-        return categoryId + "-" + id + ". " + toFoodNameString() + " // " + price.toString() + WON.unit + "\n";
-    }
 }

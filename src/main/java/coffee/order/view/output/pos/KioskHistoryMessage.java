@@ -3,7 +3,8 @@ package coffee.order.view.output.pos;
 import coffee.order.domain.order.Orders;
 
 import static coffee.order.view.output.OutputView.print;
-import static coffee.order.view.output.pos.KioskMessage.*;
+import static coffee.order.view.output.pos.KioskMessage.KIOSK_AFTER_ORDER;
+import static coffee.order.view.output.pos.KioskMessage.KIOSK_FINISH_ORDER;
 
 public class KioskHistoryMessage {
 

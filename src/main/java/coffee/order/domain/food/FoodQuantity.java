@@ -1,5 +1,7 @@
 package coffee.order.domain.food;
 
+import coffee.order.dto.food.FoodQuantityDto;
+
 import static coffee.order.exception.FoodException.QUANTITY_MINUS_EXCEPTION;
 
 public class FoodQuantity {
@@ -10,18 +12,22 @@ public class FoodQuantity {
         this.quantity = quantity;
     }
 
-    protected void increaseQuantity(int inputQuantity) {
+    public FoodQuantityDto toFoodQuantityDto() {
+        return new FoodQuantityDto(quantity);
+    }
+
+    void increaseQuantity(int inputQuantity) {
         this.quantity += inputQuantity;
     }
 
-    protected void decreaseQuantity(int inputQuantity) {
+    void decreaseQuantity(int inputQuantity) {
         if (checkMinusQuantity(this.quantity - inputQuantity)) {
             throw new IllegalArgumentException(QUANTITY_MINUS_EXCEPTION.getMessage());
         }
         this.quantity -= inputQuantity;
     }
 
-    protected boolean checkMinusQuantity(int quantity) {
+    boolean checkMinusQuantity(int quantity) {
         return quantity < 0;
     }
 }

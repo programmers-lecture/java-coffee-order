@@ -1,5 +1,7 @@
 package coffee.order.domain.food;
 
+import coffee.order.dto.food.FoodCategoryDto;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +42,10 @@ public enum FoodCategory {
         this.foods = foods;
         this.name = name;
         this.id = id;
+    }
+
+    public FoodCategoryDto toFoodCategoryDto() {
+        return new FoodCategoryDto(foods.toFoodsDto(), name, id);
     }
 
     public static Foods findFoodsByCategoryId(Long categoryId) {

@@ -1,5 +1,7 @@
 package coffee.order.domain.food;
 
+import coffee.order.dto.food.FoodPriceDto;
+
 import static coffee.order.exception.FoodException.PRICE_MINUS_EXCEPTION;
 
 public class FoodPrice {
@@ -10,22 +12,29 @@ public class FoodPrice {
         this.price = price;
     }
 
-    protected int getPrice() {
+    public FoodPriceDto toFoodPriceDto() {
+        return new FoodPriceDto(price);
+    }
+
+
+    int getPrice() {
         return price;
     }
 
-    protected void increasePrice(int inputPrice) {
+
+    void increasePrice(int inputPrice) {
         this.price += inputPrice;
     }
 
-    protected void decreasePrice(int inputPrice) {
+
+    void decreasePrice(int inputPrice) {
         if (checkMinusPrice(this.price - inputPrice)) {
             throw new IllegalArgumentException(PRICE_MINUS_EXCEPTION.getMessage());
         }
         this.price -= inputPrice;
     }
 
-    protected boolean checkMinusPrice(int price) {
+    boolean checkMinusPrice(int price) {
         return price < 0;
     }
 

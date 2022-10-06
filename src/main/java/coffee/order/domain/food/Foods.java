@@ -1,7 +1,10 @@
 package coffee.order.domain.food;
 
+import coffee.order.dto.food.FoodsDto;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static coffee.order.exception.FoodException.FOODS_GET_NULL_POINTER_EXCEPTION;
 
@@ -11,6 +14,13 @@ public class Foods {
 
     public Foods(List<Food> foods) {
         this.foods = foods;
+    }
+
+    public FoodsDto toFoodsDto() {
+        return new FoodsDto(
+                foods.stream()
+                        .map(Food::toFoodDto)
+                        .collect(Collectors.toUnmodifiableList()));
     }
 
     public Food findFoodByFoodId(Long foodId) {
@@ -24,10 +34,4 @@ public class Foods {
                 .findFirst();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        foods.forEach(food -> sb.append(food.toString()));
-        return sb.toString();
-    }
 }
