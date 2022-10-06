@@ -1,9 +1,10 @@
 package coffee.order;
 
-import coffee.order.controller.Cafe;
+import coffee.order.controller.Kiosk;
 
 public class Main {
     public static void main(String[] args) {
-        Cafe.runCafe();
+        Kiosk kiosk = new Kiosk();
+        kiosk.run();
     }
 }
