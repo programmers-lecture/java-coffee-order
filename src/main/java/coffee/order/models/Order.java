@@ -1,66 +1,46 @@
 package coffee.order.models;
 
-import coffee.order.enums.Coffee;
-import coffee.order.enums.Dessert;
-import coffee.order.enums.Tea;
-
 public class Order {
-    private String menuNumber;
-    private int count;
-    private String menuName;
-    private int menuPrice;
-    private boolean isCouponUsed;
+    private final Customer customer;
+    private final Food food;
+    private int orderCount;
+    private int couponUseCount;
 
-    public Order(String menuNumber, int count) {
-        this.menuNumber = menuNumber;
-        this.count = count;
-        this.isCouponUsed = false;
-        saveOrderInfo();
+    public Order(Customer customer, Food food, int count) {
+        this.customer = customer;
+        this.food = food;
+        this.orderCount = count;
+        this.couponUseCount = 0;
     }
 
-    public void saveOrderInfo() {
-        Coffee coffee = Coffee.findCoffee(menuNumber);
-        if(coffee != null) {
-            menuName = coffee.getName();
-            menuPrice = coffee.getPrice();
-            return;
-        }
-        Tea tea = Tea.findTea(menuNumber);
-        if(tea != null) {
-            menuName = tea.getName();
-            menuPrice = tea.getPrice();
-            return;
-        }
-        Dessert dessert = Dessert.findDessert(menuNumber);
-        if(dessert != null)  {
-            menuName = dessert.getName();
-            menuPrice = dessert.getPrice();
-            return;
-        }
-        throw new IllegalArgumentException("주문에 해당되는 메뉴가 존재하지 않습니다.");
+    public int getOrderPrice() {
+        return orderCount * food.getPrice();
     }
 
-    public void useCouponForOrder() {
-        this.isCouponUsed = true;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public String getMenuNumber() {
-        return this.menuNumber;
+    public String getOrderFoodName() {
+        return food.getName();
     }
 
-    public String getMenuName() {
-        return this.menuName;
+    public String getOrderFoodNumber() {
+        return food.getNumber();
     }
 
-    public int getCount() {
-        return this.count;
+    public int getOrderFoodCount() {
+        return orderCount;
     }
 
-    public int getMenuPrice() {
-        return this.menuPrice;
+    public int getCouponUseCount() {
+        return couponUseCount;
     }
 
-    public boolean getIsCouponUsed() {
-        return this.isCouponUsed;
+    public void useCouponForOrderedFood(int couponUseCount) {
+        if(couponUseCount < 0 || orderCount - couponUseCount < 0)
+            throw new IllegalArgumentException("사용 쿠폰 수량은 주문 수보다 크거나 음수일 수 없습니다.");
+        this.orderCount -= couponUseCount;
+        this.couponUseCount += couponUseCount;
     }
 }
