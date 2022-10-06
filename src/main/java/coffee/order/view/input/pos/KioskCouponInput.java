@@ -1,7 +1,8 @@
 package coffee.order.view.input.pos;
 
-import static coffee.order.domain.pos.KioskCommand.*;
-import static coffee.order.view.input.InputView.*;
+import static coffee.order.domain.pos.KioskCommand.NO;
+import static coffee.order.domain.pos.KioskCommand.YES;
+import static coffee.order.view.input.InputView.read;
 import static coffee.order.view.input.exception.KioskCouponInputException.*;
 
 public class KioskCouponInput {
