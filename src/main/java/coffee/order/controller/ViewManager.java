@@ -1,7 +1,12 @@
 package coffee.order.controller;
 
+import coffee.order.model.Menu;
+import coffee.order.model.MenuType;
 import coffee.order.view.InputView;
 import coffee.order.view.OutputView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ViewManager {
     private final InputView inputView;
@@ -14,5 +19,9 @@ public class ViewManager {
 
     public void greeting() {
         outputView.printGreetingMessage();
+    }
+
+    public void showMenu(MenuType[] menuTypes, HashMap<MenuType, ArrayList<? super Menu>> menu) {
+        outputView.printMenu(menuTypes, menu);
     }
 }

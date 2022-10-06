@@ -1,7 +1,12 @@
 package coffee.order.controller;
 
+import coffee.order.model.Menu;
+import coffee.order.model.MenuType;
 import coffee.order.service.CouponService;
 import coffee.order.service.MenuService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ServiceManager {
     private final MenuService menuService;
@@ -14,5 +19,9 @@ public class ServiceManager {
 
     public void initializeMenu() {
         menuService.initializeMenu();
+    }
+
+    public HashMap<MenuType, ArrayList<? super Menu>> getMenu() {
+        return menuService.getMenu();
     }
 }

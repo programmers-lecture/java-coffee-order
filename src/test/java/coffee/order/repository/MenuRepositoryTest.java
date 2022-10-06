@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,5 +40,10 @@ class MenuRepositoryTest {
         assertThat(dessertList.size())
                 .as("메뉴 타입별 사이즈")
                 .isEqualTo(3);
+    }
+
+    @Test
+    void menuTypeTest() {
+        System.out.println(Arrays.toString(MenuType.getMenuTypes()));
     }
 }

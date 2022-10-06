@@ -1,5 +1,7 @@
 package coffee.order.controller;
 
+import coffee.order.model.MenuType;
+
 public class Controller {
     private final ViewManager viewManager;
     private final ServiceManager serviceManager;
@@ -13,6 +15,9 @@ public class Controller {
         while (true) {
             viewManager.greeting();
             serviceManager.initializeMenu();
+            viewManager.showMenu(MenuType.getMenuTypes(), serviceManager.getMenu());
+
+            break;
         }
     }
 }
