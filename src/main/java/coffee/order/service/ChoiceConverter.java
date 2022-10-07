@@ -8,8 +8,9 @@ public class ChoiceConverter {
     public Transaction convertToTransaction(MenuChoice menuChoice, MenuService menuService) {
         MenuType menuType = MenuType.findMenuType(menuChoice.getMenuType());
         String menuName = menuService.findMenuName(menuType, menuChoice.getMenuName());
-        int orderAmount = menuChoice.getOrderAmount();
+        int orderQuantity = menuChoice.getOrderQuantity();
+        int orderAmount = menuService.findMenuPrice(menuType, menuName);
 
-        return new Transaction(menuType, menuName, orderAmount);
+        return new Transaction(menuType, menuName, orderQuantity);
     }
 }

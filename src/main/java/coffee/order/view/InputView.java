@@ -36,8 +36,8 @@ public class InputView {
 
         int menuType = Integer.parseInt(menuIndexes[MENU_TYPE_INDEX]);
         int menuName = Integer.parseInt(menuIndexes[MENU_SUB_NUMBER_INDEX]);
-        int orderAmount = Integer.parseInt(trimmedTokens.get(ORDER_AMOUNT_INDEX));
+        int orderQuantity = Integer.parseInt(trimmedTokens.get(ORDER_AMOUNT_INDEX));
 
-        return new MenuChoice(menuType, menuName, orderAmount);
+        return new MenuChoice(menuType, menuName, orderQuantity);
     }
 }

@@ -3,12 +3,12 @@ package coffee.order.view;
 public class MenuChoice {
     private final int menuType;
     private final int menuName;
-    private final int orderAmount;
+    private final int orderQuantity;
 
-    public MenuChoice(int menuType, int menuName, int orderAmount) {
+    public MenuChoice(int menuType, int menuName, int orderQuantity) {
         this.menuType = menuType;
         this.menuName = menuName;
-        this.orderAmount = orderAmount;
+        this.orderQuantity = orderQuantity;
     }
 
     public int getMenuType() {
@@ -19,7 +19,7 @@ public class MenuChoice {
         return menuName;
     }
 
-    public int getOrderAmount() {
-        return orderAmount;
+    public int getOrderQuantity() {
+        return orderQuantity;
     }
 }
