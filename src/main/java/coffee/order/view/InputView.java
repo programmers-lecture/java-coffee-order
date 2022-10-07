@@ -19,13 +19,13 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public MenuChoice readMenuChoice() {
+    public Order readMenuChoice() {
         // TODO: 유저가 그만둘 때까지 계속 입력받기
         String menuChoice = scanner.nextLine();
         return createNewMenuChoice(menuChoice);
     }
 
-    public MenuChoice createNewMenuChoice(String menuChoice) {
+    public Order createNewMenuChoice(String menuChoice) {
         String[] tokens = menuChoice.split(MENU_CHOICE_DELIMITER);
         ArrayList<String> trimmedTokens = Arrays.stream(tokens)
                 .map(String::trim)
@@ -38,6 +38,6 @@ public class InputView {
         int menuName = Integer.parseInt(menuIndexes[MENU_SUB_NUMBER_INDEX]);
         int orderQuantity = Integer.parseInt(trimmedTokens.get(ORDER_AMOUNT_INDEX));
 
-        return new MenuChoice(menuType, menuName, orderQuantity);
+        return new Order(menuType, menuName, orderQuantity);
     }
 }

@@ -1,11 +1,11 @@
 package coffee.order.view;
 
-public class MenuChoice {
+public class Order {
     private final int menuType;
     private final int menuName;
     private final int orderQuantity;
 
-    public MenuChoice(int menuType, int menuName, int orderQuantity) {
+    public Order(int menuType, int menuName, int orderQuantity) {
         this.menuType = menuType;
         this.menuName = menuName;
         this.orderQuantity = orderQuantity;

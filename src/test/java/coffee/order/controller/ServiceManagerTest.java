@@ -1,7 +1,7 @@
 package coffee.order.controller;
 
 import coffee.order.repository.TransactionRepository;
-import coffee.order.view.MenuChoice;
+import coffee.order.view.Order;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,10 +17,10 @@ class ServiceManagerTest {
     @Test
     void createNewTransaction() {
         // given
-        MenuChoice menuChoice = new MenuChoice(1, 2, 10);
+        Order order = new Order(1, 2, 10);
 
         // when
-        serviceManager.createNewTransaction(menuChoice);
+        serviceManager.createNewTransaction(order);
 
         // then
         Assertions.assertThat(new TransactionRepository().getTransactionDatabase()).containsKey(1L);

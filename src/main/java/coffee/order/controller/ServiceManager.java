@@ -6,7 +6,7 @@ import coffee.order.service.ChoiceConverter;
 import coffee.order.service.CouponService;
 import coffee.order.service.MenuService;
 import coffee.order.service.TransactionService;
-import coffee.order.view.MenuChoice;
+import coffee.order.view.Order;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class ServiceManager {
         return menuService.getMenuDatabase();
     }
 
-    public void createNewTransaction(MenuChoice menuChoice) {
-        transactionService.createNewTransaction(menuChoice, converter, menuService);
+    public void createNewTransaction(Order order) {
+        transactionService.createNewTransaction(order, converter, menuService);
     }
 }

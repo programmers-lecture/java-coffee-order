@@ -2,7 +2,7 @@ package coffee.order.service;
 
 import coffee.order.model.Transaction;
 import coffee.order.repository.TransactionRepository;
-import coffee.order.view.MenuChoice;
+import coffee.order.view.Order;
 
 public class TransactionService {
     private final TransactionRepository transactionRepository;
@@ -11,8 +11,8 @@ public class TransactionService {
         transactionRepository = new TransactionRepository();
     }
 
-    public void createNewTransaction(MenuChoice menuChoice, ChoiceConverter converter, MenuService menuService) {
-        Transaction transaction = converter.convertToTransaction(menuChoice, menuService);
+    public void createNewTransaction(Order order, ChoiceConverter converter, MenuService menuService) {
+        Transaction transaction = converter.convertToTransaction(order, menuService);
         transactionRepository.addTransaction(transaction);
     }
 }

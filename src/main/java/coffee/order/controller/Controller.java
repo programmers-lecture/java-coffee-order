@@ -1,9 +1,7 @@
 package coffee.order.controller;
 
 import coffee.order.model.MenuType;
-import coffee.order.view.MenuChoice;
-
-import java.util.HashMap;
+import coffee.order.view.Order;
 
 public class Controller {
     private final ViewManager viewManager;
@@ -20,8 +18,8 @@ public class Controller {
             serviceManager.initializeMenu();
             viewManager.showMenu(MenuType.getMenuTypes(), serviceManager.getMenu());
 
-            MenuChoice menuChoice = viewManager.readMenuChoice();
-            serviceManager.createNewTransaction(menuChoice);
+            Order order = viewManager.readMenuChoice();
+            serviceManager.createNewTransaction(order);
 //            viewManager.confirmOrder();
 
             // TODO: Coupon Service
