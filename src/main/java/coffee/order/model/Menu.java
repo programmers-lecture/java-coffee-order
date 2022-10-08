@@ -13,4 +13,8 @@ public class Menu {
     public String toString() {
         return menuName;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }

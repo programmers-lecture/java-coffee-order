@@ -2,7 +2,7 @@ package coffee.order.controller;
 
 import coffee.order.model.Menu;
 import coffee.order.model.MenuType;
-import coffee.order.service.ChoiceConverter;
+import coffee.order.model.Transaction;
 import coffee.order.service.CouponService;
 import coffee.order.service.MenuService;
 import coffee.order.service.TransactionService;
@@ -15,13 +15,11 @@ public class ServiceManager {
     private final MenuService menuService;
     private final CouponService couponService;
     private final TransactionService transactionService;
-    private final ChoiceConverter converter;
 
     public ServiceManager() {
         menuService = new MenuService();
         couponService = new CouponService();
         transactionService = new TransactionService();
-        converter = new ChoiceConverter();
     }
 
     public void initializeMenu() {
@@ -32,7 +30,7 @@ public class ServiceManager {
         return menuService.getMenuDatabase();
     }
 
-    public void createNewTransaction(Order order) {
-        transactionService.createNewTransaction(order, converter, menuService);
+    public Transaction createNewTransaction(Order order) {
+        return transactionService.createNewTransaction(order, menuService);
     }
 }

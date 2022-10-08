@@ -26,4 +26,8 @@ public class MenuService {
     public String findMenuName(MenuType menuType, int menuName) {
         return menuRepository.findMenuName(menuType, menuName);
     }
+
+    public int findMenuPrice(MenuType menuType, String menuName) {
+        return menuRepository.findMenuPrice(menuType, menuName);
+    }
 }

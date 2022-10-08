@@ -1,6 +1,7 @@
 package coffee.order.controller;
 
 import coffee.order.model.MenuType;
+import coffee.order.model.Transaction;
 import coffee.order.view.Order;
 
 public class Controller {
@@ -19,8 +20,8 @@ public class Controller {
             viewManager.showMenu(MenuType.getMenuTypes(), serviceManager.getMenu());
 
             Order order = viewManager.readMenuChoice();
-            serviceManager.createNewTransaction(order);
-//            viewManager.confirmOrder();
+            // TODO: 거래내역 객체를 생성하고, DB에 저장, MessageHandler에 보내서 출력할 메시지 생성
+            Transaction newTransaction = serviceManager.createNewTransaction(order);
 
             // TODO: Coupon Service
 
