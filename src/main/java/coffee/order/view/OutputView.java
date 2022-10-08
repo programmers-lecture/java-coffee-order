@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class OutputView {
     private static final String GREETING_MESSAGE = "Welcome! 손님 역할을 실행합니다...";
     private static final String MENU_GUIDE_MESSAGE = "메뉴를 골라주세요 (번호, 개수)";
+    private static final String ORDER_CONFIRM_MESSAGE = "주문 내역은 아래와 같습니다.";
 
     private static final String HYPHEN = "-";
     private static final String BLANK = " ";
@@ -42,5 +43,10 @@ public class OutputView {
 
     private String menuIndexGenerator(MenuType menuType, ArrayList<? super Menu> menuList, Object menu) {
         return menuType.getOrder() + HYPHEN + (menuList.indexOf(menu) + INDEX_BOUNDARY);
+    }
+
+    public void confirmOrder(String orderLiteral) {
+        System.out.println(ORDER_CONFIRM_MESSAGE);
+        System.out.println(orderLiteral);
     }
 }

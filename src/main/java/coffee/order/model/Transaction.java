@@ -12,4 +12,16 @@ public class Transaction {
         this.orderQuantity = orderQuantity;
         this.orderAmount = orderAmount;
     }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public int getOrderQuantity() {
+        return orderQuantity;
+    }
+
+    public int getOrderAmount() {
+        return orderAmount;
+    }
 }
