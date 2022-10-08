@@ -29,12 +29,20 @@ public class Food {
         );
     }
 
+    public String toFoodNameString() {
+        return name.toString();
+    }
+
     public int getPrice() {
         return price.getPrice();
     }
 
     public void decreaseQuantity(int inputQuantity) {
         this.quantity.decreaseQuantity(inputQuantity);
+    }
+
+    boolean checkSameId(Long foodId) {
+        return Objects.equals(this.id, foodId);
     }
 
     private void increaseQuantity(int inputQuantity) {
@@ -47,14 +55,6 @@ public class Food {
 
     private void increasePrice(int inputPrice) {
         this.price.increasePrice(inputPrice);
-    }
-
-    protected boolean checkSameId(Long foodId) {
-        return Objects.equals(this.id, foodId);
-    }
-
-    public String toFoodNameString() {
-        return name.toString();
     }
 
 }

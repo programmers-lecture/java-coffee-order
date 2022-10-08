@@ -20,7 +20,6 @@ public class FoodPrice {
         return price;
     }
 
-
     void increasePrice(int inputPrice) {
         this.price += inputPrice;
     }
@@ -32,7 +31,7 @@ public class FoodPrice {
         this.price -= inputPrice;
     }
 
-    boolean checkMinusPrice(int price) {
+    private boolean checkMinusPrice(int price) {
         return price < 0;
     }
 
