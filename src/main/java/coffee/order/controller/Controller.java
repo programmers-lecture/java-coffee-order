@@ -29,9 +29,9 @@ public class Controller {
             ConfirmMessage confirmMessage = viewManager.confirmCouponUse();
             if (confirmMessage.isCustomerSaidYes()) {
                 PhoneNumber phoneNumber = viewManager.readPhoneNumber();
-//                if (serviceManager.getCouponQuantity(phoneNumber) > 10) {
+                if (serviceManager.getCouponQuantity(phoneNumber) > 10) {
 //                    viewManager.confirmCouponApply
-//                }
+                }
             }
 
             // TODO: 최종 주문

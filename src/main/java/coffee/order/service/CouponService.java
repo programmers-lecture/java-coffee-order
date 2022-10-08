@@ -10,7 +10,11 @@ public class CouponService {
         couponRepository = new CouponRepository();
     }
 
-    public void getCouponQuantity(PhoneNumber phoneNumber) {
+    public Integer getCouponQuantity(PhoneNumber phoneNumber) {
+        if (!couponRepository.existsCustomer(phoneNumber)) {
+            couponRepository.addNewCustomer(phoneNumber);
+        }
 
+        return couponRepository.findCouponQuantity(phoneNumber);
     }
 }

@@ -35,7 +35,7 @@ public class ServiceManager {
         return transactionService.createNewTransaction(order, menuService);
     }
 
-    public int getCouponQuantity(PhoneNumber phoneNumber) {
-        couponService.getCouponQuantity(phoneNumber);
+    public Integer getCouponQuantity(PhoneNumber phoneNumber) {
+        return couponService.getCouponQuantity(phoneNumber);
     }
 }
