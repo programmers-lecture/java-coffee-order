@@ -1,7 +1,6 @@
 package coffee.order.view.input.pos;
 
-import static coffee.order.domain.pos.KioskCommand.NO;
-import static coffee.order.domain.pos.KioskCommand.YES;
+import static coffee.order.util.RegexUtil.*;
 import static coffee.order.view.input.InputView.read;
 import static coffee.order.view.input.exception.KioskCouponInputException.*;
 
@@ -33,16 +32,16 @@ public class KioskCouponInput {
 
     private boolean checkAnswerFormNotOk(String customerAnswered) {
         return customerAnswered == null ||
-                (!customerAnswered.equals(YES.selectedCommand) &&
-                        !customerAnswered.equals(NO.selectedCommand));
+                !checkFormValid(REGEX_YES_OR_NO_FORM_VALIDATOR, customerAnswered);
     }
 
     private boolean checkSelectMenuFormNotOk(String selectedMenu) {
-        return selectedMenu == null || !selectedMenu.matches("^[0-9]*-[0-9]*$");
+        return selectedMenu == null ||
+                !checkFormValid(REGEX_SELECT_MENU_FOR_COUPON_FORM_VALIDATOR, selectedMenu);
     }
 
     private boolean checkPhoneNumberFormNotOk(String phoneNumber) {
-        return !phoneNumber.matches("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
+        return !checkFormValid(REGEX_PHONE_NUMBER_FORM_VALIDATOR, phoneNumber);
     }
 
 }

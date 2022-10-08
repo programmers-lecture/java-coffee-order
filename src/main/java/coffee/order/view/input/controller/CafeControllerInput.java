@@ -1,7 +1,7 @@
 package coffee.order.view.input.controller;
 
-import static coffee.order.domain.pos.KioskCommand.BARISTA;
-import static coffee.order.domain.pos.KioskCommand.CUSTOMER;
+import static coffee.order.util.RegexUtil.REGEX_CUSTOMER_OR_BARISTA_FORM_VALIDATOR;
+import static coffee.order.util.RegexUtil.checkFormValid;
 import static coffee.order.view.input.InputView.read;
 import static coffee.order.view.input.exception.CafeControllerInputException.NO_SUCH_CHARACTER_EXCEPTION;
 
@@ -17,7 +17,6 @@ public class CafeControllerInput {
 
     private boolean checkCharacterChooseFormNotOk(String chosenOne) {
         return chosenOne.length() == 0 ||
-                (!chosenOne.equals(CUSTOMER.selectedCommand) &&
-                        !chosenOne.equals(BARISTA.selectedCommand));
+                checkFormValid(REGEX_CUSTOMER_OR_BARISTA_FORM_VALIDATOR, chosenOne);
     }
 }

@@ -3,7 +3,6 @@ package coffee.order.domain.food;
 import coffee.order.dto.food.FoodsDto;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static coffee.order.exception.FoodException.FOODS_GET_NULL_POINTER_EXCEPTION;
