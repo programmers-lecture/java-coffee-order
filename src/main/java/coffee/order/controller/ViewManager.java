@@ -4,6 +4,10 @@ import coffee.order.model.Menu;
 import coffee.order.model.MenuType;
 import coffee.order.model.Transaction;
 import coffee.order.view.*;
+import coffee.order.view.model.ConfirmMessage;
+import coffee.order.view.model.LiteralCollection;
+import coffee.order.view.model.Order;
+import coffee.order.view.model.PhoneNumber;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,5 +56,11 @@ public class ViewManager {
         outputView.printCouponConfirmMessage();
         boolean yesOrNot = inputView.readYesOrNot();
         return new ConfirmMessage(yesOrNot);
+    }
+
+    public PhoneNumber readPhoneNumber() {
+        outputView.printPhoneNumberGuideMessage();
+        String phoneNumber = inputView.readPhoneNumber();
+        return new PhoneNumber(phoneNumber);
     }
 }

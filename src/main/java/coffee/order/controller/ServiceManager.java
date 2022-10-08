@@ -6,7 +6,8 @@ import coffee.order.model.Transaction;
 import coffee.order.service.CouponService;
 import coffee.order.service.MenuService;
 import coffee.order.service.TransactionService;
-import coffee.order.view.Order;
+import coffee.order.view.model.Order;
+import coffee.order.view.model.PhoneNumber;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,5 +33,9 @@ public class ServiceManager {
 
     public Transaction createNewTransaction(Order order) {
         return transactionService.createNewTransaction(order, menuService);
+    }
+
+    public int getCouponQuantity(PhoneNumber phoneNumber) {
+        couponService.getCouponQuantity(phoneNumber);
     }
 }

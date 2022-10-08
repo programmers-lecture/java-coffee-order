@@ -1,5 +1,7 @@
 package coffee.order.view;
 
+import coffee.order.view.model.Order;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -45,5 +47,9 @@ public class InputView {
     public boolean readYesOrNot() {
         int userChoice = scanner.nextInt();
         return userChoice == YES;
+    }
+
+    public String readPhoneNumber() {
+        return scanner.nextLine();
     }
 }

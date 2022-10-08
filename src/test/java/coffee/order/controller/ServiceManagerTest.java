@@ -1,7 +1,7 @@
 package coffee.order.controller;
 
 import coffee.order.repository.TransactionRepository;
-import coffee.order.view.Order;
+import coffee.order.view.model.Order;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

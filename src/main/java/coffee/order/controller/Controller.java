@@ -2,8 +2,9 @@ package coffee.order.controller;
 
 import coffee.order.model.MenuType;
 import coffee.order.model.Transaction;
-import coffee.order.view.ConfirmMessage;
-import coffee.order.view.Order;
+import coffee.order.view.model.ConfirmMessage;
+import coffee.order.view.model.Order;
+import coffee.order.view.model.PhoneNumber;
 
 public class Controller {
     private final ViewManager viewManager;
@@ -26,9 +27,12 @@ public class Controller {
 
             // TODO: Coupon Service
             ConfirmMessage confirmMessage = viewManager.confirmCouponUse();
-//            if (confirmMessage.isCustomerSaidYes()) {
-//                serviceManager.
-//            }
+            if (confirmMessage.isCustomerSaidYes()) {
+                PhoneNumber phoneNumber = viewManager.readPhoneNumber();
+//                if (serviceManager.getCouponQuantity(phoneNumber) > 10) {
+//                    viewManager.confirmCouponApply
+//                }
+            }
 
             // TODO: 최종 주문
 

@@ -3,7 +3,7 @@ package coffee.order.service;
 import coffee.order.model.MenuType;
 import coffee.order.model.Transaction;
 import coffee.order.repository.TransactionRepository;
-import coffee.order.view.Order;
+import coffee.order.view.model.Order;
 
 public class TransactionService {
     private final TransactionRepository transactionRepository;

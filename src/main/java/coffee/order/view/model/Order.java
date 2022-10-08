@@ -1,4 +1,4 @@
-package coffee.order.view;
+package coffee.order.view.model;
 
 public class Order {
     private final int menuType;
