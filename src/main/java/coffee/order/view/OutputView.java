@@ -10,6 +10,8 @@ public class OutputView {
     private static final String GREETING_MESSAGE = "Welcome! 손님 역할을 실행합니다...";
     private static final String MENU_GUIDE_MESSAGE = "메뉴를 골라주세요 (번호, 개수)";
     private static final String ORDER_CONFIRM_MESSAGE = "주문 내역은 아래와 같습니다.";
+    private static final String COUPON_CONFIRM_MESSAGE = "쿠폰을 적립하시겠습니까?";
+    private static final String YES_OR_NO_MESSAGE = "1. 네 / 2. 아니요";
 
     private static final String HYPHEN = "-";
     private static final String BLANK = " ";
@@ -48,5 +50,11 @@ public class OutputView {
     public void confirmOrder(String orderLiteral) {
         System.out.println(ORDER_CONFIRM_MESSAGE);
         System.out.println(orderLiteral);
+        System.out.println();
+    }
+
+    public void printCouponConfirmMessage() {
+        System.out.println(COUPON_CONFIRM_MESSAGE);
+        System.out.println(YES_OR_NO_MESSAGE);
     }
 }

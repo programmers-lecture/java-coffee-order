@@ -12,6 +12,7 @@ public class InputView {
     private static final int ORDER_AMOUNT_INDEX = 1;
     private static final int MENU_TYPE_INDEX = 0;
     private static final int MENU_SUB_NUMBER_INDEX = 1;
+    private static final int YES = 1;
 
     private final Scanner scanner;
 
@@ -39,5 +40,10 @@ public class InputView {
         int orderQuantity = Integer.parseInt(trimmedTokens.get(ORDER_AMOUNT_INDEX));
 
         return new Order(menuType, menuName, orderQuantity);
+    }
+
+    public boolean readYesOrNot() {
+        int userChoice = scanner.nextInt();
+        return userChoice == YES;
     }
 }

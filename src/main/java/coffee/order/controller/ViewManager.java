@@ -3,10 +3,7 @@ package coffee.order.controller;
 import coffee.order.model.Menu;
 import coffee.order.model.MenuType;
 import coffee.order.model.Transaction;
-import coffee.order.view.InputView;
-import coffee.order.view.Order;
-import coffee.order.view.OutputView;
-import coffee.order.view.LiteralCollection;
+import coffee.order.view.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,5 +45,12 @@ public class ViewManager {
         orderLiteral.append(LiteralCollection.WON.getLiteral());
 
         return orderLiteral.toString();
+    }
+
+    public ConfirmMessage confirmCouponUse() {
+        // TODO: 사용 여부 출력 -> 사용 여부 입력 -> 사용 여부 boolean 리턴
+        outputView.printCouponConfirmMessage();
+        boolean yesOrNot = inputView.readYesOrNot();
+        return new ConfirmMessage(yesOrNot);
     }
 }
