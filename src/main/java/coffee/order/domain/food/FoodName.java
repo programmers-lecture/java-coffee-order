@@ -14,8 +14,4 @@ public class FoodName {
         return new FoodNameDto(name);
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
 }

@@ -59,10 +59,5 @@ public enum FoodCategory {
     private static boolean checkSameFoodCategoryId(Long findCategoryId, Long categoryId) {
         return categoryId.longValue() == findCategoryId.longValue();
     }
-
-    @Override
-    public String toString() {
-        return id + ". " + name + "\n" + foods.toString();
-    }
     
 }

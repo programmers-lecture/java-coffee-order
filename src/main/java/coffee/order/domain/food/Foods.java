@@ -24,14 +24,10 @@ public class Foods {
     }
 
     public Food findFoodByFoodId(Long foodId) {
-        return findOptionalFoodByFoodId(foodId)
-                .orElseThrow(() -> new NullPointerException(FOODS_GET_NULL_POINTER_EXCEPTION.getMessage()));
-    }
-
-    private Optional<Food> findOptionalFoodByFoodId(Long foodId) {
         return foods.stream()
                 .filter(food -> food.checkSameId(foodId))
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new NullPointerException(FOODS_GET_NULL_POINTER_EXCEPTION.getMessage()));
     }
 
 }

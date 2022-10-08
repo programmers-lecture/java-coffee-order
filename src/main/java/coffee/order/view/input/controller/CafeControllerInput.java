@@ -12,7 +12,7 @@ public class CafeControllerInput {
         if (checkCharacterChooseFormNotOk(chosenOne)) {
             throw new NullPointerException(NO_SUCH_CHARACTER_EXCEPTION.message);
         }
-        return read();
+        return chosenOne;
     }
 
     private boolean checkCharacterChooseFormNotOk(String chosenOne) {

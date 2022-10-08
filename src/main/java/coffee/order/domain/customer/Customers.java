@@ -23,6 +23,15 @@ public enum Customers {
                 .getValue();
     }
 
+    public boolean checkPhoneNumberExists(String phoneNumber) {
+        return findOptionalCustomerByPhoneNumber(phoneNumber).isPresent();
+    }
+
+    public void saveCustomerWithPhoneNumber(Customer customer, String phoneNumber) {
+        customer.savePhoneNumber(phoneNumber);
+        customers.put(phoneNumber, customer);
+    }
+
     private Optional<Map.Entry<String, Customer>> findOptionalCustomerByPhoneNumber(String phoneNumber) {
         return customers.entrySet()
                 .stream()
@@ -32,15 +41,6 @@ public enum Customers {
 
     private Predicate<Map.Entry<String, Customer>> checkSamePhoneNumber(String phoneNumber) {
         return customer -> customer.getKey().equals(phoneNumber);
-    }
-
-    public boolean checkPhoneNumberExists(String phoneNumber) {
-        return findOptionalCustomerByPhoneNumber(phoneNumber).isPresent();
-    }
-
-    public void saveCustomerWithPhoneNumber(Customer customer, String phoneNumber) {
-        customer.savePhoneNumber(phoneNumber);
-        customers.put(phoneNumber, customer);
     }
 
 }
