@@ -29,7 +29,10 @@ public class Controller {
             ConfirmMessage confirmMessage = viewManager.confirmCouponUse();
             if (confirmMessage.isCustomerSaidYes()) {
                 PhoneNumber phoneNumber = viewManager.readPhoneNumber();
-                if (serviceManager.getCouponQuantity(phoneNumber) > 10) {
+                Integer couponQuantity = serviceManager.getCouponQuantity(phoneNumber);
+                viewManager.notifyCouponQuantity(couponQuantity);
+
+                if (couponQuantity > 10) {
 //                    viewManager.confirmCouponApply
                 }
             }

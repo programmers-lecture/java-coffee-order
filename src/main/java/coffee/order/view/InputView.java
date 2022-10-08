@@ -50,6 +50,6 @@ public class InputView {
     }
 
     public String readPhoneNumber() {
-        return scanner.nextLine();
+        return scanner.next();
     }
 }

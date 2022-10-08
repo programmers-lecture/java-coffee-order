@@ -13,6 +13,7 @@ public class OutputView {
     private static final String COUPON_CONFIRM_MESSAGE = "쿠폰을 적립하시겠습니까?";
     private static final String PHONE_NUMBER_GUIDE_MESSAGE = "전화번호를 입력해주세요. (형식 : 000-0000-0000)";
     private static final String YES_OR_NO_MESSAGE = "1. 네 / 2. 아니요";
+    private static final String COUPON_QUANTITY_NOTIFYING_MESSAGE = "현재 쿠폰의 개수는 %d개 입니다.";
 
     private static final String HYPHEN = "-";
     private static final String BLANK = " ";
@@ -61,5 +62,13 @@ public class OutputView {
 
     public void printPhoneNumberGuideMessage() {
         System.out.println(PHONE_NUMBER_GUIDE_MESSAGE);
+    }
+
+    public void printCouponQuatity(Integer couponQuantity) {
+        System.out.println(generateCouponQuantityNotifyingMessage(couponQuantity));
+    }
+
+    private String generateCouponQuantityNotifyingMessage(Integer couponQuantity) {
+        return String.format(COUPON_QUANTITY_NOTIFYING_MESSAGE, couponQuantity);
     }
 }

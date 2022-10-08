@@ -63,4 +63,8 @@ public class ViewManager {
         String phoneNumber = inputView.readPhoneNumber();
         return new PhoneNumber(phoneNumber);
     }
+
+    public void notifyCouponQuantity(Integer couponQuantity) {
+        outputView.printCouponQuatity(couponQuantity);
+    }
 }
