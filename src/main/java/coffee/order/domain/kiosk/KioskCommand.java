@@ -1,4 +1,4 @@
-package coffee.order.domain.pos;
+package coffee.order.domain.kiosk;
 
 public enum KioskCommand {
 

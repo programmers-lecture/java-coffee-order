@@ -1,4 +1,4 @@
-package coffee.order.domain.pos;
+package coffee.order.domain.kiosk;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.order.Order;
@@ -12,8 +12,8 @@ import java.util.Map;
 public class Kiosk {
 
     public void processKiosk(Customer customer) {
-        KioskOrder kioskOrder = new KioskOrder(customer);
-        KioskCoupon kioskCoupon = new KioskCoupon(customer);
+        KioskOrderManager kioskOrder = new KioskOrderManager();
+        KioskCouponManager kioskCoupon = new KioskCouponManager(customer);
 
         Orders customerOrders = kioskOrder.processOrder();
         boolean checkCouponUsed = kioskCoupon.processCoupon();

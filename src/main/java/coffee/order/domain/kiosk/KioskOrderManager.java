@@ -1,6 +1,5 @@
-package coffee.order.domain.pos;
+package coffee.order.domain.kiosk;
 
-import coffee.order.domain.customer.Customer;
 import coffee.order.domain.food.Food;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
@@ -9,13 +8,7 @@ import coffee.order.view.output.pos.KioskOrderHistoryMessage;
 
 import static coffee.order.domain.food.FoodCategory.findFoodsByCategoryId;
 
-public class KioskOrder {
-
-    private final Customer customer;
-
-    public KioskOrder(Customer customer) {
-        this.customer = customer;
-    }
+public class KioskOrderManager {
 
     public KioskOrderHistoryMessage kioskOrderHistory() {
         return new KioskOrderHistoryMessage();

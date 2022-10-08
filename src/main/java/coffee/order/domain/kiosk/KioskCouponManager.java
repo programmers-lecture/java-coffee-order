@@ -1,4 +1,4 @@
-package coffee.order.domain.pos;
+package coffee.order.domain.kiosk;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.order.Order;
@@ -9,15 +9,15 @@ import java.util.Map;
 import java.util.Optional;
 
 import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
-import static coffee.order.domain.pos.KioskCommand.NO;
+import static coffee.order.domain.kiosk.KioskCommand.NO;
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_ANSWER;
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
 
-public class KioskCoupon {
+public class KioskCouponManager {
 
     private Customer customer;
 
-    public KioskCoupon(Customer customer) {
+    public KioskCouponManager(Customer customer) {
         this.customer = customer;
     }
 

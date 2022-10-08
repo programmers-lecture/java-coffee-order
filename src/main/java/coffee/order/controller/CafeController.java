@@ -1,11 +1,11 @@
 package coffee.order.controller;
 
 import coffee.order.domain.customer.Customer;
-import coffee.order.domain.pos.Kiosk;
+import coffee.order.domain.kiosk.Kiosk;
 import coffee.order.view.input.controller.CafeControllerInput;
 import coffee.order.view.output.controller.CafeControllerHistoryMessage;
 
-import static coffee.order.domain.pos.KioskCommand.*;
+import static coffee.order.domain.kiosk.KioskCommand.*;
 
 public class CafeController {
 

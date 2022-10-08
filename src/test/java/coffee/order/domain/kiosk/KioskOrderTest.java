@@ -1,4 +1,4 @@
-package coffee.order.domain.pos;
+package coffee.order.domain.kiosk;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.order.Order;
@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class KioskOrderTest {
 
     private final Customer customer = new Customer();
-    private final KioskOrder kioskOrder = new KioskOrder(customer);
+    private final KioskOrderManager kioskOrder = new KioskOrderManager(customer);
     private static final String ENTER_KEY = "\n";
 
     @ParameterizedTest(name = "[{index}] 회원 주문 입력 = {0}, 실제 주문 목록 = {1}")
