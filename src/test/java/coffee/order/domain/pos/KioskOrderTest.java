@@ -28,7 +28,7 @@ class KioskOrderTest {
     void whenAskOrdersThenSuccessTest(String customerOrders, List<String> foodNames) {
         System.setIn(new ByteArrayInputStream(customerOrders.getBytes(UTF_8)));
 
-        Orders orders = kioskOrder.askOrder();
+        Orders orders = kioskOrder.processOrder();
 
         List<String> collect =
                 orders.getOrders()

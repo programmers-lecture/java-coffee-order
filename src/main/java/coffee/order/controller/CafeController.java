@@ -29,7 +29,7 @@ public class CafeController {
             if (chosenOne.equals(CUSTOMER.selectedCommand)) {
                 Kiosk kiosk = new Kiosk();
                 Customer customer = new Customer();
-                kiosk.orderProcess(customer);
+                kiosk.processKiosk(customer);
             }
 
             if (chosenOne.equals(BARISTA.selectedCommand)) {

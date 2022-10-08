@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class Kiosk {
 
-    public void orderProcess(Customer customer) {
+    public void processKiosk(Customer customer) {
         KioskOrder kioskOrder = new KioskOrder(customer);
         KioskCoupon kioskCoupon = new KioskCoupon(customer);
 
-        Orders customerOrders = kioskOrder.askOrder();
-        boolean checkCouponUsed = kioskCoupon.askCoupon();
+        Orders customerOrders = kioskOrder.processOrder();
+        boolean checkCouponUsed = kioskCoupon.processCoupon();
 
         if (checkCouponUsed) {
             Map<String, Order> selectedOrders = createSelectedMenu(customerOrders.getOrders());

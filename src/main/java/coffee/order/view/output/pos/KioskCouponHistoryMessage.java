@@ -18,16 +18,10 @@ public class KioskCouponHistoryMessage {
         print(KIOSK_COUPON_SELECT_YES_OR_NO.message);
     }
 
-    public void printWhenNoticeCurrentCouponQuantity() {
-        print(KIOSK_COUPON_NOTICE_CURRENT_COUPON_QUANTITY.message);
-    }
-
     public void printCurrentCouponQuantity(String couponQuantity) {
-        print(couponQuantity);
-    }
-
-    public void printAfterNoticeCurrentCouponQuantity() {
-        print(KIOSK_COUPON_NOTICE_CURRENT_COUPON_QUANTITY_LAST_SENTENCE.message);
+        print(KIOSK_COUPON_NOTICE_CURRENT_COUPON_QUANTITY.message +
+                couponQuantity +
+                KIOSK_COUPON_NOTICE_CURRENT_COUPON_QUANTITY_LAST_SENTENCE.message);
     }
 
     public void printWhenAskUseCoupon() {

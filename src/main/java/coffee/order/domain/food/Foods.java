@@ -9,7 +9,7 @@ import static coffee.order.exception.FoodException.FOODS_GET_NULL_POINTER_EXCEPT
 
 public class Foods {
 
-    private List<Food> foods;
+    private final List<Food> foods;
 
     public Foods(List<Food> foods) {
         this.foods = foods;

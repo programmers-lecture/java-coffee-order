@@ -25,7 +25,7 @@ public class KioskOrder {
         return new KioskOrderInput();
     }
 
-    public Orders askOrder() {
+    public Orders processOrder() {
         kioskOrderHistory().printAsksCustomerToSelectMenu();
         kioskOrderHistory().printShowMenuToCustomer();
         return getOrders();

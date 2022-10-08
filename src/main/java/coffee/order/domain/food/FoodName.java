@@ -14,4 +14,7 @@ public class FoodName {
         return new FoodNameDto(name);
     }
 
+    public String getName() {
+        return name;
+    }
 }

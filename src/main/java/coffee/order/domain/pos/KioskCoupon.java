@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
-import static coffee.order.domain.pos.KioskCommand.YES;
+import static coffee.order.domain.pos.KioskCommand.NO;
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_ANSWER;
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
 
@@ -29,56 +29,22 @@ public class KioskCoupon {
         return new KioskCouponInput();
     }
 
-    public boolean askCoupon() {
-        askSaveCoupon();
-        return askUseCoupon();
-    }
-
-    private void askSaveCoupon() {
-        kioskCouponHistory().printWhenAskSaveCoupon();
-        kioskCouponHistory().printWhenAskYesOrNo();
-        String customerAnswered = kioskCouponInput().askCustomerYesOrNo();
-        if (checkCustomersCommandYes(customerAnswered)) {
-            customer = askPhoneNumber();
-            customer.saveCoupon();
-            kioskCouponHistory().printWhenNoticeCurrentCouponQuantity();
-            kioskCouponHistory().printCurrentCouponQuantity(askCouponQuantity());
-            kioskCouponHistory().printAfterNoticeCurrentCouponQuantity();
-        }
-    }
-
-    public String askCouponQuantity() {
-        return String.valueOf(customer.findCouponQuantity());
-    }
-
-    private boolean askUseCoupon() {
-        if (!customer.checkMyCouponEnough()) {
+    public boolean processCoupon() {
+        if (checkCustomersCommandNo(askSaveCoupon())) {
             return false;
         }
+        handleCustomerData(askPhoneNumber());
+        saveCoupon();
 
-        kioskCouponHistory().printWhenAskUseCoupon();
-        kioskCouponHistory().printWhenAskYesOrNo();
-
-        String customerAnswered = kioskCouponInput().askCustomerYesOrNo();
-        if (!checkCustomersCommandYes(customerAnswered)) {
+        if (checkCustomerCouponEnough()) {
             return false;
         }
+        if (checkCustomersCommandNo(askUseCoupon())) {
+            return false;
+        }
+        useCoupon();
 
-        customer.useCoupon();
         return true;
-    }
-
-    private Customer askPhoneNumber() {
-        kioskCouponHistory().printWhenAskPhoneNumber();
-        String phoneNumber = kioskCouponInput().askCustomerPhoneNumber();
-        if (!CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber)) {
-            CUSTOMERS_DATA.saveCustomerWithPhoneNumber(customer, phoneNumber);
-        }
-        return CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
-    }
-
-    private boolean checkCustomersCommandYes(String answer) {
-        return answer.equals(YES.selectedCommand);
     }
 
     public Order findOrderPurchasedByCoupon(Map<String, Order> customerOrders) {
@@ -93,6 +59,64 @@ public class KioskCoupon {
     private String askCustomerMenuNumberToApplyCoupon() {
         return Optional.of(kioskCouponInput().askCustomerMenuNumberToApplyCoupon())
                 .orElseThrow(() -> new IllegalArgumentException(CUSTOMER_NOT_CORRECT_ANSWER.getMessage()));
+    }
+
+    private void useCoupon() {
+        customer.useCoupon();
+    }
+
+    private void saveCoupon() {
+        customer.saveCoupon();
+        kioskCouponHistory().printCurrentCouponQuantity(findCouponQuantity());
+    }
+
+    private void handleCustomerData(String customerPhoneNumber) {
+        if (checkCustomerNew(customerPhoneNumber)) {
+            saveCustomer(customerPhoneNumber);
+        }
+        customer = findCustomer(customerPhoneNumber);
+    }
+
+    private boolean checkCustomerCouponEnough() {
+        return !customer.checkCouponEnough();
+    }
+
+    private String askSaveCoupon() {
+        kioskCouponHistory().printWhenAskSaveCoupon();
+        kioskCouponHistory().printWhenAskYesOrNo();
+        return kioskCouponInput().askCustomerYesOrNo();
+    }
+
+    private String findCouponQuantity() {
+        return String.valueOf(customer.findCouponQuantity());
+    }
+
+    private String askUseCoupon() {
+        kioskCouponHistory().printWhenAskUseCoupon();
+        kioskCouponHistory().printWhenAskYesOrNo();
+
+        return kioskCouponInput().askCustomerYesOrNo();
+    }
+
+    private String askPhoneNumber() {
+        kioskCouponHistory().printWhenAskPhoneNumber();
+        return kioskCouponInput().askCustomerPhoneNumber();
+    }
+
+    private Customer findCustomer(String phoneNumber) {
+        return CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
+    }
+
+    private void saveCustomer(String phoneNumber) {
+        CUSTOMERS_DATA.saveCustomerWithPhoneNumber(customer, phoneNumber);
+    }
+
+    private boolean checkCustomerNew(String phoneNumber) {
+        return !CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber);
+    }
+
+    private boolean checkCustomersCommandNo(String answer) {
+        return answer.equals(NO.selectedCommand);
     }
 
 }

@@ -30,7 +30,7 @@ public class Food {
     }
 
     public String toFoodNameString() {
-        return name.toString();
+        return name.getName();
     }
 
     public int getPrice() {

@@ -19,7 +19,7 @@ public class Customer {
         return wallet.findCouponQuantity();
     }
 
-    public boolean checkMyCouponEnough() {
+    public boolean checkCouponEnough() {
         return wallet.checkCouponEnoughToUse();
     }
 
