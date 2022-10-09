@@ -10,12 +10,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KioskOrderManager {
+public class KioskCustomerOrderManager {
 
     private final OrderGenerator orderGenerator;
     private final KioskCustomer kioskCustomer;
 
-    public KioskOrderManager(KioskCustomer kioskCustomer) {
+    public KioskCustomerOrderManager(KioskCustomer kioskCustomer) {
         this.orderGenerator = new OrderGenerator();
         this.kioskCustomer = kioskCustomer;
     }

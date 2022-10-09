@@ -2,6 +2,16 @@ package coffee.order.domain.kiosk.barista;
 
 public class KioskBarista {
 
+    private final KioskBaristaFoodManager foodManager;
+    private final KioskBaristaOrderManager orderManager;
+    private final KioskBaristaCouponManager couponManager;
+
+    public KioskBarista() {
+        this.foodManager = new KioskBaristaFoodManager();
+        this.orderManager = new KioskBaristaOrderManager();
+        this.couponManager = new KioskBaristaCouponManager();
+    }
+
     // TODO : 커피 등록 요청
 
     // TODO : 수량 등록 요청

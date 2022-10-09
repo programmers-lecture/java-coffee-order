@@ -1,6 +1,6 @@
 package coffee.order.domain.kiosk.barista;
 
-public class KioskFoodManager {
+public class KioskBaristaFoodManager {
 
     // TODO : 상품 등록 요청
 

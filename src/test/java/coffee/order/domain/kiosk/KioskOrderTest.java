@@ -1,7 +1,7 @@
 package coffee.order.domain.kiosk;
 
 import coffee.order.domain.kiosk.customer.KioskCustomer;
-import coffee.order.domain.kiosk.customer.KioskOrderManager;
+import coffee.order.domain.kiosk.customer.KioskCustomerOrderManager;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class KioskOrderTest {
 
     private final KioskCustomer kioskCustomer = new KioskCustomer();
-    private final KioskOrderManager kioskOrder = new KioskOrderManager(kioskCustomer);
+    private final KioskCustomerOrderManager kioskOrder = new KioskCustomerOrderManager(kioskCustomer);
     private static final String ENTER_KEY = "\n";
 
     @ParameterizedTest(name = "[{index}] 회원 주문 입력 = {0}, 실제 주문 목록 = {1}")

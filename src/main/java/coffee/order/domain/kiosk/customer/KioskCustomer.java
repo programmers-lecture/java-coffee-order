@@ -2,27 +2,22 @@ package coffee.order.domain.kiosk.customer;
 
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.order.Order;
-import coffee.order.domain.order.OrderGenerator;
 import coffee.order.domain.order.Orders;
 import coffee.order.view.output.kiosk.customer.KioskCustomerHistoryMessage;
 
 import java.util.Collection;
 import java.util.Map;
 
-import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
-
 public class KioskCustomer {
 
-//    private final OrderGenerator orderGenerator;
-    private final KioskCustomerManager customerManager;
-    private final KioskCouponManager couponManager;
-    private final KioskOrderManager orderManager;
+    private final KioskCustomerCustomerManager customerManager;
+    private final KioskCustomerCouponManager couponManager;
+    private final KioskCustomerOrderManager orderManager;
 
     public KioskCustomer() {
-//        this.orderGenerator = new OrderGenerator();
-        this.customerManager = new KioskCustomerManager(this);
-        this.couponManager = new KioskCouponManager(this);
-        this.orderManager = new KioskOrderManager(this);
+        this.customerManager = new KioskCustomerCustomerManager(this);
+        this.couponManager = new KioskCustomerCouponManager(this);
+        this.orderManager = new KioskCustomerOrderManager(this);
     }
 
     public KioskCustomerHistoryMessage kioskHistory() {

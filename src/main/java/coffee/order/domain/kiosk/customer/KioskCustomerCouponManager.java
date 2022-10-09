@@ -11,11 +11,11 @@ import static coffee.order.domain.kiosk.KioskCommand.YES;
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_EXIST_ORDER_FOOD_NUMBER;
 import static java.lang.String.valueOf;
 
-public class KioskCouponManager {
+public class KioskCustomerCouponManager {
 
     private final KioskCustomer kioskCustomer;
 
-    public KioskCouponManager(KioskCustomer kioskCustomer) {
+    public KioskCustomerCouponManager(KioskCustomer kioskCustomer) {
         this.kioskCustomer = kioskCustomer;
     }
 
@@ -27,7 +27,7 @@ public class KioskCouponManager {
         return new KioskCouponManagerInput();
     }
 
-    public void processSaveCoupon(KioskCustomerManager customerManager) {
+    public void processSaveCoupon(KioskCustomerCustomerManager customerManager) {
         if (!askSaveCouponThenCheck()) {
             return;
         }

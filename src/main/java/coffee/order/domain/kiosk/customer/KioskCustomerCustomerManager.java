@@ -4,16 +4,14 @@ import coffee.order.domain.customer.Customer;
 import coffee.order.view.input.kiosk.KioskCustomerManagerInput;
 import coffee.order.view.output.kiosk.KioskCustomerManagerHistoryMessage;
 
-import java.time.temporal.ChronoUnit;
-
 import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
 
-public class KioskCustomerManager {
+public class KioskCustomerCustomerManager {
 
     private final KioskCustomer kioskCustomer;
     private Customer customer;
 
-    public KioskCustomerManager(KioskCustomer kioskCustomer) {
+    public KioskCustomerCustomerManager(KioskCustomer kioskCustomer) {
         this.customer = new Customer();
         this.kioskCustomer = kioskCustomer;
     }
