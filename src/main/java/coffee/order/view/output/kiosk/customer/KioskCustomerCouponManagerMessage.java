@@ -1,6 +1,6 @@
-package coffee.order.view.output.kiosk;
+package coffee.order.view.output.kiosk.customer;
 
-public enum KioskCouponManagerMessage {
+public enum KioskCustomerCouponManagerMessage {
 
     KIOSK_COUPON_ASK_SAVE_COUPON("\n쿠폰을 적립하시겠습니까?\n"),
     KIOSK_COUPON_SELECT_YES_OR_NO("\n1. 네 / 2. 아니요\n"),
@@ -10,7 +10,7 @@ public enum KioskCouponManagerMessage {
 
     public final String message;
 
-    KioskCouponManagerMessage(String message) {
+    KioskCustomerCouponManagerMessage(String message) {
         this.message = message;
     }
 

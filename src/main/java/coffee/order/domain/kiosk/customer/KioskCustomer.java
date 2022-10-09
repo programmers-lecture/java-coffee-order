@@ -17,7 +17,7 @@ public class KioskCustomer {
     public KioskCustomer() {
         this.customerManager = new KioskCustomerCustomerManager(this);
         this.couponManager = new KioskCustomerCouponManager(this);
-        this.orderManager = new KioskCustomerOrderManager(this);
+        this.orderManager = new KioskCustomerOrderManager();
     }
 
     public KioskCustomerHistoryMessage kioskHistory() {
@@ -39,14 +39,6 @@ public class KioskCustomer {
         Orders orders = orderManager.loadOrders();
         customer.takeReceipt(orders);
         kioskHistory().printAfterGiveReceipt();
-    }
-
-    void createTempOrder(String orderCommand) {
-        orderManager.createOrder(orderCommand);
-    }
-
-    Orders generateOrders() {
-        return orderManager.loadOrders();
     }
 
     Customer loadCustomer() {

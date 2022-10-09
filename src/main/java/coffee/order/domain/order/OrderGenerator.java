@@ -22,6 +22,10 @@ public class OrderGenerator {
         return orders;
     }
 
+    public void createTempOrder(String orderCommand) {
+        createOrder(orderCommand);
+    }
+
     public void createOrder(String orderCommand) {
         Order order = new Order(
                 findFoodByOrderCommand(orderCommand),

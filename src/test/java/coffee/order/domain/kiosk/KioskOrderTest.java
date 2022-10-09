@@ -19,8 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class KioskOrderTest {
 
-    private final KioskCustomer kioskCustomer = new KioskCustomer();
-    private final KioskCustomerOrderManager kioskOrder = new KioskCustomerOrderManager(kioskCustomer);
+    private final KioskCustomerOrderManager kioskOrder = new KioskCustomerOrderManager();
     private static final String ENTER_KEY = "\n";
 
     @ParameterizedTest(name = "[{index}] 회원 주문 입력 = {0}, 실제 주문 목록 = {1}")

@@ -1,11 +1,11 @@
-package coffee.order.view.input.kiosk;
+package coffee.order.view.input.kiosk.customer;
 
 import static coffee.order.util.RegexUtil.*;
 import static coffee.order.view.input.InputView.read;
-import static coffee.order.view.input.exception.KioskCouponManagerInputException.COUPON_APPLY_ANSWER_EXCEPTION;
-import static coffee.order.view.input.exception.KioskCouponManagerInputException.CUSTOMER_ANSWER_EXCEPTION;
+import static coffee.order.view.input.exception.KioskCustomerCouponManagerInputException.COUPON_APPLY_ANSWER_EXCEPTION;
+import static coffee.order.view.input.exception.KioskCustomerCouponManagerInputException.CUSTOMER_ANSWER_EXCEPTION;
 
-public class KioskCouponManagerInput {
+public class KioskCustomerCouponManagerInput {
 
     public String askCustomerYesOrNo() {
         String customerAnswered = read();

@@ -1,14 +1,14 @@
-package coffee.order.view.output.kiosk;
+package coffee.order.view.output.kiosk.customer;
 
 import coffee.order.domain.order.Order;
 
 import java.util.Map;
 
 import static coffee.order.view.output.OutputView.print;
-import static coffee.order.view.output.kiosk.KioskCouponManagerMessage.*;
+import static coffee.order.view.output.kiosk.customer.KioskCustomerCouponManagerMessage.*;
 import static coffee.order.view.output.order.OrdersMessage.ORDER_ASK_TO_CHOOSE_ORDER;
 
-public class KioskCouponManagerHistoryMessage {
+public class KioskCustomerCouponManagerHistoryMessage {
 
     public void printWhenAskSaveCoupon() {
         print(KIOSK_COUPON_ASK_SAVE_COUPON.message);

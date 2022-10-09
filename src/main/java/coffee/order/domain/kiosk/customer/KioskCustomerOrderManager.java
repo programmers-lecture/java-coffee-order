@@ -3,8 +3,8 @@ package coffee.order.domain.kiosk.customer;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.OrderGenerator;
 import coffee.order.domain.order.Orders;
-import coffee.order.view.input.kiosk.KioskOrderManagerInput;
-import coffee.order.view.output.kiosk.KioskOrderManagerHistoryMessage;
+import coffee.order.view.input.kiosk.customer.KioskCustomerOrderManagerInput;
+import coffee.order.view.output.kiosk.customer.KioskCustomerOrderManagerHistoryMessage;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,19 +13,17 @@ import java.util.Map;
 public class KioskCustomerOrderManager {
 
     private final OrderGenerator orderGenerator;
-    private final KioskCustomer kioskCustomer;
 
-    public KioskCustomerOrderManager(KioskCustomer kioskCustomer) {
+    public KioskCustomerOrderManager() {
         this.orderGenerator = new OrderGenerator();
-        this.kioskCustomer = kioskCustomer;
     }
 
-    public KioskOrderManagerHistoryMessage kioskOrderHistory() {
-        return new KioskOrderManagerHistoryMessage();
+    public KioskCustomerOrderManagerHistoryMessage kioskOrderHistory() {
+        return new KioskCustomerOrderManagerHistoryMessage();
     }
 
-    public KioskOrderManagerInput kioskOrderInput() {
-        return new KioskOrderManagerInput();
+    public KioskCustomerOrderManagerInput kioskOrderInput() {
+        return new KioskCustomerOrderManagerInput();
     }
 
     public Orders getOrders() {
@@ -35,10 +33,10 @@ public class KioskCustomerOrderManager {
         while (true) {
             String command = kioskOrderInput().askCustomerToChooseFood();
             if (checkEndCommand(command)) break;
-            kioskCustomer.createTempOrder(command);
+            orderGenerator.createTempOrder(command);
         }
         kioskOrderHistory().printAfterSelectMenu();
-        return kioskCustomer.generateOrders();
+        return orderGenerator.loadOrders();
     }
 
     public Map<String, Order> createSelectedMenu(Collection<Order> orders) {
@@ -49,10 +47,6 @@ public class KioskCustomerOrderManager {
 
     public Orders loadOrders() {
         return orderGenerator.loadOrders();
-    }
-
-    public void createOrder(String orderCommand) {
-        orderGenerator.createOrder(orderCommand);
     }
 
     private String createSelectNumber(Map<String, Order> myOrders) {

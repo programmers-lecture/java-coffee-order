@@ -1,16 +1,16 @@
-package coffee.order.view.output.kiosk;
+package coffee.order.view.output.kiosk.customer;
 
 import coffee.order.domain.food.FoodCategory;
 
 import java.util.Arrays;
 
 import static coffee.order.view.output.OutputView.print;
-import static coffee.order.view.output.kiosk.KioskOrderManagerMessage.KIOSK_ORDER_AFTER_ORDER;
-import static coffee.order.view.output.kiosk.KioskOrderManagerMessage.KIOSK_ORDER_INPUT_USER_SELECT;
+import static coffee.order.view.output.kiosk.customer.KioskCustomerOrderManagerMessage.KIOSK_ORDER_AFTER_ORDER;
+import static coffee.order.view.output.kiosk.customer.KioskCustomerOrderManagerMessage.KIOSK_ORDER_INPUT_USER_SELECT;
 
-public class KioskOrderManagerHistoryMessage {
+public class KioskCustomerOrderManagerHistoryMessage {
 
-    public KioskOrderManagerHistoryMessage() {
+    public KioskCustomerOrderManagerHistoryMessage() {
     }
 
     public void printAsksCustomerToSelectMenu() {

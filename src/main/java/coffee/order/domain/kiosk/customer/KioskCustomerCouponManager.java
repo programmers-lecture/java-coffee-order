@@ -1,8 +1,8 @@
 package coffee.order.domain.kiosk.customer;
 
 import coffee.order.domain.order.Order;
-import coffee.order.view.input.kiosk.KioskCouponManagerInput;
-import coffee.order.view.output.kiosk.KioskCouponManagerHistoryMessage;
+import coffee.order.view.input.kiosk.customer.KioskCustomerCouponManagerInput;
+import coffee.order.view.output.kiosk.customer.KioskCustomerCouponManagerHistoryMessage;
 
 import java.util.Map;
 import java.util.Optional;
@@ -19,12 +19,12 @@ public class KioskCustomerCouponManager {
         this.kioskCustomer = kioskCustomer;
     }
 
-    public KioskCouponManagerHistoryMessage kioskCouponHistory() {
-        return new KioskCouponManagerHistoryMessage();
+    public KioskCustomerCouponManagerHistoryMessage kioskCouponHistory() {
+        return new KioskCustomerCouponManagerHistoryMessage();
     }
 
-    public KioskCouponManagerInput kioskCouponInput() {
-        return new KioskCouponManagerInput();
+    public KioskCustomerCouponManagerInput kioskCouponInput() {
+        return new KioskCustomerCouponManagerInput();
     }
 
     public void processSaveCoupon(KioskCustomerCustomerManager customerManager) {

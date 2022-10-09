@@ -1,8 +1,8 @@
 package coffee.order.domain.kiosk.customer;
 
 import coffee.order.domain.customer.Customer;
-import coffee.order.view.input.kiosk.KioskCustomerManagerInput;
-import coffee.order.view.output.kiosk.KioskCustomerManagerHistoryMessage;
+import coffee.order.view.input.kiosk.customer.KioskCustomerCustomerManagerInput;
+import coffee.order.view.output.kiosk.customer.KioskCustomerCustomerManagerHistoryMessage;
 
 import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
 
@@ -16,12 +16,12 @@ public class KioskCustomerCustomerManager {
         this.kioskCustomer = kioskCustomer;
     }
 
-    public KioskCustomerManagerHistoryMessage history() {
-        return new KioskCustomerManagerHistoryMessage();
+    public KioskCustomerCustomerManagerHistoryMessage history() {
+        return new KioskCustomerCustomerManagerHistoryMessage();
     }
 
-    public KioskCustomerManagerInput input() {
-        return new KioskCustomerManagerInput();
+    public KioskCustomerCustomerManagerInput input() {
+        return new KioskCustomerCustomerManagerInput();
     }
 
     public void findCustomerThenSetting(String phoneNumber) {
