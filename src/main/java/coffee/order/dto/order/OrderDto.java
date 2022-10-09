@@ -20,10 +20,6 @@ public class OrderDto {
         this.usedCoupon = usedCoupon;
     }
 
-    public Integer getTotalPrice() {
-        return totalPrice;
-    }
-
     public String getOrderHistory() {
         return this.toString();
     }
@@ -41,8 +37,24 @@ public class OrderDto {
         return !usedCoupon ||quantity != 0;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public Integer getTotalPrice() {
+        return totalPrice;
+    }
+
     public boolean checkCouponUsed() {
         return usedCoupon;
+    }
+
+    public String getMenuNumber() {
+        return foodDto.getCategoryId() + "-" + foodDto.getId();
+    }
+
+    public String getFoodName() {
+        foodDto.getName();
     }
 
 }

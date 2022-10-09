@@ -5,6 +5,7 @@ import coffee.order.domain.order.Order;
 import java.util.Map;
 
 import static coffee.order.view.output.OutputView.print;
+import static coffee.order.view.output.UnitMessage.*;
 import static coffee.order.view.output.kiosk.customer.KioskCustomerCouponManagerMessage.*;
 import static coffee.order.view.output.order.OrdersMessage.ORDER_ASK_TO_CHOOSE_ORDER;
 
@@ -37,9 +38,10 @@ public class KioskCustomerCouponManagerHistoryMessage {
         for (Map.Entry<String, Order> entry : myOrders.entrySet()) {
             ordersToChoiceBuilder
                     .append(entry.getKey())
-                    .append(". ")
+                    .append(DOT.unit)
+                    .append(SPACE.unit)
                     .append(entry.getValue().getFoodName())
-                    .append("\n");
+                    .append(ENTER.unit);
         }
         print(ordersToChoiceBuilder.toString());
     }

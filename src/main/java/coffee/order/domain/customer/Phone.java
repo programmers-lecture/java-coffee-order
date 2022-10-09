@@ -1,5 +1,7 @@
 package coffee.order.domain.customer;
 
+import coffee.order.dto.customer.PhoneDto;
+
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM;
 
 public class Phone {
@@ -14,6 +16,10 @@ public class Phone {
             throw new IllegalArgumentException(CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM.getMessage());
         }
         this.phoneNumber = phoneNumber;
+    }
+
+    public PhoneDto toPhoneDto() {
+        return new PhoneDto(phoneNumber);
     }
 
     private boolean checkPhoneNumberEmpty(String phoneNumber) {

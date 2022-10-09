@@ -28,7 +28,7 @@ public class KioskCustomerOrderManagerHistoryMessage {
     private String createMenu() {
         StringBuilder menuBuilder = new StringBuilder();
         Arrays.stream(FoodCategory.values())
-                .forEach(category -> menuBuilder.append(category.toFoodCategoryDto().toString()).append("\n\n"));
+                .forEach(category -> menuBuilder.append(category.   toFoodCategoryDto().toString()).append("\n\n"));
         return menuBuilder.toString();
     }
 

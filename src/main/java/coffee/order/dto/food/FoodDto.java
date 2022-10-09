@@ -20,6 +20,14 @@ public class FoodDto {
         return name;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
     @Override
     public String toString() {
         return categoryId + "-" + id + ". " + name.toString() + " // " + price.toString() + WON.unit + "\n";
