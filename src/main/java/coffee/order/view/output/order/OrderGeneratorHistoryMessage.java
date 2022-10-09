@@ -6,11 +6,11 @@ import static coffee.order.view.output.OutputView.print;
 import static coffee.order.view.output.UnitMessage.WON;
 import static coffee.order.view.output.order.OrdersMessage.ORDER_TOTAL_PRICE;
 
-public class OrdersHistoryMessage {
+public class OrderGeneratorHistoryMessage {
 
     private final OrdersDto ordersDto;
 
-    public OrdersHistoryMessage(OrdersDto ordersDto) {
+    public OrderGeneratorHistoryMessage(OrdersDto ordersDto) {
         this.ordersDto = ordersDto;
     }
 

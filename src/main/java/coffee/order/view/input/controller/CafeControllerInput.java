@@ -17,6 +17,6 @@ public class CafeControllerInput {
 
     private boolean checkCharacterChooseFormNotOk(String chosenOne) {
         return chosenOne.length() == 0 ||
-                checkFormValid(REGEX_CUSTOMER_OR_BARISTA_FORM_VALIDATOR, chosenOne);
+                !checkFormValid(REGEX_CUSTOMER_OR_BARISTA_FORM_VALIDATOR, chosenOne);
     }
 }

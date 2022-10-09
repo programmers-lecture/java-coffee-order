@@ -1,4 +1,4 @@
-package coffee.order.domain.kiosk;
+package coffee.order.domain.kiosk.barista;
 
 public class KioskFoodManager {
 

@@ -1,6 +1,6 @@
 package coffee.order.view.input.exception;
 
-public enum KioskCouponInputException {
+public enum KioskCouponManagerInputException {
 
     COUPON_APPLY_ANSWER_EXCEPTION("쿠폰 사용 1(예) / 2(아니요) 입력 도중 오류가 발생하였습니다."),
     CUSTOMER_ANSWER_EXCEPTION("고객님의 입력 간에 오류가 발생하였습니다."),
@@ -8,7 +8,7 @@ public enum KioskCouponInputException {
 
     public final String message;
 
-    KioskCouponInputException(String message) {
+    KioskCouponManagerInputException(String message) {
         this.message = message;
     }
 }

@@ -1,6 +1,5 @@
 package coffee.order.controller;
 
-import coffee.order.domain.customer.Customer;
 import coffee.order.domain.kiosk.Kiosk;
 import coffee.order.view.input.controller.CafeControllerInput;
 import coffee.order.view.output.controller.CafeControllerHistoryMessage;
@@ -22,17 +21,16 @@ public class CafeController {
             controllerHistory().printWhenAskUserSelect();
             String chosenOne = cafeControllerInput().askCustomerOrBarista();
 
-            if (chosenOne.equals(END_KIOSK.selectedCommand)) {
+            if (chosenOne.equals(END_KIOSK.code)) {
                 break;
             }
 
-            if (chosenOne.equals(CUSTOMER.selectedCommand)) {
+            if (chosenOne.equals(CUSTOMER.code)) {
                 Kiosk kiosk = new Kiosk();
-                Customer customer = new Customer();
-                kiosk.processKiosk(customer);
+                kiosk.processKiosk(CUSTOMER.code);
             }
 
-            if (chosenOne.equals(BARISTA.selectedCommand)) {
+            if (chosenOne.equals(BARISTA.code)) {
                 // TODO : 바리스타 구현 3주차
             }
         }

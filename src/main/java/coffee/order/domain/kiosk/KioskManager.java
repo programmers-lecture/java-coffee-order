@@ -1,16 +1,15 @@
 package coffee.order.domain.kiosk;
 
+import coffee.order.domain.kiosk.customer.KioskCustomer;
+
 public class KioskManager {
 
-    /**
-     * 손님
-     */
-
-    // TODO : 주문을 받는다.
-
-    // TODO : 쿠폰 적립을 물어본다.
-
-    // TODO : 쿠폰 사용 유무를 물어본다.
+    public void processCustomer() {
+        KioskCustomer kioskCustomer = new KioskCustomer();
+        kioskCustomer.processOrder();
+        kioskCustomer.processCoupon();
+        kioskCustomer.giveReceipt();
+    }
 
     /**
      * 바리스타

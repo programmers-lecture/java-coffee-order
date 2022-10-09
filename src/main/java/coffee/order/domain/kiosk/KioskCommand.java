@@ -8,9 +8,9 @@ public enum KioskCommand {
     BARISTA("2"),
     END_KIOSK("0");
 
-    public final String selectedCommand;
+    public final String code;
 
-    KioskCommand(String selectedCommand) {
-        this.selectedCommand = selectedCommand;
+    KioskCommand(String code) {
+        this.code = code;
     }
 }

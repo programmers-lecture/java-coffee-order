@@ -5,7 +5,7 @@ public class Coupon {
     private int quantity;
 
     public Coupon() {
-        this.quantity = 0;
+        this.quantity = 9;
     }
 
     protected int getQuantity() {
