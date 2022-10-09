@@ -27,7 +27,7 @@ public class Customer {
         wallet.useCoupon();
     }
 
-    public void addMyOrders(Orders orders) {
+    public void takeReceipt(Orders orders) {
         if (checkNotEnoughMoney(orders)) {
             throw new IllegalArgumentException(CUSTOMER_NOT_ENOUGH_MONEY.getMessage());
         }

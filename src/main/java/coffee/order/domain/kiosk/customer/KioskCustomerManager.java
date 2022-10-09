@@ -1,15 +1,20 @@
 package coffee.order.domain.kiosk.customer;
 
+import coffee.order.domain.customer.Customer;
 import coffee.order.view.input.kiosk.KioskCustomerManagerInput;
 import coffee.order.view.output.kiosk.KioskCustomerManagerHistoryMessage;
+
+import java.time.temporal.ChronoUnit;
 
 import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
 
 public class KioskCustomerManager {
 
     private final KioskCustomer kioskCustomer;
+    private Customer customer;
 
     public KioskCustomerManager(KioskCustomer kioskCustomer) {
+        this.customer = new Customer();
         this.kioskCustomer = kioskCustomer;
     }
 
@@ -25,12 +30,16 @@ public class KioskCustomerManager {
         if (checkCustomerNew(phoneNumber)) {
             saveCustomer(phoneNumber);
         }
-        kioskCustomer.loginCustomer(phoneNumber);
+        loginCustomer(phoneNumber);
     }
 
     public String askPhoneNumber() {
         history().printWhenAskPhoneNumber();
         return input().askCustomerPhoneNumber();
+    }
+
+    public Customer loadCustomer() {
+        return customer;
     }
 
     private void saveCustomer(String phoneNumber) {
@@ -41,4 +50,7 @@ public class KioskCustomerManager {
         return !CUSTOMERS_DATA.checkPhoneNumberExists(phoneNumber);
     }
 
+    private void loginCustomer(String phoneNumber) {
+        customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
+    }
 }

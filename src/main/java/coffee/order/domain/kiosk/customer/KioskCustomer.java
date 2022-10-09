@@ -13,16 +13,13 @@ import static coffee.order.domain.customer.Customers.CUSTOMERS_DATA;
 
 public class KioskCustomer {
 
-    private Customer customer;
-
-    private final OrderGenerator orderGenerator;
+//    private final OrderGenerator orderGenerator;
     private final KioskCustomerManager customerManager;
     private final KioskCouponManager couponManager;
     private final KioskOrderManager orderManager;
 
     public KioskCustomer() {
-        customer = new Customer();
-        this.orderGenerator = new OrderGenerator();
+//        this.orderGenerator = new OrderGenerator();
         this.customerManager = new KioskCustomerManager(this);
         this.couponManager = new KioskCouponManager(this);
         this.orderManager = new KioskOrderManager(this);
@@ -43,31 +40,29 @@ public class KioskCustomer {
 
     public void giveReceipt() {
         kioskHistory().printBeforeGiveReceipt();
-        customer.addMyOrders(orderGenerator.loadOrders());
+        Customer customer = customerManager.loadCustomer();
+        Orders orders = orderManager.loadOrders();
+        customer.takeReceipt(orders);
         kioskHistory().printAfterGiveReceipt();
     }
 
     void createTempOrder(String orderCommand) {
-        orderGenerator.createOrder(orderCommand);
+        orderManager.createOrder(orderCommand);
     }
 
     Orders generateOrders() {
-        return orderGenerator.loadOrders();
+        return orderManager.loadOrders();
     }
 
     Customer loadCustomer() {
-        return customer;
+        return customerManager.loadCustomer();
     }
 
     void applyCoupon() {
-        Collection<Order> orders = orderGenerator.loadOrders().getOrders();
+        Collection<Order> orders = orderManager.loadOrders().getOrders();
         Map<String, Order> selectOrderMenu = orderManager.createSelectedMenu(orders);
         Order orderByCoupon = couponManager.findOrderedByCoupon(selectOrderMenu);
         orderByCoupon.changeCouponUsed();
-    }
-
-    void loginCustomer(String phoneNumber) {
-        customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
     }
 
 }
