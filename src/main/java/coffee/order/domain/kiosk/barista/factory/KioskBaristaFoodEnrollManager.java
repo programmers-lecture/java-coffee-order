@@ -1,14 +1,25 @@
 package coffee.order.domain.kiosk.barista.factory;
 
-public class KioskBaristaFoodEnrollManager implements KioskBaristaProcess {
-    @Override
-    public void process() {
+import coffee.order.domain.kiosk.KioskManager;
+import coffee.order.domain.kiosk.form.FoodEnrollForm;
+import coffee.order.view.input.kiosk.barista.factory.KioskBaristaFoodEnrollManagerInput;
+import coffee.order.view.output.kiosk.barista.factory.KioskBaristaFoodEnrollManagerHistoryMessage;
 
+public class KioskBaristaFoodEnrollManager implements KioskBaristaProcess {
+
+    public KioskBaristaFoodEnrollManagerHistoryMessage foodEnrollHistory() {
+        return new KioskBaristaFoodEnrollManagerHistoryMessage();
     }
 
-    // TODO : 상품 등록 요청
+    public KioskBaristaFoodEnrollManagerInput foodEnrollInput() {
+        return new KioskBaristaFoodEnrollManagerInput();
+    }
 
-    // TODO : 상품 수량 등록 요청
+    @Override
+    public void process(KioskManager kioskManager) {
+        foodEnrollHistory().askBaristaToEnrollForm();
+        FoodEnrollForm foodEnrollForm = foodEnrollInput().askFoodEnrollForm();
+        kioskManager.loadKioskSetting().reflectNewFood(foodEnrollForm);
+    }
 
-    // TODO : 상품 가격 변경 요청
 }

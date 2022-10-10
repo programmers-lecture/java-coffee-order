@@ -18,13 +18,16 @@ public class KioskManager {
         kioskCustomer.processCoupon();
         kioskCustomer.giveReceipt();
 
-        kioskCustomer.reflectOrders(kioskSetting);
-        kioskCustomer.reflectReceipt(kioskSetting);
-//        kioskCustomer.reflectCustomer(kioskSetting);
+        kioskCustomer.reflectOrders();
+        kioskCustomer.reflectReceipt();
     }
 
     public void processBarista() {
-        KioskBarista kioskBarista = new KioskBarista();
+        KioskBarista kioskBarista = new KioskBarista(this);
         kioskBarista.process();
+    }
+
+    public KioskSetting loadKioskSetting() {
+        return kioskSetting;
     }
 }

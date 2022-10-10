@@ -5,7 +5,8 @@ import static coffee.order.exception.KioskException.BARISTA_PROCESS_NULL_EXCEPTI
 
 public class KioskBaristaProcessFactory {
 
-    private KioskBaristaProcessFactory() {}
+    private KioskBaristaProcessFactory() {
+    }
 
     private static final KioskBaristaProcess foodInputManager = new KioskBaristaFoodEnrollManager();
     private static final KioskBaristaProcess foodQuantityManager = new KioskBaristaFoodQuantityManager();

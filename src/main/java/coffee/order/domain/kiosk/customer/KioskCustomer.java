@@ -49,15 +49,15 @@ public class KioskCustomer {
         kioskHistory().printAfterGiveReceipt();
     }
 
-    public void reflectOrders(KioskSetting kioskSetting) {
+    public void reflectOrders() {
         Orders orders = orderManager.loadOrders();
-        kioskSetting.reflectOrders(orders);
+        kioskManager.loadKioskSetting().reflectOrders(orders);
     }
 
-    public void reflectReceipt(KioskSetting kioskSetting) {
+    public void reflectReceipt() {
         Phone phone = customerManager.loadCustomer().answerPhoneNumber();
         Receipt receipt = receiptManager.loadReceipt();
-        kioskSetting.reflectReceipt(phone, receipt);
+        kioskManager.loadKioskSetting().reflectReceipt(phone, receipt);
     }
 
     Customer loadCustomer() {

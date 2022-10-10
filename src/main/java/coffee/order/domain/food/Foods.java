@@ -2,6 +2,7 @@ package coffee.order.domain.food;
 
 import coffee.order.dto.food.FoodsDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,11 @@ public class Foods {
 
     public Foods(List<Food> foods) {
         this.foods = foods;
+    }
+
+
+    public Foods() {
+        this.foods = new ArrayList<>();
     }
 
     public FoodsDto toFoodsDto() {
@@ -27,6 +33,11 @@ public class Foods {
                 .filter(food -> food.checkSameId(foodId))
                 .findFirst()
                 .orElseThrow(() -> new NullPointerException(FOODS_GET_NULL_POINTER_EXCEPTION.getMessage()));
+    }
+
+    public void enrollFood(Food food) {
+        System.out.println("food = " + food);
+        foods.add(food);
     }
 
 }
