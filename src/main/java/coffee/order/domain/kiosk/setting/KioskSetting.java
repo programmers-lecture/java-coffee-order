@@ -23,7 +23,7 @@ public class KioskSetting {
         FoodCategory.enrollFood(form);
     }
 
-    public void reflectUpdateFoodQuantity(FoodUpdateForm form) {
+    public void reflectUpdateFood(FoodUpdateForm form) {
         FoodCategory.updateFood(form);
     }
 }

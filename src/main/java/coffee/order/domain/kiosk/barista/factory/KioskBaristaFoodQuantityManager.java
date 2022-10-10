@@ -20,7 +20,7 @@ public class KioskBaristaFoodQuantityManager implements KioskBaristaProcess {
         foodQuantityUpdateHistory().askMenuAndFoodQuantity();
         foodQuantityUpdateHistory().printMenus();
         FoodUpdateForm foodQuantityUpdateForm = foodQuantityInput().askMenuAndFoodQuantity();
-        kioskManager.loadKioskSetting().reflectUpdateFoodQuantity(foodQuantityUpdateForm);
+        kioskManager.loadKioskSetting().reflectUpdateFood(foodQuantityUpdateForm);
         foodQuantityUpdateHistory().printUpdateFinished();
     }
 }

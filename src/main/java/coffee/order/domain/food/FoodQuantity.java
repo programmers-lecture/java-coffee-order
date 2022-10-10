@@ -16,8 +16,11 @@ public class FoodQuantity {
         return new FoodQuantityDto(quantity);
     }
 
-    void increaseQuantity(int inputQuantity) {
-        this.quantity += inputQuantity;
+    void updateQuantity(int inputQuantity) {
+        if (checkMinusQuantity(inputQuantity)) {
+            throw new IllegalArgumentException(QUANTITY_MINUS_EXCEPTION.getMessage());
+        }
+        this.quantity = inputQuantity;
     }
 
     void decreaseQuantity(int inputQuantity) {

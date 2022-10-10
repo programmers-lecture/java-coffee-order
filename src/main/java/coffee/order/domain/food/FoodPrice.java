@@ -24,11 +24,11 @@ public class FoodPrice {
         this.price += inputPrice;
     }
 
-    void decreasePrice(int inputPrice) {
-        if (checkMinusPrice(this.price - inputPrice)) {
+    void updatePrice(int inputPrice) {
+        if (checkMinusPrice(inputPrice)) {
             throw new IllegalArgumentException(PRICE_MINUS_EXCEPTION.getMessage());
         }
-        this.price -= inputPrice;
+        this.price = inputPrice;
     }
 
     private boolean checkMinusPrice(int price) {

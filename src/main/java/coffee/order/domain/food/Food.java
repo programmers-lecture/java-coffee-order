@@ -42,28 +42,16 @@ public class Food {
     }
 
     public void updateFood(Integer updatePrice, Integer updateQuantity) {
-        if (updatePrice != 0) {
-
+        if (updatePrice.intValue() != 0) {
+            price.updatePrice(updatePrice);
         }
-        if (updateQuantity != 0) {
-
+        if (updateQuantity.intValue() != 0) {
+            quantity.updateQuantity(updateQuantity);
         }
     }
 
     boolean checkSameId(Long foodId) {
         return Objects.equals(this.id, foodId);
-    }
-
-    private void increaseQuantity(int inputQuantity) {
-        this.quantity.increaseQuantity(inputQuantity);
-    }
-
-    private void decreasePrice(int inputPrice) {
-        this.price.decreasePrice(inputPrice);
-    }
-
-    private void increasePrice(int inputPrice) {
-        this.price.increasePrice(inputPrice);
     }
 
 }
