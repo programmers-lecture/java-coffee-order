@@ -4,12 +4,14 @@ import coffee.order.view.model.Order;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
     private static final String MENU_CHOICE_DELIMITER = ",";
     private static final String MENU_INDEX_DELIMITER = "-";
+    private static final String EOF_SYMBOL = "";
     private static final int MENU_NUMBER_INDEX = 0;
     private static final int ORDER_AMOUNT_INDEX = 1;
     private static final int MENU_TYPE_INDEX = 0;
@@ -23,8 +25,14 @@ public class InputView {
     }
 
     public Order readMenuChoice() {
-        // TODO: 유저가 그만둘 때까지 계속 입력받기
-        String menuChoice = scanner.nextLine();
+        List<Order> choices = new ArrayList<>();
+        String menuChoice;
+
+        while (!(menuChoice = scanner.nextLine()).equals(EOF_SYMBOL)) {
+            choices.add(createNewMenuChoice(menuChoice));
+        }
+
+        System.out.println(choices);
         return createNewMenuChoice(menuChoice);
     }
 
