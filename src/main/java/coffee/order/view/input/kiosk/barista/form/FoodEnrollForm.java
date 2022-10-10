@@ -1,4 +1,4 @@
-package coffee.order.domain.kiosk.form;
+package coffee.order.view.input.kiosk.barista.form;
 
 public class FoodEnrollForm {
 
@@ -10,15 +10,10 @@ public class FoodEnrollForm {
 
     public FoodEnrollForm(String categoryName, String foodName, Long categoryId, Long foodId, Integer price) {
         this.categoryName = categoryName;
-        System.out.println("categoryName = " + categoryName);
         this.foodName = foodName;
-        System.out.println("foodName = " + foodName);
         this.categoryId = categoryId;
-        System.out.println("categoryId = " + categoryId);
         this.foodId = foodId;
-        System.out.println("foodId = " + foodId);
         this.price = price;
-        System.out.println("price = " + price);
     }
 
     public String getCategoryName() {

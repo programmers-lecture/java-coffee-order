@@ -3,7 +3,7 @@ package coffee.order.view.input.kiosk.customer;
 import static coffee.order.util.RegexUtil.REGEX_SELECT_MENU_FORM_VALIDATOR;
 import static coffee.order.util.RegexUtil.checkFormValid;
 import static coffee.order.view.input.InputView.read;
-import static coffee.order.view.input.exception.KioskCustomerOrderManagerInputException.CUSTOMER_ORDER_ANSWER_EXCEPTION;
+import static coffee.order.view.input.exception.kiosk.customer.KioskCustomerOrderManagerInputException.CUSTOMER_ORDER_ANSWER_EXCEPTION;
 
 public class KioskCustomerOrderManagerInput {
 

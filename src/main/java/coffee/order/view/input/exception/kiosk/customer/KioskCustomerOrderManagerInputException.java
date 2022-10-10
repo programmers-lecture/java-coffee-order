@@ -1,4 +1,4 @@
-package coffee.order.view.input.exception;
+package coffee.order.view.input.exception.kiosk.customer;
 
 public enum KioskCustomerOrderManagerInputException {
 

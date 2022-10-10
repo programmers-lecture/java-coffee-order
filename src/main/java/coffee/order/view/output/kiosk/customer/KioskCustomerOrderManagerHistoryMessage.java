@@ -5,6 +5,7 @@ import coffee.order.domain.food.FoodCategory;
 import java.util.Arrays;
 
 import static coffee.order.view.output.OutputView.print;
+import static coffee.order.view.output.UnitMessage.ENTER;
 import static coffee.order.view.output.kiosk.customer.KioskCustomerOrderManagerMessage.KIOSK_ORDER_AFTER_ORDER;
 import static coffee.order.view.output.kiosk.customer.KioskCustomerOrderManagerMessage.KIOSK_ORDER_INPUT_USER_SELECT;
 
@@ -28,7 +29,7 @@ public class KioskCustomerOrderManagerHistoryMessage {
     private String createMenu() {
         StringBuilder menuBuilder = new StringBuilder();
         Arrays.stream(FoodCategory.values())
-                .forEach(category -> menuBuilder.append(category.   toFoodCategoryDto().toString()).append("\n\n"));
+                .forEach(category -> menuBuilder.append(category.   toFoodCategoryDto()).append(ENTER.unit).append(ENTER.unit));
         return menuBuilder.toString();
     }
 

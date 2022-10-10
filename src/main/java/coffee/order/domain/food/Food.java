@@ -41,6 +41,15 @@ public class Food {
         this.quantity.decreaseQuantity(inputQuantity);
     }
 
+    public void updateFood(Integer updatePrice, Integer updateQuantity) {
+        if (updatePrice != 0) {
+
+        }
+        if (updateQuantity != 0) {
+
+        }
+    }
+
     boolean checkSameId(Long foodId) {
         return Objects.equals(this.id, foodId);
     }

@@ -1,11 +1,10 @@
 package coffee.order.domain.food;
 
-import coffee.order.domain.kiosk.form.FoodEnrollForm;
+import coffee.order.view.input.kiosk.barista.form.FoodEnrollForm;
 import coffee.order.dto.food.FoodCategoryDto;
+import coffee.order.view.input.kiosk.barista.form.FoodUpdateForm;
 
-import java.sql.Array;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
@@ -57,7 +56,7 @@ public enum FoodCategory {
         return new FoodCategoryDto(foods.toFoodsDto(), name, id);
     }
 
-    synchronized public static Foods findFoodsByCategoryId(Long categoryId) {
+    public static Foods findFoodsByCategoryId(Long categoryId) {
         return Arrays.stream(FoodCategory.values())
                 .filter(category -> checkSameFoodCategoryId(categoryId, category.id))
                 .map(category -> category.foods)
@@ -76,6 +75,15 @@ public enum FoodCategory {
         );
 
         findCategory.enrollFood(createdFood);
+    }
+
+    public static void updateFood(FoodUpdateForm form) {
+        Long formCategoryId = form.getCategoryId();
+        Long formFoodId = form.getFoodId();
+        Food findFood = FoodCategory.findFoodsByCategoryId(formCategoryId)
+                                    .findFoodByFoodId(formFoodId);
+
+        findFood.updateFood(form.getFoodPrice(), form.getFoodQuantity());
     }
 
     private static boolean checkSameFoodCategoryId(Long findCategoryId, Long categoryId) {

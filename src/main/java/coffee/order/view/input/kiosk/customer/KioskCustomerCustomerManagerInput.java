@@ -3,7 +3,7 @@ package coffee.order.view.input.kiosk.customer;
 import static coffee.order.util.RegexUtil.REGEX_PHONE_NUMBER_FORM_VALIDATOR;
 import static coffee.order.util.RegexUtil.checkFormValid;
 import static coffee.order.view.input.InputView.read;
-import static coffee.order.view.input.exception.KioskCustomerCouponManagerInputException.CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM;
+import static coffee.order.view.input.exception.kiosk.customer.KioskCustomerCouponManagerInputException.CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM;
 
 public class KioskCustomerCustomerManagerInput {
 

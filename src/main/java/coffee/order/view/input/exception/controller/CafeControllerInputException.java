@@ -1,4 +1,4 @@
-package coffee.order.view.input.exception;
+package coffee.order.view.input.exception.controller;
 
 public enum CafeControllerInputException {
 

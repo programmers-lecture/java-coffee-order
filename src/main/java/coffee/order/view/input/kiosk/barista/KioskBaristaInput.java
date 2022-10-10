@@ -3,7 +3,7 @@ package coffee.order.view.input.kiosk.barista;
 import coffee.order.view.input.InputView;
 
 import static coffee.order.domain.kiosk.barista.KioskBaristaMenus.checkMenuExists;
-import static coffee.order.view.input.exception.KioskBaristaInputException.KIOSK_BARISTA_INPUT_EXCEPTION;
+import static coffee.order.view.input.exception.kiosk.barista.KioskBaristaInputException.KIOSK_BARISTA_INPUT_EXCEPTION;
 
 public class KioskBaristaInput {
 

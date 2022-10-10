@@ -3,7 +3,7 @@ package coffee.order.view.input.controller;
 import static coffee.order.util.RegexUtil.REGEX_CUSTOMER_OR_BARISTA_FORM_VALIDATOR;
 import static coffee.order.util.RegexUtil.checkFormValid;
 import static coffee.order.view.input.InputView.read;
-import static coffee.order.view.input.exception.CafeControllerInputException.NO_SUCH_CHARACTER_EXCEPTION;
+import static coffee.order.view.input.exception.controller.CafeControllerInputException.NO_SUCH_CHARACTER_EXCEPTION;
 
 public class CafeControllerInput {
 

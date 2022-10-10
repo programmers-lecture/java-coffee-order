@@ -1,9 +1,9 @@
 package coffee.order.view.input.kiosk.barista.factory;
 
-import coffee.order.domain.kiosk.form.FoodEnrollForm;
+import coffee.order.view.input.kiosk.barista.form.FoodEnrollForm;
 
 import static coffee.order.view.input.InputView.read;
-import static coffee.order.view.input.exception.KioskBaristaFoodEnrollManagerInputException.FOOD_ENROLL_FORM_EXCEPTION;
+import static coffee.order.view.input.exception.kiosk.barista.factory.KioskBaristaFoodEnrollManagerInputException.FOOD_ENROLL_FORM_EXCEPTION;
 
 public class KioskBaristaFoodEnrollManagerInput {
 
