@@ -12,4 +12,9 @@ public class Transaction {
     public List<Order> getOrders() {
         return orders;
     }
+
+    public boolean isCouponApplied() {
+        return orders.stream()
+                .anyMatch(Order::isCouponApplied);
+    }
 }

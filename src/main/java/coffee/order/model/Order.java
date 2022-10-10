@@ -5,12 +5,14 @@ public class Order {
     private final String menuName;
     private final int orderQuantity;
     private final int orderAmount;
+    private boolean isCouponApplied;
 
     public Order(MenuType menuType, String menuName, int orderQuantity, int orderAmount) {
         this.menuType = menuType;
         this.menuName = menuName;
         this.orderQuantity = orderQuantity;
         this.orderAmount = orderAmount;
+        isCouponApplied = false;
     }
 
     public MenuType getMenuType() {
@@ -27,5 +29,13 @@ public class Order {
 
     public int getOrderAmount() {
         return orderAmount;
+    }
+
+    public void applyCoupon() {
+        isCouponApplied = true;
+    }
+
+    public boolean isCouponApplied() {
+        return isCouponApplied;
     }
 }

@@ -21,12 +21,14 @@ public class CouponRepository {
 
     public void addCoupon(PhoneNumber phoneNumber, Transaction transaction) {
         Integer lastCouponQuantity = findCouponQuantity(phoneNumber);
-        Integer additionalCouponQuantity = transaction.getOrders().stream()
-                .filter(order -> order.getOrderAmount() != 0)
-                .map(Order::getOrderQuantity)
-                .reduce(0, Integer::sum);
 
-        updateCouponQuantity(phoneNumber, lastCouponQuantity + additionalCouponQuantity);
+        if (!transaction.isCouponApplied()) {
+            lastCouponQuantity += transaction.getOrders().stream()
+                    .map(Order::getOrderQuantity)
+                    .reduce(0, Integer::sum);
+        }
+
+        updateCouponQuantity(phoneNumber, lastCouponQuantity);
     }
 
     public boolean customerExists(PhoneNumber phoneNumber) {
