@@ -1,30 +1,30 @@
 package coffee.order.domain.kiosk.receipt;
 
-import coffee.order.dto.kiosk.receipt.KioskReceiptDto;
-import coffee.order.dto.kiosk.receipt.KioskReceiptsDto;
+import coffee.order.domain.customer.Phone;
+import coffee.order.domain.receipt.Receipt;
+import coffee.order.dto.receipt.ReceiptDto;
+import coffee.order.dto.receipt.ReceiptsDto;
 
-import java.util.*;
-
-import static coffee.order.exception.KioskReceiptsException.RECEIPT_NULL_EXCEPTION;
+import java.util.HashMap;
+import java.util.Map;
 
 public enum KioskReceipts {
 
-    KIOSK_RECEIPTS(new HashMap<>());
+    RECEIPTS(new HashMap<>());
 
-    private final Map<String, KioskReceipt> receipts;
+    private final Map<String, Receipt> receipts;
 
-    KioskReceipts(Map<String, KioskReceipt> receipts) {
+    KioskReceipts(Map<String, Receipt> receipts) {
         this.receipts = receipts;
     }
 
-    public KioskReceiptsDto toKioskReceiptsDto() {
-        Map<String, KioskReceiptDto> receiptsDto = new HashMap<>();
-        receipts.forEach((key, value) -> receiptsDto.put(key, value.toKioskReceiptDto()));
-        return new KioskReceiptsDto(receiptsDto);
+    public ReceiptsDto toKioskReceiptsDto() {
+        Map<String, ReceiptDto> receiptsDto = new HashMap<>();
+        receipts.forEach((key, value) -> receiptsDto.put(key, value.toReceiptDto()));
+        return new ReceiptsDto(receiptsDto);
     }
 
-    public Collection<KioskReceipt> findAllReceipts() {
-        return Optional.of(receipts.values())
-                .orElseThrow(() -> new NullPointerException(RECEIPT_NULL_EXCEPTION.message));
+    public void saveReceipt(Phone phone, Receipt receipt) {
+        receipts.put(phone.loadPhoneNumber(), receipt);
     }
 }

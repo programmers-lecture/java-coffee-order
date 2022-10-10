@@ -1,14 +1,14 @@
-package coffee.order.dto.kiosk.receipt;
+package coffee.order.dto.receipt;
 
 import java.util.Map;
 
 import static coffee.order.view.output.UnitMessage.*;
 
-public class KioskReceiptsDto {
+public class ReceiptsDto {
 
-    private final Map<String, KioskReceiptDto> receipts;
+    private final Map<String, ReceiptDto> receipts;
 
-    public KioskReceiptsDto(Map<String, KioskReceiptDto> receipts) {
+    public ReceiptsDto(Map<String, ReceiptDto> receipts) {
         this.receipts = receipts;
     }
 

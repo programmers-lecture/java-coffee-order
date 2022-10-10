@@ -1,11 +1,17 @@
 package coffee.order.domain.customer.wallet;
 
+import coffee.order.dto.customer.CouponDto;
+
 public class Coupon {
 
     private int quantity;
 
     public Coupon() {
         this.quantity = 9;
+    }
+
+    public CouponDto toCouponDto() {
+        return new CouponDto(quantity);
     }
 
     protected int getQuantity() {

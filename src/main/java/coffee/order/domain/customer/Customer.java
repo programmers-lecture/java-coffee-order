@@ -1,7 +1,9 @@
 package coffee.order.domain.customer;
 
 import coffee.order.domain.customer.wallet.Wallet;
+import coffee.order.domain.receipt.Receipt;
 import coffee.order.domain.order.Orders;
+import coffee.order.dto.customer.CustomerDto;
 
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_ENOUGH_MONEY;
 
@@ -13,6 +15,10 @@ public class Customer {
     public Customer() {
         this.phone = new Phone();
         this.wallet = new Wallet();
+    }
+
+    public CustomerDto toCustomerDto() {
+        return new CustomerDto(phone.toPhoneDto(), wallet.toWalletDto());
     }
 
     public int findCouponQuantity() {
@@ -27,11 +33,14 @@ public class Customer {
         wallet.useCoupon();
     }
 
-    public void takeReceipt(Orders orders) {
+    public void takeReceipt(Receipt kioskReceipt) {
+        wallet.addReceipt(kioskReceipt);
+    }
+
+    public void order(Orders orders) {
         if (checkNotEnoughMoney(orders)) {
             throw new IllegalArgumentException(CUSTOMER_NOT_ENOUGH_MONEY.getMessage());
         }
-        wallet.addReceipt(orders);
     }
 
     public void savePhoneNumber(String phoneNumber) {
@@ -40,6 +49,10 @@ public class Customer {
 
     public void saveCoupon() {
         wallet.increaseCouponQuantity();
+    }
+
+    public Phone answerPhoneNumber() {
+        return phone;
     }
 
     private boolean checkNotEnoughMoney(Orders orders) {

@@ -1,18 +1,20 @@
-package coffee.order.dto.kiosk.receipt;
+package coffee.order.dto.receipt;
 
-import coffee.order.dto.customer.PhoneDto;
 import coffee.order.dto.order.OrdersDto;
+
+import java.time.LocalDateTime;
 
 import static coffee.order.view.output.UnitMessage.*;
 
-public class KioskReceiptDto {
+public class ReceiptDto {
 
-    private final PhoneDto phoneDto;
     private final OrdersDto ordersDto;
 
-    public KioskReceiptDto(PhoneDto phoneDto, OrdersDto ordersDto) {
-        this.phoneDto = phoneDto;
+    private final LocalDateTime localDateTime;
+
+    public ReceiptDto(OrdersDto ordersDto, LocalDateTime localDateTime) {
         this.ordersDto = ordersDto;
+        this.localDateTime = localDateTime;
     }
 
     public String receiptText() {

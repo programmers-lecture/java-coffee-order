@@ -1,13 +1,16 @@
 package coffee.order.domain.kiosk;
 
 import coffee.order.domain.kiosk.customer.KioskCustomer;
+import coffee.order.domain.kiosk.setting.KioskSetting;
 
 public class KioskManager {
 
     public void processCustomer() {
-        KioskCustomer kioskCustomer = new KioskCustomer();
+        KioskCustomer kioskCustomer = new KioskCustomer(this);
+        KioskSetting kioskSetting = new KioskSetting(this);
         kioskCustomer.processOrder();
         kioskCustomer.processCoupon();
+        kioskCustomer.reflectOrders(kioskSetting);
         kioskCustomer.giveReceipt();
     }
 

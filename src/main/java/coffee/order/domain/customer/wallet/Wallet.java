@@ -1,17 +1,22 @@
 package coffee.order.domain.customer.wallet;
 
-import coffee.order.domain.order.Orders;
+import coffee.order.domain.receipt.Receipt;
+import coffee.order.dto.customer.WalletDto;
 
 public class Wallet {
 
     private final Cash cash;
     private final Coupon coupon;
-    private final Receipts receipts;
+    private final CustomerReceipts receipts;
 
     public Wallet() {
         this.cash = new Cash(Integer.MAX_VALUE);
         this.coupon = new Coupon();
-        this.receipts = new Receipts();
+        this.receipts = new CustomerReceipts();
+    }
+
+    public WalletDto toWalletDto() {
+        return new WalletDto(coupon.toCouponDto());
     }
 
     public boolean checkCouponEnoughToUse() {
@@ -38,7 +43,7 @@ public class Wallet {
         this.coupon.increaseQuantity();
     }
 
-    public void addReceipt(Orders orders) {
-        receipts.addReceipt(orders);
+    public void addReceipt(Receipt kioskReceipt) {
+        receipts.addReceipt(kioskReceipt);
     }
 }

@@ -29,4 +29,8 @@ public class Phone {
     private boolean checkPhoneNumberForm(String phoneNumber) {
         return phoneNumber.matches("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
     }
+
+    public String loadPhoneNumber() {
+        return phoneNumber;
+    }
 }

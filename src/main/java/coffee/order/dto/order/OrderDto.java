@@ -54,7 +54,7 @@ public class OrderDto {
     }
 
     public String getFoodName() {
-        foodDto.getName();
+        return foodDto.getName().toString();
     }
 
 }

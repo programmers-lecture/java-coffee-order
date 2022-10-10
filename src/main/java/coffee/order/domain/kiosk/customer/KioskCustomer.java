@@ -1,6 +1,10 @@
 package coffee.order.domain.kiosk.customer;
 
 import coffee.order.domain.customer.Customer;
+import coffee.order.domain.customer.Phone;
+import coffee.order.domain.kiosk.KioskManager;
+import coffee.order.domain.kiosk.setting.KioskSetting;
+import coffee.order.domain.receipt.Receipt;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
 import coffee.order.view.output.kiosk.customer.KioskCustomerHistoryMessage;
@@ -10,14 +14,18 @@ import java.util.Map;
 
 public class KioskCustomer {
 
+    private final KioskManager kioskManager;
     private final KioskCustomerCustomerManager customerManager;
     private final KioskCustomerCouponManager couponManager;
     private final KioskCustomerOrderManager orderManager;
+    private final KioskCustomerReceiptManager receiptManager;
 
-    public KioskCustomer() {
+    public KioskCustomer(KioskManager kioskManager) {
+        this.kioskManager = kioskManager;
         this.customerManager = new KioskCustomerCustomerManager(this);
         this.couponManager = new KioskCustomerCouponManager(this);
         this.orderManager = new KioskCustomerOrderManager();
+        this.receiptManager = new KioskCustomerReceiptManager();
     }
 
     public KioskCustomerHistoryMessage kioskHistory() {
@@ -35,10 +43,21 @@ public class KioskCustomer {
 
     public void giveReceipt() {
         kioskHistory().printBeforeGiveReceipt();
-        Customer customer = customerManager.loadCustomer();
         Orders orders = orderManager.loadOrders();
-        customer.takeReceipt(orders);
+        Receipt receipt = receiptManager.createReceipt(orders);
+        customerManager.giveReceipt(receipt);
         kioskHistory().printAfterGiveReceipt();
+    }
+
+    public void reflectOrders(KioskSetting kioskSetting) {
+        Orders orders = orderManager.loadOrders();
+        kioskSetting.reflectOrders(orders);
+    }
+
+    public void reflectReceipt(KioskSetting kioskSetting) {
+        Phone phone = customerManager.loadCustomer().answerPhoneNumber();
+        Receipt receipt = receiptManager.loadReceipt();
+        kioskSetting.reflectReceipt(phone, receipt);
     }
 
     Customer loadCustomer() {
@@ -51,5 +70,4 @@ public class KioskCustomer {
         Order orderByCoupon = couponManager.findOrderedByCoupon(selectOrderMenu);
         orderByCoupon.changeCouponUsed();
     }
-
 }

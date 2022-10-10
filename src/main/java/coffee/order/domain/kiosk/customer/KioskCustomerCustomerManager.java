@@ -1,6 +1,7 @@
 package coffee.order.domain.kiosk.customer;
 
 import coffee.order.domain.customer.Customer;
+import coffee.order.domain.receipt.Receipt;
 import coffee.order.view.input.kiosk.customer.KioskCustomerCustomerManagerInput;
 import coffee.order.view.output.kiosk.customer.KioskCustomerCustomerManagerHistoryMessage;
 
@@ -50,5 +51,9 @@ public class KioskCustomerCustomerManager {
 
     private void loginCustomer(String phoneNumber) {
         customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
+    }
+
+    public void giveReceipt(Receipt receipt) {
+        customer.takeReceipt(receipt);
     }
 }

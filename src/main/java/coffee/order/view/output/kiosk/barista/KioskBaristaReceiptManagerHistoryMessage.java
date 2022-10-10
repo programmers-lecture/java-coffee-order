@@ -1,13 +1,13 @@
 package coffee.order.view.output.kiosk.barista;
 
-import coffee.order.dto.kiosk.receipt.KioskReceiptsDto;
+import coffee.order.dto.receipt.ReceiptsDto;
 import coffee.order.view.output.OutputView;
 
 public class KioskBaristaReceiptManagerHistoryMessage {
 
-    private final KioskReceiptsDto kioskReceiptsDto;
+    private final ReceiptsDto kioskReceiptsDto;
 
-    public KioskBaristaReceiptManagerHistoryMessage(KioskReceiptsDto kioskReceiptsDto) {
+    public KioskBaristaReceiptManagerHistoryMessage(ReceiptsDto kioskReceiptsDto) {
         this.kioskReceiptsDto = kioskReceiptsDto;
     }
 
