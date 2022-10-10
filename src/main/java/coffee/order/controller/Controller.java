@@ -26,18 +26,21 @@ public class Controller {
             viewManager.confirmOrder(newTransaction);
 
             // TODO: Coupon Service
-            ConfirmMessage confirmMessage = viewManager.confirmCouponUse();
+            ConfirmMessage confirmMessage = viewManager.confirmCouponAccumulation();
             if (confirmMessage.isCustomerSaidYes()) {
                 PhoneNumber phoneNumber = viewManager.readPhoneNumber();
                 Integer couponQuantity = serviceManager.getCouponQuantity(phoneNumber);
                 viewManager.notifyCouponQuantity(couponQuantity);
 
-                if (couponQuantity > 10) {
-//                    viewManager.confirmCouponApply
+                if (serviceManager.checkCouponApplicability(couponQuantity)) {
+//                    ConfirmMessage couponApplicationConfirm = viewManager.confirmCouponApplication();
                 }
+
             }
 
-            // TODO: 최종 주문
+            // TODO: 음료개수만큼 쿠폰 적립
+
+            // TODO: 최종 주문 출력
 
             break;
         }

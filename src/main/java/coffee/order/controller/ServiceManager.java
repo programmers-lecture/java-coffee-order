@@ -38,4 +38,8 @@ public class ServiceManager {
     public Integer getCouponQuantity(PhoneNumber phoneNumber) {
         return couponService.getCouponQuantity(phoneNumber);
     }
+
+    public boolean checkCouponApplicability(Integer couponQuantity) {
+        return couponService.isCouponApplicable(couponQuantity);
+    }
 }

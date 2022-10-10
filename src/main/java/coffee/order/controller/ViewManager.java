@@ -3,7 +3,8 @@ package coffee.order.controller;
 import coffee.order.model.Menu;
 import coffee.order.model.MenuType;
 import coffee.order.model.Transaction;
-import coffee.order.view.*;
+import coffee.order.view.InputView;
+import coffee.order.view.OutputView;
 import coffee.order.view.model.ConfirmMessage;
 import coffee.order.view.model.LiteralCollection;
 import coffee.order.view.model.Order;
@@ -51,7 +52,7 @@ public class ViewManager {
         return orderLiteral.toString();
     }
 
-    public ConfirmMessage confirmCouponUse() {
+    public ConfirmMessage confirmCouponAccumulation() {
         // TODO: 사용 여부 출력 -> 사용 여부 입력 -> 사용 여부 boolean 리턴
         outputView.printCouponConfirmMessage();
         boolean yesOrNot = inputView.readYesOrNot();
