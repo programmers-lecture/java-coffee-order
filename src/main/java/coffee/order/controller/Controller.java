@@ -26,17 +26,7 @@ public class Controller {
             viewManager.confirmOrder(newTransaction);
 
             // TODO: Coupon Service
-            ConfirmMessage confirmMessage = viewManager.confirmCouponAccumulation();
-            if (confirmMessage.isCustomerSaidYes()) {
-                PhoneNumber phoneNumber = viewManager.readPhoneNumber();
-                Integer couponQuantity = serviceManager.getCouponQuantity(phoneNumber);
-                viewManager.notifyCouponQuantity(couponQuantity);
-
-                if (serviceManager.checkCouponApplicability(couponQuantity)) {
-//                    ConfirmMessage couponApplicationConfirm = viewManager.confirmCouponApplication();
-                }
-
-            }
+            runCouponService(newTransaction);
 
             // TODO: 음료개수만큼 쿠폰 적립
 
@@ -44,5 +34,30 @@ public class Controller {
 
             break;
         }
+    }
+
+    private void runCouponService(Transaction transaction) {
+        ConfirmMessage couponAccumulationConfirm = viewManager.confirmCouponAccumulation();
+        if (couponAccumulationConfirm.isCustomerSaidYes()) {
+            PhoneNumber phoneNumber = viewManager.readPhoneNumber();
+            Integer couponQuantity = serviceManager.getCouponQuantity(phoneNumber);
+            viewManager.notifyCouponQuantity(couponQuantity);
+
+            checkCouponApplicability(transaction, couponQuantity);
+        }
+    }
+
+    private void checkCouponApplicability(Transaction transaction, Integer couponQuantity) {
+        if (serviceManager.checkCouponApplicability(couponQuantity)) {
+            ConfirmMessage couponApplicationConfirm = viewManager.confirmCouponApplication();
+
+            if (couponApplicationConfirm.isCustomerSaidYes()) {
+                // TODO : 주문한 내역을 고객에게 다시 보여주고 선택하게함
+//                viewManager.confirmWhichMenuToApplyCoupon();
+//                serviceManager.applyCoupon(transaction);
+            }
+        }
+
+        // return applied transaction
     }
 }

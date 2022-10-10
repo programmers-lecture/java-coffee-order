@@ -52,13 +52,6 @@ public class ViewManager {
         return orderLiteral.toString();
     }
 
-    public ConfirmMessage confirmCouponAccumulation() {
-        // TODO: 사용 여부 출력 -> 사용 여부 입력 -> 사용 여부 boolean 리턴
-        outputView.printCouponConfirmMessage();
-        boolean yesOrNot = inputView.readYesOrNot();
-        return new ConfirmMessage(yesOrNot);
-    }
-
     public PhoneNumber readPhoneNumber() {
         outputView.printPhoneNumberGuideMessage();
         String phoneNumber = inputView.readPhoneNumber();
@@ -67,5 +60,20 @@ public class ViewManager {
 
     public void notifyCouponQuantity(Integer couponQuantity) {
         outputView.printCouponQuatity(couponQuantity);
+    }
+
+    public ConfirmMessage confirmCouponAccumulation() {
+        outputView.printCouponConfirmMessage();
+        return getConfirmMessage();
+    }
+
+    public ConfirmMessage confirmCouponApplication() {
+        outputView.printCouponApplicationConfirm();
+        return getConfirmMessage();
+    }
+
+    private ConfirmMessage getConfirmMessage() {
+        boolean yesOrNot = inputView.readYesOrNot();
+        return new ConfirmMessage(yesOrNot);
     }
 }

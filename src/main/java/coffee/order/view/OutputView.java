@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OutputView {
-    private static final String GREETING_MESSAGE = "Welcome! 손님 역할을 실행합니다...";
-    private static final String MENU_GUIDE_MESSAGE = "메뉴를 골라주세요 (번호, 개수)";
-    private static final String ORDER_CONFIRM_MESSAGE = "주문 내역은 아래와 같습니다.";
-    private static final String COUPON_CONFIRM_MESSAGE = "쿠폰을 적립하시겠습니까?";
-    private static final String PHONE_NUMBER_GUIDE_MESSAGE = "전화번호를 입력해주세요. (형식 : 000-0000-0000)";
-    private static final String YES_OR_NO_MESSAGE = "1. 네 / 2. 아니요";
-    private static final String COUPON_QUANTITY_NOTIFYING_MESSAGE = "현재 쿠폰의 개수는 %d개 입니다.";
+    private static final String GREETING = "Welcome! 손님 역할을 실행합니다...";
+    private static final String MENU_GUIDE = "메뉴를 골라주세요 (번호, 개수)";
+    private static final String PHONE_NUMBER_GUIDE = "전화번호를 입력해주세요. (형식 : 000-0000-0000)";
+    private static final String ORDER_CONFIRM = "주문 내역은 아래와 같습니다.";
+    private static final String YES_OR_NO = "1. 네 / 2. 아니요";
+
+    private static final String COUPON_ACCUMULATION_CONFIRM = "쿠폰을 적립하시겠습니까?";
+    private static final String COUPON_APPLICATION_CONFIRM = "쿠폰을 사용하시겠습니까?";
+    private static final String COUPON_QUANTITY_NOTIFICATION = "현재 쿠폰의 개수는 %d개 입니다.";
 
     private static final String HYPHEN = "-";
     private static final String BLANK = " ";
@@ -21,12 +23,12 @@ public class OutputView {
     private static final int INDEX_BOUNDARY = 1;
 
     public void printGreetingMessage() {
-        System.out.println(GREETING_MESSAGE);
+        System.out.println(GREETING);
         System.out.println();
     }
 
     public void printMenu(MenuType[] menuTypes, HashMap<MenuType, ArrayList<? super Menu>> menuDatabase) {
-        System.out.println(MENU_GUIDE_MESSAGE);
+        System.out.println(MENU_GUIDE);
 
         for (MenuType menuType : menuTypes) {
             System.out.println(menuTypeFormat(menuType));
@@ -50,18 +52,18 @@ public class OutputView {
     }
 
     public void confirmOrder(String orderLiteral) {
-        System.out.println(ORDER_CONFIRM_MESSAGE);
+        System.out.println(ORDER_CONFIRM);
         System.out.println(orderLiteral);
         System.out.println();
     }
 
     public void printCouponConfirmMessage() {
-        System.out.println(COUPON_CONFIRM_MESSAGE);
-        System.out.println(YES_OR_NO_MESSAGE);
+        System.out.println(COUPON_ACCUMULATION_CONFIRM);
+        System.out.println(YES_OR_NO);
     }
 
     public void printPhoneNumberGuideMessage() {
-        System.out.println(PHONE_NUMBER_GUIDE_MESSAGE);
+        System.out.println(PHONE_NUMBER_GUIDE);
     }
 
     public void printCouponQuatity(Integer couponQuantity) {
@@ -69,6 +71,11 @@ public class OutputView {
     }
 
     private String generateCouponQuantityNotifyingMessage(Integer couponQuantity) {
-        return String.format(COUPON_QUANTITY_NOTIFYING_MESSAGE, couponQuantity);
+        return String.format(COUPON_QUANTITY_NOTIFICATION, couponQuantity);
+    }
+
+    public void printCouponApplicationConfirm() {
+        System.out.println(COUPON_APPLICATION_CONFIRM);
+        System.out.println(YES_OR_NO);
     }
 }
