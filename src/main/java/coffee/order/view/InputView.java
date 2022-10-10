@@ -45,11 +45,11 @@ public class InputView {
     }
 
     public boolean readYesOrNot() {
-        int userChoice = scanner.nextInt();
+        int userChoice = Integer.parseInt(scanner.nextLine());
         return userChoice == YES;
     }
 
     public String readPhoneNumber() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 }

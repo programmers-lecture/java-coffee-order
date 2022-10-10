@@ -1,5 +1,6 @@
 package coffee.order.service;
 
+import coffee.order.model.Transaction;
 import coffee.order.repository.CouponRepository;
 import coffee.order.view.model.PhoneNumber;
 
@@ -13,7 +14,7 @@ public class CouponService {
     }
 
     public Integer getCouponQuantity(PhoneNumber phoneNumber) {
-        if (!couponRepository.existsCustomer(phoneNumber)) {
+        if (!couponRepository.customerExists(phoneNumber)) {
             couponRepository.addNewCustomer(phoneNumber);
         }
 
@@ -22,5 +23,13 @@ public class CouponService {
 
     public boolean isCouponApplicable(Integer couponQuantity) {
         return couponQuantity > COUPON_APPLICATION_CRITERIA;
+    }
+
+    public void addCoupon(Transaction transaction, PhoneNumber phoneNumber) {
+        if (!couponRepository.customerExists(phoneNumber)) {
+            couponRepository.addNewCustomer(phoneNumber);
+        }
+
+        couponRepository.addCoupon(phoneNumber, transaction.getOrderQuantity());
     }
 }

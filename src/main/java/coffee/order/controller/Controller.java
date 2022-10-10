@@ -16,14 +16,13 @@ public class Controller {
     }
 
     public void runCafeApplication() {
+        serviceManager.initializeMenu();
+        viewManager.greeting();
+
         while (true) {
-            viewManager.greeting();
-            serviceManager.initializeMenu();
             viewManager.showMenu(MenuType.getMenuTypes(), serviceManager.getMenu());
 
-            Order order = viewManager.readMenuChoice();
-            Transaction newTransaction = serviceManager.createNewTransaction(order);
-            viewManager.confirmOrder(newTransaction);
+            Transaction newTransaction = runOrderSequence();
 
             // TODO: Coupon Service
             runCouponService(newTransaction);
@@ -32,18 +31,27 @@ public class Controller {
 
             // TODO: 최종 주문 출력
 
-            break;
+//            break;
         }
+    }
+
+    private Transaction runOrderSequence() {
+        Order order = viewManager.readMenuChoice();
+        Transaction newTransaction = serviceManager.createNewTransaction(order);
+        viewManager.confirmOrder(newTransaction);
+        return newTransaction;
     }
 
     private void runCouponService(Transaction transaction) {
         ConfirmMessage couponAccumulationConfirm = viewManager.confirmCouponAccumulation();
+
         if (couponAccumulationConfirm.isCustomerSaidYes()) {
             PhoneNumber phoneNumber = viewManager.readPhoneNumber();
             Integer couponQuantity = serviceManager.getCouponQuantity(phoneNumber);
             viewManager.notifyCouponQuantity(couponQuantity);
 
             checkCouponApplicability(transaction, couponQuantity);
+            serviceManager.addCoupon(transaction, phoneNumber);
         }
     }
 

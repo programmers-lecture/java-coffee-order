@@ -42,4 +42,8 @@ public class ServiceManager {
     public boolean checkCouponApplicability(Integer couponQuantity) {
         return couponService.isCouponApplicable(couponQuantity);
     }
+
+    public void addCoupon(Transaction transaction, PhoneNumber phoneNumber) {
+        couponService.addCoupon(transaction, phoneNumber);
+    }
 }
