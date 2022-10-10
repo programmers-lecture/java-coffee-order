@@ -9,6 +9,7 @@ public class Phone {
     private String phoneNumber;
 
     public Phone() {
+        phoneNumber = "000-0000-0000";
     }
 
     public Phone(String phoneNumber) {

@@ -36,7 +36,6 @@ public class Foods {
     }
 
     public void enrollFood(Food food) {
-        System.out.println("food = " + food);
         foods.add(food);
     }
 

@@ -3,6 +3,7 @@ package coffee.order.dto.receipt;
 import coffee.order.dto.order.OrdersDto;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static coffee.order.view.output.UnitMessage.*;
 
@@ -17,11 +18,14 @@ public class ReceiptDto {
         this.localDateTime = localDateTime;
     }
 
-    public String receiptText() {
+    public String receiptText(AtomicInteger id) {
         StringBuilder receiptTextBuilder = new StringBuilder();
         ordersDto.getOrders()
                 .forEach(orderDto -> {
                     receiptTextBuilder
+                            .append(id.getAndIncrement())
+                            .append(DOT.unit)
+                            .append(SPACE.unit)
                             .append(orderDto.getMenuNumber())
                             .append(SPACE.unit)
                             .append(orderDto.getFoodName())

@@ -25,15 +25,9 @@ public class CafeController {
                 break;
             }
 
-//            if (chosenOne.equals(CUSTOMER.code)) {
             Kiosk kiosk = new Kiosk();
             kiosk.processKiosk(chosenOne);
-//                kiosk.processKosk(CUSTOMER.code);
         }
-
-//            if (chosenOne.equals(BARISTA.code)) {
-        // TODO : 바리스타 구현 3주차
-//            }
     }
 
 }

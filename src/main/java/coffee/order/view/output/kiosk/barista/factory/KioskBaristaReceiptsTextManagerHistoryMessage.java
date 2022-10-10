@@ -1,18 +1,18 @@
 package coffee.order.view.output.kiosk.barista.factory;
 
-import coffee.order.dto.kiosk.receipt.ReceiptsDto;
-import coffee.order.view.output.OutputView;
+import coffee.order.dto.kiosk.receipt.KioskReceiptsDto;
+
+import static coffee.order.view.output.OutputView.print;
 
 public class KioskBaristaReceiptsTextManagerHistoryMessage {
 
-    private final ReceiptsDto receiptsDto;
+    private final KioskReceiptsDto kioskReceiptsDto;
 
-    public KioskBaristaReceiptsTextManagerHistoryMessage(ReceiptsDto receiptsDto) {
-        this.receiptsDto = receiptsDto;
+    public KioskBaristaReceiptsTextManagerHistoryMessage(KioskReceiptsDto kioskReceiptsDto) {
+        this.kioskReceiptsDto = kioskReceiptsDto;
     }
 
     public void printReceiptsText() {
-        String receiptsText = receiptsDto.receiptsText();
-        OutputView.print(receiptsText);
+        print(kioskReceiptsDto.receiptsText());
     }
 }

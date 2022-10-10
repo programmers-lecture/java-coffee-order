@@ -2,9 +2,9 @@ package coffee.order.domain.kiosk.setting;
 
 import coffee.order.domain.customer.Phone;
 import coffee.order.domain.food.FoodCategory;
-import coffee.order.view.input.kiosk.barista.form.FoodEnrollForm;
 import coffee.order.domain.order.Orders;
 import coffee.order.domain.receipt.Receipt;
+import coffee.order.view.input.kiosk.barista.form.FoodEnrollForm;
 import coffee.order.view.input.kiosk.barista.form.FoodUpdateForm;
 
 import static coffee.order.domain.kiosk.receipt.KioskReceipts.RECEIPTS;

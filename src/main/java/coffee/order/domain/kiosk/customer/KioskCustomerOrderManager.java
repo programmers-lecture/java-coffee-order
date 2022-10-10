@@ -27,7 +27,6 @@ public class KioskCustomerOrderManager {
     }
 
     public Orders getOrders() {
-        kioskOrderHistory().printAsksCustomerToSelectMenu();
         kioskOrderHistory().printShowMenuToCustomer();
 
         while (true) {

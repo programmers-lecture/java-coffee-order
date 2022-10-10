@@ -1,7 +1,7 @@
 package coffee.order.domain.food;
 
-import coffee.order.view.input.kiosk.barista.form.FoodEnrollForm;
 import coffee.order.dto.food.FoodCategoryDto;
+import coffee.order.view.input.kiosk.barista.form.FoodEnrollForm;
 import coffee.order.view.input.kiosk.barista.form.FoodUpdateForm;
 
 import java.util.Arrays;

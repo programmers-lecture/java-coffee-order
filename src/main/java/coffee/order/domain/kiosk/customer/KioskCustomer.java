@@ -3,7 +3,6 @@ package coffee.order.domain.kiosk.customer;
 import coffee.order.domain.customer.Customer;
 import coffee.order.domain.customer.Phone;
 import coffee.order.domain.kiosk.KioskManager;
-import coffee.order.domain.kiosk.setting.KioskSetting;
 import coffee.order.domain.order.Order;
 import coffee.order.domain.order.Orders;
 import coffee.order.domain.receipt.Receipt;
