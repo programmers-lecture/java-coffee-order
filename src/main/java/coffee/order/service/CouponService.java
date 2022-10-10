@@ -14,10 +14,7 @@ public class CouponService {
     }
 
     public Integer getCouponQuantity(PhoneNumber phoneNumber) {
-        if (!couponRepository.customerExists(phoneNumber)) {
-            couponRepository.addNewCustomer(phoneNumber);
-        }
-
+        checkCustomerExists(phoneNumber);
         return couponRepository.findCouponQuantity(phoneNumber);
     }
 
@@ -26,10 +23,13 @@ public class CouponService {
     }
 
     public void addCoupon(Transaction transaction, PhoneNumber phoneNumber) {
+        checkCustomerExists(phoneNumber);
+        couponRepository.addCoupon(phoneNumber, transaction);
+    }
+
+    private void checkCustomerExists(PhoneNumber phoneNumber) {
         if (!couponRepository.customerExists(phoneNumber)) {
             couponRepository.addNewCustomer(phoneNumber);
         }
-
-//        couponRepository.addCoupon(phoneNumber, transaction.getOrderQuantity());
     }
 }

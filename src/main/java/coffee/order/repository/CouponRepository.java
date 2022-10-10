@@ -1,5 +1,7 @@
 package coffee.order.repository;
 
+import coffee.order.model.Order;
+import coffee.order.model.Transaction;
 import coffee.order.view.model.PhoneNumber;
 
 import java.util.HashMap;
@@ -17,9 +19,14 @@ public class CouponRepository {
         updateCouponQuantity(phoneNumber, INITIAL_COUPON_QUANTITY);
     }
 
-    public void addCoupon(PhoneNumber phoneNumber, int orderQuantity) {
+    public void addCoupon(PhoneNumber phoneNumber, Transaction transaction) {
         Integer lastCouponQuantity = findCouponQuantity(phoneNumber);
-        updateCouponQuantity(phoneNumber, lastCouponQuantity + orderQuantity);
+        Integer additionalCouponQuantity = transaction.getOrders().stream()
+                .filter(order -> order.getOrderAmount() != 0)
+                .map(Order::getOrderQuantity)
+                .reduce(0, Integer::sum);
+
+        updateCouponQuantity(phoneNumber, lastCouponQuantity + additionalCouponQuantity);
     }
 
     public boolean customerExists(PhoneNumber phoneNumber) {
