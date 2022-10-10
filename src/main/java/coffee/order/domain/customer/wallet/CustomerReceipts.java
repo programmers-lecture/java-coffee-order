@@ -1,7 +1,7 @@
 package coffee.order.domain.customer.wallet;
 
-import coffee.order.domain.receipt.Receipt;
 import coffee.order.domain.order.Orders;
+import coffee.order.domain.receipt.Receipt;
 
 import java.util.ArrayList;
 import java.util.List;

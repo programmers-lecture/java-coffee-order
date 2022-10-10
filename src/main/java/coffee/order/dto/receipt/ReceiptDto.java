@@ -20,16 +20,29 @@ public class ReceiptDto {
     public String receiptText() {
         StringBuilder receiptTextBuilder = new StringBuilder();
         ordersDto.getOrders()
-                .forEach(orderDto -> receiptTextBuilder
-                        .append(orderDto.getMenuNumber())
-                        .append(SPACE.unit)
-                        .append(orderDto.getFoodName())
-                        .append(SPACE.unit)
-                        .append(orderDto.getQuantity())
-                        .append(COUNT.unit)
-                        .append(SPACE.unit)
-                        .append(SLASH.unit)
-                        .append(SPACE.unit));
+                .forEach(orderDto -> {
+                    receiptTextBuilder
+                            .append(orderDto.getMenuNumber())
+                            .append(SPACE.unit)
+                            .append(orderDto.getFoodName())
+                            .append(SPACE.unit)
+                            .append(orderDto.getQuantity())
+                            .append(COUNT.unit);
+
+                    if (orderDto.checkCouponUsed()) {
+                        receiptTextBuilder
+                                .append(LEFT_BRACKET.unit)
+                                .append(COUPON_USED.unit)
+                                .append(RIGHT_BRACKET.unit)
+                                .append(SPACE.unit);
+                    }
+
+                    receiptTextBuilder
+                            .append(SPACE.unit)
+                            .append(SLASH.unit)
+                            .append(SPACE.unit);
+                });
+
         receiptTextBuilder
                 .append(SPACE.unit)
                 .append(RIGHT_ARROW.unit)

@@ -9,7 +9,11 @@ public enum UnitMessage {
     SPACE(" "),
     TOTAL("총"),
     ENTER("\n"),
-    DOT(".");
+    DOT("."),
+    LEFT_BRACKET("("),
+    RIGHT_BRACKET(")"),
+    COUPON_USED("쿠폰 사용"),
+    MIDDLE_LINE("-");
 
     public final String unit;
 

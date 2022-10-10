@@ -1,6 +1,9 @@
-package coffee.order.dto.receipt;
+package coffee.order.dto.kiosk.receipt;
+
+import coffee.order.dto.receipt.ReceiptDto;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static coffee.order.view.output.UnitMessage.*;
 
@@ -13,11 +16,11 @@ public class ReceiptsDto {
     }
 
     public String receiptsText() {
-        int id = 1;
+        AtomicInteger id = new AtomicInteger(1);
         StringBuilder receiptsTextBuilder = new StringBuilder();
         receipts.values()
                 .forEach(receiptDto -> receiptsTextBuilder
-                        .append(id)
+                        .append(id.getAndIncrement())
                         .append(DOT.unit)
                         .append(SPACE.unit)
                         .append(receiptDto.receiptText())

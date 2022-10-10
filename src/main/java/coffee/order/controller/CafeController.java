@@ -4,7 +4,7 @@ import coffee.order.domain.kiosk.Kiosk;
 import coffee.order.view.input.controller.CafeControllerInput;
 import coffee.order.view.output.controller.CafeControllerHistoryMessage;
 
-import static coffee.order.domain.kiosk.KioskCommand.*;
+import static coffee.order.domain.kiosk.KioskCommand.END_KIOSK;
 
 public class CafeController {
 
@@ -25,15 +25,16 @@ public class CafeController {
                 break;
             }
 
-            if (chosenOne.equals(CUSTOMER.code)) {
-                Kiosk kiosk = new Kiosk();
-                kiosk.processKiosk(CUSTOMER.code);
-            }
-
-            if (chosenOne.equals(BARISTA.code)) {
-                // TODO : 바리스타 구현 3주차
-            }
+//            if (chosenOne.equals(CUSTOMER.code)) {
+            Kiosk kiosk = new Kiosk();
+            kiosk.processKiosk(chosenOne);
+//                kiosk.processKosk(CUSTOMER.code);
         }
 
+//            if (chosenOne.equals(BARISTA.code)) {
+        // TODO : 바리스타 구현 3주차
+//            }
     }
+
 }
+

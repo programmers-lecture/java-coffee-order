@@ -1,5 +1,8 @@
 package coffee.order.domain.customer;
 
+import coffee.order.dto.customer.CustomerDto;
+import coffee.order.dto.customer.CustomersDto;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -15,6 +18,13 @@ public enum Customers {
 
     Customers(Map<String, Customer> customers) {
         this.customers = customers;
+    }
+
+    public CustomersDto toCustomersDto() {
+        Map<String, CustomerDto> customersDto = new HashMap<>();
+        customers.forEach((phoneNumber, customer) ->
+                customersDto.put(phoneNumber, customer.toCustomerDto()));
+        return new CustomersDto(customersDto);
     }
 
     public Customer findCustomerByPhoneNumber(String phoneNumber) {

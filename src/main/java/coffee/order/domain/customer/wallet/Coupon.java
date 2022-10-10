@@ -1,17 +1,19 @@
 package coffee.order.domain.customer.wallet;
 
-import coffee.order.dto.customer.CouponDto;
+import coffee.order.dto.customer.wallet.CouponDto;
 
 public class Coupon {
 
-    private int quantity;
+    private Integer quantity;
+    private Integer usedCount;
 
     public Coupon() {
         this.quantity = 9;
+        this.usedCount = 0;
     }
 
     public CouponDto toCouponDto() {
-        return new CouponDto(quantity);
+        return new CouponDto(quantity, usedCount);
     }
 
     protected int getQuantity() {
@@ -28,5 +30,6 @@ public class Coupon {
 
     protected void setQuantityZero() {
         this.quantity = 0;
+        this.usedCount = this.usedCount.intValue() + 1;
     }
 }

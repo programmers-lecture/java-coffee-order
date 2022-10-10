@@ -1,8 +1,8 @@
 package coffee.order.domain.customer;
 
 import coffee.order.domain.customer.wallet.Wallet;
-import coffee.order.domain.receipt.Receipt;
 import coffee.order.domain.order.Orders;
+import coffee.order.domain.receipt.Receipt;
 import coffee.order.dto.customer.CustomerDto;
 
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_ENOUGH_MONEY;

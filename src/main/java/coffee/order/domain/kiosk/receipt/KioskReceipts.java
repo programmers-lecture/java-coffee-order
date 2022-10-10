@@ -2,8 +2,8 @@ package coffee.order.domain.kiosk.receipt;
 
 import coffee.order.domain.customer.Phone;
 import coffee.order.domain.receipt.Receipt;
+import coffee.order.dto.kiosk.receipt.ReceiptsDto;
 import coffee.order.dto.receipt.ReceiptDto;
-import coffee.order.dto.receipt.ReceiptsDto;
 
 import java.util.HashMap;
 import java.util.Map;

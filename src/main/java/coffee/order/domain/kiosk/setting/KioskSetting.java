@@ -15,4 +15,5 @@ public class KioskSetting {
     public void reflectOrders(Orders orders) {
         orders.changeFoodQuantityByThisOrders();
     }
+
 }

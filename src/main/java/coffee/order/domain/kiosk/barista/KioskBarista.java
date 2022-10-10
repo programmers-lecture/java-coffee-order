@@ -1,24 +1,25 @@
 package coffee.order.domain.kiosk.barista;
 
+import coffee.order.domain.kiosk.barista.factory.KioskBaristaProcessFactory;
+import coffee.order.view.input.kiosk.barista.KioskBaristaInput;
+import coffee.order.view.output.kiosk.barista.KioskBaristaHistoryMessage;
+
 public class KioskBarista {
 
-    private final KioskBaristaFoodManager foodManager;
-    private final KioskBaristaOrderManager orderManager;
-    private final KioskBaristaCouponManager couponManager;
-
-    public KioskBarista() {
-        this.foodManager = new KioskBaristaFoodManager();
-        this.orderManager = new KioskBaristaOrderManager();
-        this.couponManager = new KioskBaristaCouponManager();
+    public KioskBaristaHistoryMessage baristaHistory() {
+        return new KioskBaristaHistoryMessage();
     }
 
-    // TODO : 커피 등록 요청
+    public KioskBaristaInput baristaInput() {
+        return new KioskBaristaInput();
+    }
 
-    // TODO : 수량 등록 요청
+    public void process() {
+        baristaHistory().printBaristaToSelectMenu();
+        baristaHistory().printBaristaMenus();
+        String menu = baristaInput().askBaristaSelectMenu();
 
-    // TODO : 가격 변경 요청
-
-    // TODO : 주문 내역 출력 요청
-
-    // TODO : 쿠폰 내역 출력 요청
+        KioskBaristaProcessFactory.find(menu)
+                                  .process();
+    }
 }

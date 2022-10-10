@@ -25,7 +25,7 @@ public class KioskCustomerCustomerManager {
         return new KioskCustomerCustomerManagerInput();
     }
 
-    public void findCustomerThenSetting(String phoneNumber) {
+    public void findCustomerThenLogin(String phoneNumber) {
         if (checkCustomerNew(phoneNumber)) {
             saveCustomer(phoneNumber);
         }
@@ -41,6 +41,10 @@ public class KioskCustomerCustomerManager {
         return customer;
     }
 
+    public void giveReceipt(Receipt receipt) {
+        customer.takeReceipt(receipt);
+    }
+
     private void saveCustomer(String phoneNumber) {
         CUSTOMERS_DATA.saveCustomerWithPhoneNumber(kioskCustomer.loadCustomer(), phoneNumber);
     }
@@ -51,9 +55,5 @@ public class KioskCustomerCustomerManager {
 
     private void loginCustomer(String phoneNumber) {
         customer = CUSTOMERS_DATA.findCustomerByPhoneNumber(phoneNumber);
-    }
-
-    public void giveReceipt(Receipt receipt) {
-        customer.takeReceipt(receipt);
     }
 }

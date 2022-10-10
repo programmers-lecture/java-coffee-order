@@ -32,7 +32,7 @@ public class KioskCustomerCouponManager {
             return;
         }
         String phoneNumber = customerManager.askPhoneNumber();
-        customerManager.findCustomerThenSetting(phoneNumber);
+        customerManager.findCustomerThenLogin(phoneNumber);
         saveCoupon();
     }
 

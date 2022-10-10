@@ -1,7 +1,7 @@
 package coffee.order.domain.customer.wallet;
 
 import coffee.order.domain.receipt.Receipt;
-import coffee.order.dto.customer.WalletDto;
+import coffee.order.dto.customer.wallet.WalletDto;
 
 public class Wallet {
 

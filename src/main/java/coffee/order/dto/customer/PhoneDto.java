@@ -7,4 +7,8 @@ public class PhoneDto {
     public PhoneDto(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }

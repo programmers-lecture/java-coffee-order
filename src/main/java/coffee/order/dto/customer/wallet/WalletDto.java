@@ -1,6 +1,4 @@
-package coffee.order.dto.customer;
-
-import coffee.order.domain.customer.wallet.Coupon;
+package coffee.order.dto.customer.wallet;
 
 public class WalletDto {
 
@@ -8,5 +6,9 @@ public class WalletDto {
 
     public WalletDto(CouponDto couponDto) {
         this.couponDto = couponDto;
+    }
+
+    public String getCouponUsedCount() {
+        return couponDto.getUsedCount();
     }
 }
