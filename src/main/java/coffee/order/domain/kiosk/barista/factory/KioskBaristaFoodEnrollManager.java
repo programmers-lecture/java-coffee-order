@@ -20,6 +20,7 @@ public class KioskBaristaFoodEnrollManager implements KioskBaristaProcess {
         foodEnrollHistory().askBaristaToEnrollForm();
         FoodEnrollForm foodEnrollForm = foodEnrollInput().askFoodEnrollForm();
         kioskManager.loadKioskSetting().reflectNewFood(foodEnrollForm);
+        foodEnrollHistory().printEnrollFinished();
     }
 
 }
