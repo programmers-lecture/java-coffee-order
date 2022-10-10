@@ -5,6 +5,7 @@ import coffee.order.model.MenuType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class OutputView {
     private static final String GREETING = "Welcome! 손님 역할을 실행합니다...";
@@ -40,7 +41,7 @@ public class OutputView {
     }
 
     private String menuTypeFormat(MenuType menuType) {
-        return menuType.getOrder() + MENU_TYPE_DELIMITER + menuType.getKoreanName();
+        return menuType.getMenuTypeIndex() + MENU_TYPE_DELIMITER + menuType.getKoreanName();
     }
 
     private String menuFormat(MenuType menuType, ArrayList<? super Menu> menuList, Object menu) {
@@ -48,12 +49,12 @@ public class OutputView {
     }
 
     private String menuIndexGenerator(MenuType menuType, ArrayList<? super Menu> menuList, Object menu) {
-        return menuType.getOrder() + HYPHEN + (menuList.indexOf(menu) + INDEX_BOUNDARY);
+        return menuType.getMenuTypeIndex() + HYPHEN + (menuList.indexOf(menu) + INDEX_BOUNDARY);
     }
 
-    public void confirmOrder(String orderLiteral) {
+    public void confirmOrder(List<String> orderLiteral) {
         System.out.println(ORDER_CONFIRM);
-        System.out.println(orderLiteral);
+        orderLiteral.forEach(System.out::println);
         System.out.println();
     }
 

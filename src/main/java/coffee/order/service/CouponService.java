@@ -30,6 +30,6 @@ public class CouponService {
             couponRepository.addNewCustomer(phoneNumber);
         }
 
-        couponRepository.addCoupon(phoneNumber, transaction.getOrderQuantity());
+//        couponRepository.addCoupon(phoneNumber, transaction.getOrderQuantity());
     }
 }

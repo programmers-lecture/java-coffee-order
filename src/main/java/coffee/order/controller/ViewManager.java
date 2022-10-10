@@ -2,22 +2,24 @@ package coffee.order.controller;
 
 import coffee.order.model.Menu;
 import coffee.order.model.MenuType;
+import coffee.order.model.Order;
 import coffee.order.model.Transaction;
 import coffee.order.view.InputView;
 import coffee.order.view.OutputView;
 import coffee.order.view.model.ConfirmMessage;
+import coffee.order.view.model.CustomerOrder;
 import coffee.order.view.model.LiteralCollection;
-import coffee.order.view.model.Order;
 import coffee.order.view.model.PhoneNumber;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ViewManager {
     private final InputView inputView;
     private final OutputView outputView;
 
-    public Order readMenuChoice() {
+    public List<CustomerOrder> readMenuChoice() {
         return inputView.readMenuChoice();
     }
 
@@ -34,19 +36,24 @@ public class ViewManager {
         outputView.printMenu(menuTypes, menu);
     }
 
-    public void confirmOrder(Transaction newTransaction) {
-        String orderLiteral = generateOrderLiteral(newTransaction);
-        outputView.confirmOrder(orderLiteral);
+    public void confirmOrder(Transaction transaction) {
+        List<String> orderLiterals = new ArrayList<>();
+
+        for (Order order : transaction.getOrders()) {
+            orderLiterals.add(generateOrderLiteral(order));
+        }
+
+        outputView.confirmOrder(orderLiterals);
     }
 
-    private String generateOrderLiteral(Transaction newTransaction) {
+    private String generateOrderLiteral(Order order) {
         StringBuilder orderLiteral = new StringBuilder();
-        orderLiteral.append(newTransaction.getMenuName());
+        orderLiteral.append(order.getMenuName());
         orderLiteral.append(LiteralCollection.BLANK.getLiteral());
-        orderLiteral.append(newTransaction.getOrderQuantity());
+        orderLiteral.append(order.getOrderQuantity());
         orderLiteral.append(LiteralCollection.COUNT.getLiteral());
         orderLiteral.append(LiteralCollection.BLANK.getLiteral());
-        orderLiteral.append(newTransaction.getOrderAmount());
+        orderLiteral.append(order.getOrderAmount());
         orderLiteral.append(LiteralCollection.WON.getLiteral());
 
         return orderLiteral.toString();

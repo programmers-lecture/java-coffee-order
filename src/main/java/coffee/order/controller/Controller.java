@@ -3,8 +3,10 @@ package coffee.order.controller;
 import coffee.order.model.MenuType;
 import coffee.order.model.Transaction;
 import coffee.order.view.model.ConfirmMessage;
-import coffee.order.view.model.Order;
+import coffee.order.view.model.CustomerOrder;
 import coffee.order.view.model.PhoneNumber;
+
+import java.util.List;
 
 public class Controller {
     private final ViewManager viewManager;
@@ -36,8 +38,8 @@ public class Controller {
     }
 
     private Transaction runOrderSequence() {
-        Order order = viewManager.readMenuChoice();
-        Transaction newTransaction = serviceManager.createNewTransaction(order);
+        List<CustomerOrder> customerOrder = viewManager.readMenuChoice();
+        Transaction newTransaction = serviceManager.createNewTransaction(customerOrder);
         viewManager.confirmOrder(newTransaction);
         return newTransaction;
     }

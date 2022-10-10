@@ -3,7 +3,8 @@ package coffee.order.view.model;
 public enum LiteralCollection {
     BLANK(" "),
     COUNT("개"),
-    WON("원");
+    WON("원"),
+    HYPHEN("-");
 
     private final String literal;
 

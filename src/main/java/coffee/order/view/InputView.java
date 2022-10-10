@@ -1,6 +1,7 @@
 package coffee.order.view;
 
-import coffee.order.view.model.Order;
+import coffee.order.view.model.CustomerOrder;
+import coffee.order.view.model.LiteralCollection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,10 +13,6 @@ public class InputView {
     private static final String MENU_CHOICE_DELIMITER = ",";
     private static final String MENU_INDEX_DELIMITER = "-";
     private static final String EOF_SYMBOL = "";
-    private static final int MENU_NUMBER_INDEX = 0;
-    private static final int ORDER_AMOUNT_INDEX = 1;
-    private static final int MENU_TYPE_INDEX = 0;
-    private static final int MENU_SUB_NUMBER_INDEX = 1;
     private static final int YES = 1;
 
     private final Scanner scanner;
@@ -24,32 +21,30 @@ public class InputView {
         scanner = new Scanner(System.in);
     }
 
-    public Order readMenuChoice() {
-        List<Order> choices = new ArrayList<>();
-        String menuChoice;
+    public List<CustomerOrder> readMenuChoice() {
+        List<CustomerOrder> customerOrders = new ArrayList<>();
+        String menuChoiceLiteral;
 
-        while (!(menuChoice = scanner.nextLine()).equals(EOF_SYMBOL)) {
-            choices.add(createNewMenuChoice(menuChoice));
+        while (!(menuChoiceLiteral = scanner.nextLine()).equals(EOF_SYMBOL)) {
+            customerOrders.add(createNewOrder(menuChoiceLiteral));
         }
 
-        System.out.println(choices);
-        return createNewMenuChoice(menuChoice);
+        return customerOrders;
     }
 
-    public Order createNewMenuChoice(String menuChoice) {
-        String[] tokens = menuChoice.split(MENU_CHOICE_DELIMITER);
+    public CustomerOrder createNewOrder(String menuChoiceLiteral) {
+        String[] tokens = menuChoiceLiteral.split(MENU_CHOICE_DELIMITER);
         ArrayList<String> trimmedTokens = Arrays.stream(tokens)
                 .map(String::trim)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        String menuNumber = trimmedTokens.get(MENU_NUMBER_INDEX);
-        String[] menuIndexes = menuNumber.split(MENU_INDEX_DELIMITER);
+        String[] menuIndexInfo = trimmedTokens.get(0).split(LiteralCollection.HYPHEN.getLiteral());
 
-        int menuType = Integer.parseInt(menuIndexes[MENU_TYPE_INDEX]);
-        int menuName = Integer.parseInt(menuIndexes[MENU_SUB_NUMBER_INDEX]);
-        int orderQuantity = Integer.parseInt(trimmedTokens.get(ORDER_AMOUNT_INDEX));
+        int menuTypeIndex = Integer.parseInt(menuIndexInfo[0]);
+        int menuNameIndex = Integer.parseInt(menuIndexInfo[1]);
+        int orderQuantity = Integer.parseInt(trimmedTokens.get(1));
 
-        return new Order(menuType, menuName, orderQuantity);
+        return new CustomerOrder(menuTypeIndex, menuNameIndex, orderQuantity);
     }
 
     public boolean readYesOrNot() {

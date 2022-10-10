@@ -9,11 +9,11 @@ public enum MenuType {
     DESSERT("디저트", 3);
 
     private final String koreanName;
-    private final int order;
+    private final int menuTypeIndex;
 
-    MenuType(String koreanName, int order) {
+    MenuType(String koreanName, int menuTypeIndex) {
         this.koreanName = koreanName;
-        this.order = order;
+        this.menuTypeIndex = menuTypeIndex;
     }
 
     public static MenuType[] getMenuTypes() {
@@ -24,14 +24,14 @@ public enum MenuType {
         return koreanName;
     }
 
-    public int getOrder() {
-        return order;
+    public int getMenuTypeIndex() {
+        return menuTypeIndex;
     }
 
-    public static MenuType findMenuType(int order) {
+    public static MenuType findMenuTypeByIndex(int menuTypeIndex) {
         return Arrays.stream(MenuType.values())
-                .filter(menuType -> menuType.getOrder() == order)
-                .findAny()
+                .filter(menuType -> menuType.getMenuTypeIndex() == menuTypeIndex)
+                .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
 }

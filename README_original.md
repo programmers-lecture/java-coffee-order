@@ -1,7 +1,7 @@
 # 커피 주문 애플리케이션
 
 ## 깃허브
-**[java-coffee-order](https://github.com/programmers-lecture/java-coffee-order)**
+**[java-coffee-customerOrder](https://github.com/programmers-lecture/java-coffee-customerOrder)**
 
 ## 요구사항
 
