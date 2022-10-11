@@ -8,7 +8,7 @@ public class Coupon {
     private Integer usedCount;
 
     public Coupon() {
-        this.quantity = 9;
+        this.quantity = 0;
         this.usedCount = 0;
     }
 
@@ -21,7 +21,7 @@ public class Coupon {
     }
 
     protected boolean checkCouponEnoughToUse() {
-        return quantity == 10;
+        return quantity >= 10;
     }
 
     protected void increaseQuantity() {
@@ -29,7 +29,7 @@ public class Coupon {
     }
 
     protected void setQuantityZero() {
-        this.quantity = 0;
+        this.quantity -= 10;
         this.usedCount = this.usedCount.intValue() + 1;
     }
 }

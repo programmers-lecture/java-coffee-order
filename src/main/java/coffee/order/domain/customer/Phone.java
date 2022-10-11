@@ -3,6 +3,8 @@ package coffee.order.domain.customer;
 import coffee.order.dto.customer.PhoneDto;
 
 import static coffee.order.exception.CustomerException.CUSTOMER_NOT_CORRECT_PHONE_NUMBER_FORM;
+import static coffee.order.util.RegexUtil.REGEX_PHONE_NUMBER_FORM_VALIDATOR;
+import static coffee.order.util.RegexUtil.checkFormValid;
 
 public class Phone {
 
@@ -28,7 +30,7 @@ public class Phone {
     }
 
     private boolean checkPhoneNumberForm(String phoneNumber) {
-        return phoneNumber.matches("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
+        return checkFormValid(REGEX_PHONE_NUMBER_FORM_VALIDATOR, phoneNumber);
     }
 
     public String loadPhoneNumber() {

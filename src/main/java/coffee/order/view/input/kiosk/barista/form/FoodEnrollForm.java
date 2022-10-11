@@ -2,22 +2,16 @@ package coffee.order.view.input.kiosk.barista.form;
 
 public class FoodEnrollForm {
 
-    private final String categoryName;
     private final String foodName;
     private final Long categoryId;
     private final Long foodId;
     private final Integer price;
 
-    public FoodEnrollForm(String categoryName, String foodName, Long categoryId, Long foodId, Integer price) {
-        this.categoryName = categoryName;
+    public FoodEnrollForm(String foodName, Long categoryId, Long foodId, Integer price) {
         this.foodName = foodName;
         this.categoryId = categoryId;
         this.foodId = foodId;
         this.price = price;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
     }
 
     public String getFoodName() {

@@ -3,6 +3,7 @@ package coffee.order.view.output.order;
 import coffee.order.dto.order.OrdersDto;
 
 import static coffee.order.view.output.OutputView.print;
+import static coffee.order.view.output.UnitMessage.ENTER;
 import static coffee.order.view.output.UnitMessage.WON;
 import static coffee.order.view.output.order.OrdersMessage.ORDER_TOTAL_PRICE;
 
@@ -31,6 +32,6 @@ public class OrderGeneratorHistoryMessage {
     }
 
     private void printTotalPrice() {
-        print("\n" + ORDER_TOTAL_PRICE.message + ordersDto.getTotalPrice() + WON.unit + "\n");
+        print(ENTER.unit + ORDER_TOTAL_PRICE.message + ordersDto.getTotalPrice() + WON.unit + ENTER.unit);
     }
 }

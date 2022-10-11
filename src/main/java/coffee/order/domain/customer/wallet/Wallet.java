@@ -35,10 +35,6 @@ public class Wallet {
         this.coupon.setQuantityZero();
     }
 
-    public void spend(int money) {
-        this.cash.spend(money);
-    }
-
     public void increaseCouponQuantity() {
         this.coupon.increaseQuantity();
     }

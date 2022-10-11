@@ -1,7 +1,5 @@
 package coffee.order.domain.food;
 
-import coffee.order.dto.food.FoodQuantityDto;
-
 import static coffee.order.exception.FoodException.QUANTITY_MINUS_EXCEPTION;
 
 public class FoodQuantity {
@@ -10,10 +8,6 @@ public class FoodQuantity {
 
     public FoodQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public FoodQuantityDto toFoodQuantityDto() {
-        return new FoodQuantityDto(quantity);
     }
 
     void updateQuantity(int inputQuantity) {

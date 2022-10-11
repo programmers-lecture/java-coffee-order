@@ -15,7 +15,7 @@ public class KioskCustomerOrderManagerHistoryMessage {
     }
 
     public void printAsksCustomerToSelectMenu() {
-        print(KIOSK_ORDER_INPUT_USER_SELECT.message);
+        print(ENTER.unit + KIOSK_ORDER_INPUT_USER_SELECT.message + ENTER.unit);
     }
 
     public void printShowMenuToCustomer() {
@@ -23,7 +23,7 @@ public class KioskCustomerOrderManagerHistoryMessage {
     }
 
     public void printAfterSelectMenu() {
-        print(KIOSK_ORDER_AFTER_ORDER.message);
+        print(ENTER.unit + KIOSK_ORDER_AFTER_ORDER.message + ENTER.unit);
     }
 
     private String createMenu() {

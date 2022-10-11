@@ -2,8 +2,7 @@ package coffee.order.dto.order;
 
 import coffee.order.dto.food.FoodDto;
 
-import static coffee.order.view.output.UnitMessage.COUNT;
-import static coffee.order.view.output.UnitMessage.WON;
+import static coffee.order.view.output.UnitMessage.*;
 import static coffee.order.view.output.order.OrderMessage.ORDER_COUPON_USE;
 
 public class OrderDto {
@@ -25,12 +24,25 @@ public class OrderDto {
     }
 
     public String getOrderHistoryWhenUsedCoupon() {
-        return foodDto.getName() + " " + 1 + COUNT.unit + " " + ORDER_COUPON_USE.message + "\n";
+        return foodDto.getName() +
+                SPACE.unit +
+                1 +
+                COUNT.unit +
+                SPACE.unit +
+                ORDER_COUPON_USE.message +
+                ENTER.unit;
     }
 
     @Override
     public String toString() {
-        return foodDto.getName() + " " + quantity + COUNT.unit + " " + totalPrice + WON.unit + "\n";
+        return foodDto.getName() +
+                SPACE.unit +
+                quantity +
+                COUNT.unit +
+                SPACE.unit +
+                totalPrice +
+                WON.unit +
+                ENTER.unit;
     }
 
     public boolean checkCouponNotUsedOrNotZeroQuantity() {

@@ -2,7 +2,6 @@ package coffee.order.domain.order;
 
 import coffee.order.dto.order.OrderDto;
 import coffee.order.dto.order.OrdersDto;
-import coffee.order.view.output.order.OrderGeneratorHistoryMessage;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,10 +13,6 @@ public class Orders {
 
     public Orders() {
         this.orders = new HashMap<>();
-    }
-
-    public OrderGeneratorHistoryMessage ordersHistory() {
-        return new OrderGeneratorHistoryMessage(this.toOrderDto());
     }
 
     public OrdersDto toOrderDto() {

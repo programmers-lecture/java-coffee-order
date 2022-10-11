@@ -20,10 +20,6 @@ public class FoodPrice {
         return price;
     }
 
-    void increasePrice(int inputPrice) {
-        this.price += inputPrice;
-    }
-
     void updatePrice(int inputPrice) {
         if (checkMinusPrice(inputPrice)) {
             throw new IllegalArgumentException(PRICE_MINUS_EXCEPTION.getMessage());
