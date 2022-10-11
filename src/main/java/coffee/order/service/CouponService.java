@@ -22,7 +22,9 @@ public class CouponService {
         return couponRepository.findCouponQuantity(phoneNumber);
     }
 
-    public boolean isCouponApplicable(Integer couponQuantity) {
+    public boolean isCouponApplicable(PhoneNumber phoneNumber) {
+        checkCustomerExists(phoneNumber);
+        Integer couponQuantity = getCouponQuantity(phoneNumber);
         return couponQuantity >= COUPON_APPLICATION_CRITERIA;
     }
 
@@ -34,10 +36,12 @@ public class CouponService {
         }
     }
 
-    public void applyCoupon(Transaction transaction, NumberChoice numberChoice) {
+    public void applyCoupon(Transaction transaction, NumberChoice numberChoice, PhoneNumber phoneNumber) {
         List<Order> orders = transaction.getOrders();
         Order orderToApplyCoupon = orders.get(numberChoice.getChoice());
         orderToApplyCoupon.applyCoupon();
+
+        couponRepository.applyCoupon(phoneNumber, COUPON_APPLICATION_CRITERIA);
     }
 
     private void checkCustomerExists(PhoneNumber phoneNumber) {

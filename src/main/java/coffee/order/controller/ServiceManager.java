@@ -41,15 +41,15 @@ public class ServiceManager {
         return couponService.getCouponQuantity(phoneNumber);
     }
 
-    public boolean checkCouponApplicability(Integer couponQuantity) {
-        return couponService.isCouponApplicable(couponQuantity);
+    public boolean checkCouponApplicability(PhoneNumber phoneNumber) {
+        return couponService.isCouponApplicable(phoneNumber);
     }
 
     public void addCoupon(Transaction transaction, PhoneNumber phoneNumber) {
         couponService.addCoupon(transaction, phoneNumber);
     }
 
-    public void applyCoupon(Transaction transaction, NumberChoice numberChoice) {
-        couponService.applyCoupon(transaction, numberChoice);
+    public void applyCoupon(Transaction transaction, NumberChoice numberChoice, PhoneNumber phoneNumber) {
+        couponService.applyCoupon(transaction, numberChoice, phoneNumber);
     }
 }

@@ -53,18 +53,18 @@ public class Controller {
             Integer couponQuantity = serviceManager.getCouponQuantity(phoneNumber);
             viewManager.notifyCouponQuantity(couponQuantity);
 
-            checkCouponApplicability(transaction, couponQuantity);
+            checkCouponApplicability(transaction, phoneNumber);
             serviceManager.addCoupon(transaction, phoneNumber);
         }
     }
 
-    private void checkCouponApplicability(Transaction transaction, Integer couponQuantity) {
-        if (serviceManager.checkCouponApplicability(couponQuantity)) {
+    private void checkCouponApplicability(Transaction transaction, PhoneNumber phoneNumber) {
+        if (serviceManager.checkCouponApplicability(phoneNumber)) {
             ConfirmMessage couponApplicationConfirm = viewManager.confirmCouponApplication();
 
             if (couponApplicationConfirm.isCustomerSaidYes()) {
                 NumberChoice numberChoice = viewManager.confirmWhichMenuToApplyCoupon(transaction);
-                serviceManager.applyCoupon(transaction, numberChoice);
+                serviceManager.applyCoupon(transaction, numberChoice, phoneNumber);
                 viewManager.confirmFinalOrder(transaction);
             }
         }

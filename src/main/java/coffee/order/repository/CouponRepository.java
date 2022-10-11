@@ -40,6 +40,11 @@ public class CouponRepository {
         return couponDatabase.get(phoneNumber.getPhoneNumber());
     }
 
+    public void applyCoupon(PhoneNumber phoneNumber, int couponApplicationCriteria) {
+        Integer lastCouponQuantity = findCouponQuantity(phoneNumber);
+        updateCouponQuantity(phoneNumber, lastCouponQuantity - couponApplicationCriteria);
+    }
+
     private void updateCouponQuantity(PhoneNumber phoneNumber, Integer couponQuantity) {
         couponDatabase.put(phoneNumber.getPhoneNumber(), couponQuantity);
         System.out.println("현재 쿠폰 개수 = " + couponDatabase.get(phoneNumber.getPhoneNumber()));
