@@ -1,12 +1,15 @@
 package coffee.order.domain.food;
 
 import coffee.order.dto.food.FoodCategoryDto;
+import coffee.order.exception.FoodException;
 import coffee.order.view.input.kiosk.barista.form.FoodEnrollForm;
 import coffee.order.view.input.kiosk.barista.form.FoodUpdateForm;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static coffee.order.exception.FoodException.*;
 import static coffee.order.exception.FoodException.FOOD_CATEGORY_GET_NULL_POINTER_EXCEPTION;
 
 public enum FoodCategory {
@@ -66,6 +69,7 @@ public enum FoodCategory {
 
     public static void enrollFood(FoodEnrollForm form) {
         Foods findCategory = FoodCategory.findFoodsByCategoryId(form.getCategoryId());
+
         Food createdFood = new Food(
                 form.getFoodId(),
                 form.getCategoryId(),

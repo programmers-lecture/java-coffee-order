@@ -3,9 +3,11 @@ package coffee.order.domain.food;
 import coffee.order.dto.food.FoodsDto;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static coffee.order.exception.FoodException.FOODS_GET_NULL_POINTER_EXCEPTION;
+import static coffee.order.exception.FoodException.FOOD_ENROLL_ALREADY_EXISTS_EXCEPTION;
 
 public class Foods {
 
@@ -30,6 +32,12 @@ public class Foods {
     }
 
     public void enrollFood(Food food) {
+        Food lastFood = foods.get(foods.size() - 1);
+
+        if (!lastFood.checkFoodIdOk(food)) {
+            throw new IllegalArgumentException(FOOD_ENROLL_ALREADY_EXISTS_EXCEPTION.getMessage());
+        }
+
         foods.add(food);
     }
 

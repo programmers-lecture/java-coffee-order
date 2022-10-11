@@ -50,6 +50,10 @@ public class Food {
         }
     }
 
+    public boolean checkFoodIdOk(Food food) {
+        return this.id < food.id;
+    }
+
     boolean checkSameId(Long foodId) {
         return Objects.equals(this.id, foodId);
     }
