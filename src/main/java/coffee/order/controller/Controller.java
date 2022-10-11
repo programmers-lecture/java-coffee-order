@@ -25,24 +25,17 @@ public class Controller {
         while (true) {
             viewManager.showMenu(MenuType.getMenuTypes(), serviceManager.getMenu());
 
-            Transaction newTransaction = runOrderSequence();
+            Transaction transaction = runOrderSequence();
+            viewManager.confirmOrder(transaction);
 
-            // TODO: Coupon Service
-            runCouponService(newTransaction);
-
-            // TODO: 음료개수만큼 쿠폰 적립
-
-            // TODO: 최종 주문 출력
-
-//            break;
+            runCouponService(transaction);
+            viewManager.confirmOrder(transaction);
         }
     }
 
     private Transaction runOrderSequence() {
         List<CustomerOrder> customerOrder = viewManager.readMenuChoice();
-        Transaction newTransaction = serviceManager.createNewTransaction(customerOrder);
-        viewManager.confirmOrder(newTransaction);
-        return newTransaction;
+        return serviceManager.createNewTransaction(customerOrder);
     }
 
     private void runCouponService(Transaction transaction) {
@@ -50,8 +43,8 @@ public class Controller {
 
         if (couponAccumulationConfirm.isCustomerSaidYes()) {
             PhoneNumber phoneNumber = viewManager.readPhoneNumber();
-            Integer couponQuantity = serviceManager.getCouponQuantity(phoneNumber);
-            viewManager.notifyCouponQuantity(couponQuantity);
+            Integer currentCouponQuantity = serviceManager.getCouponQuantity(phoneNumber);
+            viewManager.notifyCouponQuantity(currentCouponQuantity);
 
             checkCouponApplicability(transaction, phoneNumber);
             serviceManager.addCoupon(transaction, phoneNumber);
@@ -60,12 +53,11 @@ public class Controller {
 
     private void checkCouponApplicability(Transaction transaction, PhoneNumber phoneNumber) {
         if (serviceManager.checkCouponApplicability(phoneNumber)) {
-            ConfirmMessage couponApplicationConfirm = viewManager.confirmCouponApplication();
+            ConfirmMessage couponApplicationConfirm = viewManager.confirmCouponUsage();
 
             if (couponApplicationConfirm.isCustomerSaidYes()) {
-                NumberChoice numberChoice = viewManager.confirmWhichMenuToApplyCoupon(transaction);
+                NumberChoice numberChoice = viewManager.confirmWhichMenuToUseCoupon(transaction);
                 serviceManager.applyCoupon(transaction, numberChoice, phoneNumber);
-                viewManager.confirmFinalOrder(transaction);
             }
         }
     }

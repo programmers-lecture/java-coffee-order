@@ -33,19 +33,6 @@ public class ViewManager {
         outputView.printMenu(menuTypes, menu);
     }
 
-    public void confirmOrder(Transaction transaction) {
-        List<String> orderLiterals = new ArrayList<>();
-        int index = 0;
-
-        for (Order order : transaction.getOrders()) {
-            orderLiterals.add(generateOrderLiteral(++index, order));
-        }
-
-        outputView.confirmOrder(orderLiterals);
-    }
-
-
-
     public PhoneNumber readPhoneNumber() {
         outputView.printPhoneNumberGuideMessage();
         String phoneNumber = inputView.readPhoneNumber();
@@ -57,34 +44,40 @@ public class ViewManager {
     }
 
     public ConfirmMessage confirmCouponAccumulation() {
-        outputView.printCouponConfirmMessage();
+        outputView.printCouponAccumulationConfirm();
         return getConfirmMessage();
     }
 
-    public ConfirmMessage confirmCouponApplication() {
-        outputView.printCouponApplicationConfirm();
+    public ConfirmMessage confirmCouponUsage() {
+        outputView.printCouponUsageConfirm();
         return getConfirmMessage();
     }
 
-    private ConfirmMessage getConfirmMessage() {
-        boolean yesOrNot = inputView.readYesOrNot();
-        return new ConfirmMessage(yesOrNot);
+    public void confirmOrder(Transaction transaction) {
+        List<String> orderLiterals = new ArrayList<>();
+        int index = 0;
+
+        for (Order order : transaction.getOrders()) {
+            orderLiterals.add(generateOrderLiteral(++index, order));
+        }
+
+        outputView.confirmOrder(orderLiterals);
+        outputView.printTotalOrderAmount(computeTotalOrderAmount(transaction));
     }
 
-    public NumberChoice confirmWhichMenuToApplyCoupon(Transaction transaction) {
+    public NumberChoice confirmWhichMenuToUseCoupon(Transaction transaction) {
         List<String> literals = new ArrayList<>();
         int index = 0;
 
         for (Order order : transaction.getOrders()) {
-            literals.add(generateCouponApplicationLiteral(++index, order));
+            literals.add(generateCouponUsageLiteral(++index, order));
         }
 
         outputView.confirmWhichMenuToApplyCoupon(literals);
         return inputView.readNumberChoice();
-//        transaction.getOrders().get(numberChoice.getChoice()).applyCoupon();
     }
 
-    private String generateCouponApplicationLiteral(int index, Order order) {
+    private String generateCouponUsageLiteral(int index, Order order) {
         StringBuilder literal = new StringBuilder();
         literal.append(index);
         literal.append(LiteralCollection.BLANK.getLiteral());
@@ -93,9 +86,9 @@ public class ViewManager {
         return literal.toString();
     }
 
-    public void confirmFinalOrder(Transaction transaction) {
-        confirmOrder(transaction);
-        outputView.printTotalOrderAmount(computeTotalOrderAmount(transaction));
+    private ConfirmMessage getConfirmMessage() {
+        boolean yesOrNot = inputView.readYesOrNot();
+        return new ConfirmMessage(yesOrNot);
     }
 
     private String checkCouponUsage(Order order) {

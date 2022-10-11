@@ -2,6 +2,7 @@ package coffee.order.view;
 
 import coffee.order.model.Menu;
 import coffee.order.model.MenuType;
+import coffee.order.view.model.LiteralCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,8 +21,6 @@ public class OutputView {
     private static final String COUPON_APPLICATION_GUIDE = "사용할 메뉴를 골라주세요.";
     private static final String COUPON_QUANTITY_NOTIFICATION = "현재 쿠폰의 개수는 %d개 입니다.";
 
-    private static final String HYPHEN = "-";
-    private static final String BLANK = " ";
     private static final String MENU_TYPE_DELIMITER = ". ";
     private static final int INDEX_BOUNDARY = 1;
 
@@ -40,6 +39,7 @@ public class OutputView {
             menuList.forEach(menu -> System.out.println(menuFormat(menuType, menuList, menu)));
             System.out.println();
         }
+        System.out.println();
     }
 
     private String menuTypeFormat(MenuType menuType) {
@@ -47,11 +47,13 @@ public class OutputView {
     }
 
     private String menuFormat(MenuType menuType, ArrayList<? super Menu> menuList, Object menu) {
-        return menuIndexGenerator(menuType, menuList, menu) + BLANK + menu.toString();
+        return menuIndexGenerator(menuType, menuList, menu)
+                + LiteralCollection.BLANK.getLiteral() + menu.toString();
     }
 
     private String menuIndexGenerator(MenuType menuType, ArrayList<? super Menu> menuList, Object menu) {
-        return menuType.getMenuTypeIndex() + HYPHEN + (menuList.indexOf(menu) + INDEX_BOUNDARY);
+        return menuType.getMenuTypeIndex() + LiteralCollection.HYPHEN.getLiteral()
+                + (menuList.indexOf(menu) + INDEX_BOUNDARY);
     }
 
     public void confirmOrder(List<String> orderLiteral) {
@@ -66,7 +68,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printCouponConfirmMessage() {
+    public void printCouponAccumulationConfirm() {
         System.out.println(COUPON_ACCUMULATION_CONFIRM);
         System.out.println(YES_OR_NO);
     }
@@ -77,19 +79,22 @@ public class OutputView {
 
     public void printCouponQuatity(Integer couponQuantity) {
         System.out.println(generateCouponQuantityNotifyingMessage(couponQuantity));
+        System.out.println();
     }
 
     private String generateCouponQuantityNotifyingMessage(Integer couponQuantity) {
         return String.format(COUPON_QUANTITY_NOTIFICATION, couponQuantity);
     }
 
-    public void printCouponApplicationConfirm() {
+    public void printCouponUsageConfirm() {
         System.out.println(COUPON_APPLICATION_CONFIRM);
         System.out.println(YES_OR_NO);
     }
 
     public void printTotalOrderAmount(Integer totalOrderAmount) {
         System.out.print(TOTAL_ORDER_AMOUNT);
-        System.out.println(totalOrderAmount);
+        System.out.print(totalOrderAmount);
+        System.out.println(LiteralCollection.WON.getLiteral());
+        System.out.println();
     }
 }

@@ -58,7 +58,7 @@ public class InputView {
     }
 
     public NumberChoice readNumberChoice() {
-        int choice = scanner.nextInt();
+        int choice = Integer.parseInt(scanner.nextLine());
         return new NumberChoice(choice - 1);
     }
 }

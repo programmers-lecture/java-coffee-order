@@ -47,6 +47,5 @@ public class CouponRepository {
 
     private void updateCouponQuantity(PhoneNumber phoneNumber, Integer couponQuantity) {
         couponDatabase.put(phoneNumber.getPhoneNumber(), couponQuantity);
-        System.out.println("현재 쿠폰 개수 = " + couponDatabase.get(phoneNumber.getPhoneNumber()));
     }
 }
