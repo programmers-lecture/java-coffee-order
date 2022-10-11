@@ -35,26 +35,16 @@ public class ViewManager {
 
     public void confirmOrder(Transaction transaction) {
         List<String> orderLiterals = new ArrayList<>();
+        int index = 0;
 
         for (Order order : transaction.getOrders()) {
-            orderLiterals.add(generateOrderLiteral(order));
+            orderLiterals.add(generateOrderLiteral(++index, order));
         }
 
         outputView.confirmOrder(orderLiterals);
     }
 
-    private String generateOrderLiteral(Order order) {
-        StringBuilder orderLiteral = new StringBuilder();
-        orderLiteral.append(order.getMenuName());
-        orderLiteral.append(LiteralCollection.BLANK.getLiteral());
-        orderLiteral.append(order.getOrderQuantity());
-        orderLiteral.append(LiteralCollection.COUNT.getLiteral());
-        orderLiteral.append(LiteralCollection.BLANK.getLiteral());
-        orderLiteral.append(order.getOrderAmount());
-        orderLiteral.append(LiteralCollection.WON.getLiteral());
 
-        return orderLiteral.toString();
-    }
 
     public PhoneNumber readPhoneNumber() {
         outputView.printPhoneNumberGuideMessage();
@@ -101,5 +91,40 @@ public class ViewManager {
         literal.append(order.getMenuName());
 
         return literal.toString();
+    }
+
+    public void confirmFinalOrder(Transaction transaction) {
+        confirmOrder(transaction);
+        outputView.printTotalOrderAmount(computeTotalOrderAmount(transaction));
+    }
+
+    private String checkCouponUsage(Order order) {
+        if (order.isCouponApplied()) {
+            return "(쿠폰사용)";
+        }
+        return "";
+    }
+
+    private Integer computeTotalOrderAmount(Transaction transaction) {
+        return transaction.getOrders().stream()
+                .map(Order::getOrderAmount)
+                .reduce(0, Integer::sum);
+    }
+
+    private String generateOrderLiteral(int index, Order order) {
+        StringBuilder orderLiteral = new StringBuilder();
+        orderLiteral.append(index);
+        orderLiteral.append(LiteralCollection.DOT.getLiteral());
+        orderLiteral.append(LiteralCollection.BLANK.getLiteral());
+        orderLiteral.append(order.getMenuName());
+        orderLiteral.append(LiteralCollection.BLANK.getLiteral());
+        orderLiteral.append(order.getOrderQuantity());
+        orderLiteral.append(LiteralCollection.COUNT.getLiteral());
+        orderLiteral.append(LiteralCollection.BLANK.getLiteral());
+        orderLiteral.append(order.getOrderAmount());
+        orderLiteral.append(LiteralCollection.WON.getLiteral());
+        orderLiteral.append(checkCouponUsage(order));
+
+        return orderLiteral.toString();
     }
 }

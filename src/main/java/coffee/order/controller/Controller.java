@@ -66,6 +66,7 @@ public class Controller {
                 // TODO : 주문한 내역을 고객에게 다시 보여주고 선택하게함
                 NumberChoice numberChoice = viewManager.confirmWhichMenuToApplyCoupon(transaction);
                 serviceManager.applyCoupon(transaction, numberChoice);
+                viewManager.confirmFinalOrder(transaction);
             }
         }
 

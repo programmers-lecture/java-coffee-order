@@ -4,7 +4,8 @@ public enum LiteralCollection {
     BLANK(" "),
     COUNT("개"),
     WON("원"),
-    HYPHEN("-");
+    HYPHEN("-"),
+    DOT(".");
 
     private final String literal;
 

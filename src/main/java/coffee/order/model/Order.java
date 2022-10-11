@@ -4,7 +4,7 @@ public class Order {
     private final MenuType menuType;
     private final String menuName;
     private final int orderQuantity;
-    private final int orderAmount;
+    private int orderAmount;
     private boolean isCouponApplied;
 
     public Order(MenuType menuType, String menuName, int orderQuantity, int orderAmount) {
@@ -33,6 +33,8 @@ public class Order {
 
     public void applyCoupon() {
         isCouponApplied = true;
+        int menuPrice = orderAmount / orderQuantity;
+        orderAmount -= menuPrice;
     }
 
     public boolean isCouponApplied() {

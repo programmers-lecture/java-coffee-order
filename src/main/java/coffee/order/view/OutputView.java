@@ -13,6 +13,7 @@ public class OutputView {
     private static final String PHONE_NUMBER_GUIDE = "전화번호를 입력해주세요. (형식 : 000-0000-0000)";
     private static final String ORDER_CONFIRM = "주문 내역은 아래와 같습니다.";
     private static final String YES_OR_NO = "1. 네 / 2. 아니요";
+    private static final String TOTAL_ORDER_AMOUNT = "총가격: ";
 
     private static final String COUPON_ACCUMULATION_CONFIRM = "쿠폰을 적립하시겠습니까?";
     private static final String COUPON_APPLICATION_CONFIRM = "쿠폰을 사용하시겠습니까?";
@@ -85,5 +86,10 @@ public class OutputView {
     public void printCouponApplicationConfirm() {
         System.out.println(COUPON_APPLICATION_CONFIRM);
         System.out.println(YES_OR_NO);
+    }
+
+    public void printTotalOrderAmount(Integer totalOrderAmount) {
+        System.out.print(TOTAL_ORDER_AMOUNT);
+        System.out.println(totalOrderAmount);
     }
 }
