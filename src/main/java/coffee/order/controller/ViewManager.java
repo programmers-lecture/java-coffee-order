@@ -83,4 +83,24 @@ public class ViewManager {
         boolean yesOrNot = inputView.readYesOrNot();
         return new ConfirmMessage(yesOrNot);
     }
+
+    public void confirmWhichMenuToApplyCoupon(Transaction transaction) {
+        List<String> literals = new ArrayList<>();
+        int index = 0;
+
+        for (Order order : transaction.getOrders()) {
+            literals.add(generateCouponApplicationLiteral(++index, order));
+        }
+
+        outputView.confirmWhichMenuToApplyCoupon(literals);
+    }
+
+    private String generateCouponApplicationLiteral(int index, Order order) {
+        StringBuilder literal = new StringBuilder();
+        literal.append(index);
+        literal.append(LiteralCollection.BLANK.getLiteral());
+        literal.append(order.getMenuName());
+
+        return literal.toString();
+    }
 }

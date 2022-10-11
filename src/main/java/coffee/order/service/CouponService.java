@@ -19,7 +19,7 @@ public class CouponService {
     }
 
     public boolean isCouponApplicable(Integer couponQuantity) {
-        return couponQuantity > COUPON_APPLICATION_CRITERIA;
+        return couponQuantity >= COUPON_APPLICATION_CRITERIA;
     }
 
     public void addCoupon(Transaction transaction, PhoneNumber phoneNumber) {

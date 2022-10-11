@@ -63,7 +63,7 @@ public class Controller {
 
             if (couponApplicationConfirm.isCustomerSaidYes()) {
                 // TODO : 주문한 내역을 고객에게 다시 보여주고 선택하게함
-//                menuToApplyCoupon viewManager.confirmWhichMenuToApplyCoupon(transaction);
+                viewManager.confirmWhichMenuToApplyCoupon(transaction);
 //                serviceManager.applyCoupon(transaction);
             }
         }

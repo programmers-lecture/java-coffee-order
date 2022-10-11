@@ -16,6 +16,7 @@ public class OutputView {
 
     private static final String COUPON_ACCUMULATION_CONFIRM = "쿠폰을 적립하시겠습니까?";
     private static final String COUPON_APPLICATION_CONFIRM = "쿠폰을 사용하시겠습니까?";
+    private static final String COUPON_APPLICATION_GUIDE = "사용할 메뉴를 골라주세요.";
     private static final String COUPON_QUANTITY_NOTIFICATION = "현재 쿠폰의 개수는 %d개 입니다.";
 
     private static final String HYPHEN = "-";
@@ -55,6 +56,12 @@ public class OutputView {
     public void confirmOrder(List<String> orderLiteral) {
         System.out.println(ORDER_CONFIRM);
         orderLiteral.forEach(System.out::println);
+        System.out.println();
+    }
+
+    public void confirmWhichMenuToApplyCoupon(List<String> literals) {
+        System.out.println(COUPON_APPLICATION_GUIDE);
+        literals.forEach(System.out::println);
         System.out.println();
     }
 
