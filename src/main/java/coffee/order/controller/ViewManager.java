@@ -6,10 +6,7 @@ import coffee.order.model.Order;
 import coffee.order.model.Transaction;
 import coffee.order.view.InputView;
 import coffee.order.view.OutputView;
-import coffee.order.view.model.ConfirmMessage;
-import coffee.order.view.model.CustomerOrder;
-import coffee.order.view.model.LiteralCollection;
-import coffee.order.view.model.PhoneNumber;
+import coffee.order.view.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,7 +81,7 @@ public class ViewManager {
         return new ConfirmMessage(yesOrNot);
     }
 
-    public void confirmWhichMenuToApplyCoupon(Transaction transaction) {
+    public NumberChoice confirmWhichMenuToApplyCoupon(Transaction transaction) {
         List<String> literals = new ArrayList<>();
         int index = 0;
 
@@ -93,6 +90,8 @@ public class ViewManager {
         }
 
         outputView.confirmWhichMenuToApplyCoupon(literals);
+        return inputView.readNumberChoice();
+//        transaction.getOrders().get(numberChoice.getChoice()).applyCoupon();
     }
 
     private String generateCouponApplicationLiteral(int index, Order order) {

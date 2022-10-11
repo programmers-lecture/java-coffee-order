@@ -4,6 +4,7 @@ import coffee.order.model.MenuType;
 import coffee.order.model.Transaction;
 import coffee.order.view.model.ConfirmMessage;
 import coffee.order.view.model.CustomerOrder;
+import coffee.order.view.model.NumberChoice;
 import coffee.order.view.model.PhoneNumber;
 
 import java.util.List;
@@ -63,8 +64,8 @@ public class Controller {
 
             if (couponApplicationConfirm.isCustomerSaidYes()) {
                 // TODO : 주문한 내역을 고객에게 다시 보여주고 선택하게함
-                viewManager.confirmWhichMenuToApplyCoupon(transaction);
-//                serviceManager.applyCoupon(transaction);
+                NumberChoice numberChoice = viewManager.confirmWhichMenuToApplyCoupon(transaction);
+                serviceManager.applyCoupon(transaction, numberChoice);
             }
         }
 

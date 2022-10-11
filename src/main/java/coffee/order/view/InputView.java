@@ -2,6 +2,7 @@ package coffee.order.view;
 
 import coffee.order.view.model.CustomerOrder;
 import coffee.order.view.model.LiteralCollection;
+import coffee.order.view.model.NumberChoice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,5 +55,10 @@ public class InputView {
 
     public String readPhoneNumber() {
         return scanner.nextLine();
+    }
+
+    public NumberChoice readNumberChoice() {
+        int choice = scanner.nextInt();
+        return new NumberChoice(choice - 1);
     }
 }

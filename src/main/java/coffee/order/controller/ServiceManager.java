@@ -7,6 +7,7 @@ import coffee.order.service.CouponService;
 import coffee.order.service.MenuService;
 import coffee.order.service.TransactionService;
 import coffee.order.view.model.CustomerOrder;
+import coffee.order.view.model.NumberChoice;
 import coffee.order.view.model.PhoneNumber;
 
 import java.util.ArrayList;
@@ -46,5 +47,9 @@ public class ServiceManager {
 
     public void addCoupon(Transaction transaction, PhoneNumber phoneNumber) {
         couponService.addCoupon(transaction, phoneNumber);
+    }
+
+    public void applyCoupon(Transaction transaction, NumberChoice numberChoice) {
+        couponService.applyCoupon(transaction, numberChoice);
     }
 }
