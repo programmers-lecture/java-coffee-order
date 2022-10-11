@@ -28,7 +28,16 @@ public class CouponService {
 
     public void addCoupon(Transaction transaction, PhoneNumber phoneNumber) {
         checkCustomerExists(phoneNumber);
-        couponRepository.addCoupon(phoneNumber, transaction);
+
+        if (!isCouponApplied(transaction)) {
+            couponRepository.addCoupon(phoneNumber, transaction);
+        }
+    }
+
+    public void applyCoupon(Transaction transaction, NumberChoice numberChoice) {
+        List<Order> orders = transaction.getOrders();
+        Order orderToApplyCoupon = orders.get(numberChoice.getChoice());
+        orderToApplyCoupon.applyCoupon();
     }
 
     private void checkCustomerExists(PhoneNumber phoneNumber) {
@@ -37,9 +46,8 @@ public class CouponService {
         }
     }
 
-    public void applyCoupon(Transaction transaction, NumberChoice numberChoice) {
-        List<Order> orders = transaction.getOrders();
-        Order orderToApplyCoupon = orders.get(numberChoice.getChoice());
-        orderToApplyCoupon.applyCoupon();
+    private boolean isCouponApplied(Transaction transaction) {
+        return transaction.getOrders().stream()
+                .anyMatch(Order::isCouponApplied);
     }
 }
