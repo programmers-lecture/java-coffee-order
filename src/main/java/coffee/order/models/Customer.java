@@ -17,6 +17,8 @@ public class Customer {
 
     @Override
     public boolean equals(Object obj) {
+        if(!(obj instanceof Customer))
+            return false;
         return this == obj || (this.phoneNumber.equals(((Customer) obj).phoneNumber));
     }
 
