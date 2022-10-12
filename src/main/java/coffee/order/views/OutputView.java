@@ -2,11 +2,13 @@ package coffee.order.views;
 
 import java.util.List;
 
+import static coffee.order.common.Constants.*;
+
 public class OutputView {
     private OutputView() {}
 
     public static void printMenuSelect() {
-        System.out.println("메뉴를 골라주세요 (번호, 갯수)");
+        System.out.println(SELECT_ORDER_MENU_REQUEST);
     }
 
     public static void printMenuCategory(int number, String category) {
@@ -16,11 +18,11 @@ public class OutputView {
     public static void printMenuFoods(List<String> menuFoods) {
         for(String menuFood: menuFoods)
             System.out.println(menuFood);
-        System.out.println("...");
+        System.out.println(MENU_CATEGORY_UNDERLINE);
     }
 
     public static void printOrdersStart() {
-        System.out.println("주문 내역은 아래와 같습니다.");
+        System.out.println(ORDER_MENU_PRINT);
     }
 
     public static void printOrdersInfo(List<String> orders) {
@@ -31,24 +33,24 @@ public class OutputView {
 
     public static void printTotalPriceSum(int totalPriceSum) {
         System.out.println();
-        System.out.println("총 가격 : " + totalPriceSum + "원");
+        System.out.println(String.format(TOTAL_PRICE_PRINT, totalPriceSum));
         System.out.println();
     }
 
     public static void printCouponCnt(int couponCnt) {
         System.out.println();
-        System.out.println("현재 쿠폰 갯수는 " + couponCnt + "개 입니다.");
+        System.out.println(String.format(COUPONS_COUNT_PRINT, couponCnt));
         System.out.println();
     }
 
     public static void printCouponUse() {
         System.out.println();
-        System.out.println("사용이 완료되었습니다.");
+        System.out.println(COUPON_USE_END_PRINT);
         System.out.println();
     }
 
     public static void printOrderEnd() {
-        System.out.println("주문 완료가 되었습니다.");
+        System.out.println(ORDER_END_PRINT);
         System.out.println();
     }
 }
