@@ -1,58 +1,90 @@
 package coffee.order.controller;
 
-import coffee.order.enums.FoodCategory;
+import coffee.order.enums.MenuCategory;
 import coffee.order.models.*;
 import coffee.order.views.InputView;
 import coffee.order.views.OutputView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Kiosk {
-    public void run() {
-        Cafe cafe = new Cafe();
-        boolean isOrderEnd = false;
-        while(!isOrderEnd) {
-            Customer customer = new Customer();
-            selectMenu(cafe, customer);
-            int couponsCnt = earnCoupons(cafe, customer);
-            useCoupons(cafe, customer, couponsCnt);
-            OutputView.printOrderEnd();
-            isOrderEnd = InputView.inputOrderEnd();
-        }
+    public Kiosk() {}
+
+    public boolean isKioskEnd() {
+        return InputView.inputOrderEnd();
     }
 
-    public void selectMenu(Cafe cafe, Customer customer) {
+    public void showMenus(Menus menus) {
         OutputView.printMenuSelect();
-        for(FoodCategory foodCategory: FoodCategory.values()) {
-            OutputView.printMenuCategory(foodCategory.getNumber(), foodCategory.getCategory());
-            List<String> menuFoods = cafe.getMenuInfo(foodCategory);
+        for(MenuCategory category: MenuCategory.values()) {
+            OutputView.printMenuCategory(category.getNumber(), category.getCategory());
+            List<String> menuFoods = getMenuInfo(menus, category);
             OutputView.printMenuFoods(menuFoods);
         }
-        List<String> orders = InputView.inputOrder();
-        cafe.createOrders(orders, customer);
+    }
+
+    public List<String[]> selectMenus() {
+        return InputView.inputOrder().stream()
+                .map(order -> order.split(", "))
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getMenuInfo(Menus menus, MenuCategory category){
+        return menus.getMenusByCategory(category)
+                .stream()
+                .map(food -> food.getNumber() + " " + food.getName())
+                .collect(Collectors.toList());
+    }
+
+    public void showOrders(Orders orders, Customer customer) {
         OutputView.printOrdersStart();
-        OutputView.printOrdersInfo(cafe.getOrdersInfo(customer));
-        OutputView.printTotalPriceSum(cafe.getOrdersPriceSum(customer));
+        OutputView.printOrdersInfo(getOrdersInfo(orders.getCurrentOrdersByCustomer(customer)));
+        OutputView.printTotalPriceSum(orders.getCurrentOrdersPriceSum(customer));
     }
 
-    public int earnCoupons(Cafe cafe, Customer customer) {
+    private List<String> getOrdersInfo(List<Order> orders) {
+        return orders.stream()
+                .map(order -> order.getOrderMenuName() + " " + order.getOrderCount() + "개 " + order.getOrderPrice() + "원")
+                .collect(Collectors.toList());
+    }
+
+    public void earnCoupons(Customer customer) {
         String phoneNumber = InputView.inputPhoneNumberForEarnCoupon();
-        int ordersCnt = cafe.getOrderFoodsCnt(customer);
         customer.addPhoneNumberInfo(phoneNumber);
-        int couponsCnt = cafe.earnCoupons(customer, ordersCnt);
-        OutputView.printCouponCnt(couponsCnt);
-        return couponsCnt;
     }
 
-    public void useCoupons(Cafe cafe, Customer customer, int couponsCnt) {
-        if (Coupon.isCouponUsePossible(couponsCnt) && InputView.inputCouponUseOrNot()) {
-            String couponUseFoodNumber = InputView.inputOrderFoodForUseCoupon(cafe.getOrdersInfoForCouponUse(customer));
-            cafe.useCouponForOrderedFood(couponUseFoodNumber, customer);
-            OutputView.printCouponUse();
-            OutputView.printOrdersStart();
-            OutputView.printOrdersInfo(cafe.getCouponUseOrdersInfo(customer));
-            OutputView.printOrdersInfo(cafe.getOrdersInfo(customer));
-            OutputView.printTotalPriceSum(cafe.getOrdersPriceSum(customer));
-        }
+    public void showCoupons(int couponsCnt) {
+        OutputView.printCouponCnt(couponsCnt);
     }
+
+    public boolean isCustomerUseCoupons(int couponsCnt) {
+        return Coupon.isCouponUsePossible(couponsCnt) && InputView.inputCouponUseOrNot();
+    }
+
+    public String selectCouponsUseMenu(Orders orders, Customer customer) {
+            List<String> currentOrders = getOrdersForCouponUse(orders.getCurrentOrdersByCustomer(customer));
+            return InputView.inputOrderFoodForUseCoupon(currentOrders);
+    }
+
+    public void showCouponsUseMenu(Orders orders, Customer customer) {
+        OutputView.printCouponUse();
+        OutputView.printOrdersStart();
+        OutputView.printOrdersInfo(getCouponUseOrders(orders.getCouponUseOrders(customer)));
+        OutputView.printOrdersInfo(getOrdersInfo(orders.getCurrentOrdersByCustomer(customer)));
+        OutputView.printTotalPriceSum(orders.getCurrentOrdersPriceSum(customer));
+    }
+
+    private List<String> getCouponUseOrders(List<Order> orders) {
+        return orders.stream()
+                .map(order -> order.getOrderMenuName() + " " + order.getCouponUseCount() + "개 쿠폰사용")
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getOrdersForCouponUse(List<Order> orders) {
+        return orders.stream()
+                .map(order -> order.getOrderFoodNumber() + ". " + order.getOrderMenuName())
+                .collect(Collectors.toList());
+    }
+
 }
