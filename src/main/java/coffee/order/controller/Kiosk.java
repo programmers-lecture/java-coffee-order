@@ -73,6 +73,7 @@ public class Kiosk {
         OutputView.printOrdersInfo(getCouponUseOrders(orders.getCouponUseOrders(customer)));
         OutputView.printOrdersInfo(getOrdersInfo(orders.getCurrentOrdersByCustomer(customer)));
         OutputView.printTotalPriceSum(orders.getCurrentOrdersPriceSum(customer));
+        OutputView.printOrderEnd();
     }
 
     private List<String> getCouponUseOrders(List<Order> orders) {
