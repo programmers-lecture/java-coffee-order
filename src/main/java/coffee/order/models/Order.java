@@ -2,34 +2,34 @@ package coffee.order.models;
 
 public class Order {
     private final Customer customer;
-    private final Food food;
+    private final Menu menu;
     private int orderCount;
     private int couponUseCount;
 
-    public Order(Customer customer, Food food, int count) {
+    public Order(Customer customer, Menu menu, int count) {
         this.customer = customer;
-        this.food = food;
+        this.menu = menu;
         this.orderCount = count;
         this.couponUseCount = 0;
     }
 
     public int getOrderPrice() {
-        return orderCount * food.getPrice();
+        return orderCount * menu.getPrice();
     }
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public String getOrderFoodName() {
-        return food.getName();
+    public String getOrderMenuName() {
+        return menu.getName();
     }
 
     public String getOrderFoodNumber() {
-        return food.getNumber();
+        return menu.getNumber();
     }
 
-    public int getOrderFoodCount() {
+    public int getOrderCount() {
         return orderCount;
     }
 

@@ -19,8 +19,8 @@ public class Coupon {
             throw new IllegalArgumentException("적립할 쿠폰의 갯수는 음수가 될 수 없습니다.");
         this.count += count;
     }
-    public int useCoupon(int orderFoodCnt) {
-        int couponUsableCnt = Math.min(count / COUPON_USE_COUNT, orderFoodCnt);
+    public int useCoupon(int orderCnt) {
+        int couponUsableCnt = Math.min(count / COUPON_USE_COUNT, orderCnt);
         count -= COUPON_USE_COUNT * couponUsableCnt;
         return couponUsableCnt;
     }
