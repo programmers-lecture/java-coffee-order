@@ -1,3 +1,0 @@
-:findFoodsByCategoryName(categoryName).findName() = 커피
-7findFoodsByCategoryName(categoryName).findName() = 티
-=findFoodsByCategoryName(categoryName).findName() = 디저트
