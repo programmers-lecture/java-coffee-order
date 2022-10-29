@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="coffee.order.repository.MenuRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-06T02:08:50" hostname="LAPTOP-4QLJQ2FF" time="0.018">
+  <properties/>
+  <testcase name="addMenu() �뀒�뒪�듃" classname="coffee.order.repository.MenuRepositoryTest" time="0.018"/>
+  <system-out><![CDATA[java.util.ArrayList
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
