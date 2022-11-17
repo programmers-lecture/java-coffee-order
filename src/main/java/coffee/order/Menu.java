@@ -1,5 +1,6 @@
 package coffee.order;
 
+//메뉴를 생성하기 위한 클래스
 public class Menu {
     static class Coffee {
         String code = "coffee"; // 카테고리
