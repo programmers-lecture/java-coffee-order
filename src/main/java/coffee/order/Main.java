@@ -1,7 +1,15 @@
 package coffee.order;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+//        Scanner sc = new Scanner(System.in);
+//        String[] order = sc.nextLine().split(",");
+//
+//        System.out.println(order);
+        System.out.println();
+
+
+
     }
 }
