@@ -1,6 +1,7 @@
 package coffee.order.domain.meals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,15 @@ public class Coffee implements MenuRepository{
         return coffee.stream()
                 .filter(menu -> menu.isCategory(category))
                 .collect(Collectors.toList());
+    }
+
+    public List<Menu> getCoffee() {
+        return coffee;
+    }
+
+    @Override
+    public String toString(){
+        return coffee.toString();
     }
 
 

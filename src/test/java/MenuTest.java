@@ -1,9 +1,11 @@
-import coffee.order.domain.coupon.Customer;
-import coffee.order.domain.meals.Menu;
-import coffee.order.domain.meals.Tea;
+import coffee.order.controller.Cafe;
+import coffee.order.controller.Counter;
+import coffee.order.domain.meals.*;
+import coffee.order.view.OutputView;
 import org.junit.jupiter.api.Test;
 
 public class MenuTest {
+    private OutputView outputView;
 
     @Test
     public void 시리얼넘버_메뉴검색_테스트(){
@@ -21,5 +23,12 @@ public class MenuTest {
 //        Customer customer2 = new Customer(n2);
 //        System.out.println(customer.regexPhoneNUmber(n1));
 //        System.out.println(customer2.regexPhoneNUmber(n2));
+    }
+    @Test
+    public void 전체메뉴조회(){
+        Cafe cafe = new Cafe();
+        Counter counter = new Counter();
+        counter.showMenu(cafe.getMenus());
+
     }
 }

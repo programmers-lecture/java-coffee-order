@@ -30,4 +30,13 @@ public class Dessert implements MenuRepository{
                 .filter(menu -> menu.isCategory(category))
                 .collect(Collectors.toList());
     }
+
+    public List<Menu> getDessert() {
+        return dessert;
+    }
+
+    @Override
+    public String toString(){
+        return dessert.toString();
+    }
 }

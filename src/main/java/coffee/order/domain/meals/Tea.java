@@ -31,4 +31,13 @@ public class Tea implements MenuRepository{
                 .filter(menu -> menu.isCategory(category))
                 .collect(Collectors.toList());
     }
+
+    public List<Menu> getTea() {
+        return tea;
+    }
+
+    @Override
+    public String toString(){
+        return tea.toString();
+    }
 }

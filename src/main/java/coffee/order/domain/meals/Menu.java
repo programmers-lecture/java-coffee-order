@@ -30,10 +30,5 @@ public class Menu {
         return this.category.equals(category);
     }
 
-    @Override
-    public String toString() {
-        return getSerialNumber()+getMenuName()+getPrice();
-    }
-
 
 }
