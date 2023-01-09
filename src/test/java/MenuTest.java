@@ -1,8 +1,14 @@
 import coffee.order.controller.Cafe;
 import coffee.order.controller.Counter;
 import coffee.order.domain.meals.*;
+import coffee.order.domain.order.Order;
+import coffee.order.domain.order.Orders;
+import coffee.order.view.InputView;
 import coffee.order.view.OutputView;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuTest {
     private OutputView outputView;
@@ -29,6 +35,15 @@ public class MenuTest {
         Cafe cafe = new Cafe();
         Counter counter = new Counter();
         counter.showMenu(cafe.getMenus());
+
+    }
+
+    @Test
+    public void 주문서생성(){
+        Cafe cafe = new Cafe();
+        Counter counter = new Counter();
+        counter.takeOrder();
+        counter.showOrder(cafe.getOrders());
 
     }
 }
