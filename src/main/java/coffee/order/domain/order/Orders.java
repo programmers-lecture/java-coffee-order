@@ -26,4 +26,10 @@ public class Orders {
                 .map(Order::getOrderMenuPrice)
                 .reduce(0, Integer::sum);
     }
+
+    public int getOrderCount() {
+        return (int) orders.stream()
+                .map(Order::getOrderMenuName)
+                .count();
+    }
 }

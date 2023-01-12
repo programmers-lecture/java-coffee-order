@@ -1,13 +1,6 @@
 package coffee.order.view;
-
-import coffee.order.controller.Cafe;
-import coffee.order.domain.meals.Coffee;
-import coffee.order.domain.order.Orders;
-
-import java.awt.*;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
+
 
 public class OutputView {
 
@@ -28,7 +21,29 @@ public class OutputView {
         System.out.println("총 가격 : "+totalPrice+"원");
     }
 
-    public static void printAskEarnCoupon(){ System.out.println("쿠폰을 적립 하시겠습니까?"); }
+    public static void printAskEarnCoupon(){
+        System.out.println("쿠폰을 적립하시겠습니까?");
+        System.out.println("1. 네 2. 아니오");}
 
+    public static void printAskPhoneNumber(){
+        System.out.println("전화번호를 입력해주세요. (형식 : 000-0000-0000)");
+    }
+
+    public static void printCouponCount(int userCouponCnt){
+        System.out.println("현재 쿠폰 개수는 " + userCouponCnt + "개 입니다");
+    }
+
+    public static void printAskUseCoupon() {
+        System.out.println("쿠폰을 사용하시겠습니까?");
+        System.out.println("1. 네 2. 아니오");
+    }
+
+    public static  void printSelectUseCouponMenu(){
+        System.out.println("사용할 메뉴를 골라주세요.");
+    }
+
+    public static void printEndOrder(){
+        System.out.println("주문이 완료되었습니다.");
+    }
 
 }

@@ -24,7 +24,6 @@ public class Menus implements MenuRepository{
         return menus;
     }
 
-
     @Override
     public Menu findBySerialNumber(String serialNumber) {
         return menus.stream()

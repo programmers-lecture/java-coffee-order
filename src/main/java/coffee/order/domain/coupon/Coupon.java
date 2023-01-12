@@ -16,11 +16,12 @@ public class Coupon {
     }
 
     // 휴대폰 번호의 정규식 검사로 유저 정보를 반환
-    public Map.Entry<String, Integer> findByPhoneNumber(String phoneNumber){
+    public Integer findByPhoneNumber(String phoneNumber){
         String customer = regexPhoneNUmber(phoneNumber);
         return coupon.entrySet().stream()
                 .filter(m -> m.getKey().equals(customer))
                 .findFirst()
+                .map(Map.Entry::getValue)
                 .orElseThrow(() -> new IllegalArgumentException("회원 정보가 없습니다."));
     }
 
@@ -39,13 +40,10 @@ public class Coupon {
     }
 
     // 쿠폰 사용
-    public void useCoupon(String phoneNumber){
+    public void subtractCoupon(String phoneNumber){
         int couponNumber = getCoupon(phoneNumber);
-        if (couponNumber>=10){
-            int remain = couponNumber - 10;
-            coupon.replace(phoneNumber, remain);
-        }
-        throw new IllegalArgumentException("쿠폰 개수가 부족합니다.");
+        int remain = couponNumber - 10;
+        coupon.replace(phoneNumber, remain);
     }
 
     // 쿠폰 적립
@@ -53,6 +51,7 @@ public class Coupon {
         int add = getCoupon(phoneNumber) + count;
         coupon.replace(phoneNumber, add);
     }
+
 
 
 

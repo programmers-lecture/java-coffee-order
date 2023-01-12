@@ -1,6 +1,8 @@
 package coffee.order.controller;
 
+import coffee.order.domain.coupon.Coupon;
 import coffee.order.domain.meals.Category;
+import coffee.order.domain.meals.Menu;
 import coffee.order.domain.meals.Menus;
 import coffee.order.domain.order.Orders;
 import coffee.order.view.InputView;
@@ -41,17 +43,48 @@ public class Counter {
         OutputView.printOrderTotalPrice(orders.getTotalPrice());
     }
 
-    //쿠폰을 적립하는 지
+    public String askEarnCoupon(){
+        OutputView.printAskEarnCoupon();
+        if(InputView.inputYesOrNo()==1){
+            OutputView.printAskPhoneNumber();
+           return InputView.inputPhoneNumber(); };
+        return "";
+    }
 
-    // yes라고 하면 전화번호를 입력해달라
+    public void showCoupon(int userCouponCnt){
+        OutputView.printCouponCount(userCouponCnt);
+    }
 
-    //쿠폰의 개수 조회해주기
+    public int askUseCoupon(){
+        OutputView.printAskUseCoupon();
+        return InputView.inputYesOrNo();
+    }
+    // 쿠폰 사용 동의
+    public void showOrdersToCouponUse(Orders orders){
+        OutputView.printSelectUseCouponMenu();
+        List<String> orderList = orders.getOrders().stream()
+                .map(order -> order.getOrderMenuSerialNumber() + " " + order.getOrderMenuName())
+                .collect(Collectors.toList());
+        OutputView.printOrder(orderList);
+    }
+    //쿠폰을 사용할 메뉴 선택
+    public String couponMenu(){
+        return InputView.inputCouponMenuSerialNumber();
+    }
 
-    //10개인 경우
-    // 쿠폰을 사용하시겠스니까 출력
 
-    // 사용할 메뉴 입력
+    // 쿠폰 사용 후의 상태
+    public void showCouponUseOrder(Orders orders){
+        List<String> modifiedOrderList =  orders.getOrders().stream()
+                .map(order -> order.getOrderMenuName() + " 1개 쿠폰 사용")
+                .collect(Collectors.toList());
+        OutputView.printOrder(modifiedOrderList);
+        OutputView.printOrderTotalPrice(orders.getTotalPrice());
+    }
 
+    public void endOrder(){
+        OutputView.printEndOrder();
+    }
 
 
 

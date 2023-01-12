@@ -17,14 +17,22 @@ public class InputView {
         return orders;
     }
 
-    public static void inputYesOrNo(){
+    // 이 두개를 합쳐 : 아닌 적립 안한다 하는 경우 빈 문자열 반환
+    public static int inputYesOrNo(){
         Scanner sc = new Scanner(System.in);
-        String answer = sc.nextLine();
+        return sc.nextInt();
     }
 
-    public static void inputPhoneNumber() {
+    public static String inputPhoneNumber() {
         Scanner sc = new Scanner(System.in);
-        String phoneNumber = sc.nextLine();
+        return sc.nextLine();
     }
+
+    public static String inputCouponMenuSerialNumber(){
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+
+
 
 }

@@ -28,9 +28,15 @@ public class Order {
         return menu.getPrice()*quantity;
     }
 
+    public Menu getMenu() {
+        return menu;
+    }
+
     public int getQuantity(){
         return quantity;
     }
+
+
 
 
 }
