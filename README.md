@@ -224,3 +224,25 @@
 4. 객체지향 생활 체조를 지켜서 개발한다.
 
 [객체지향생활체조](https://developerfarm.wordpress.com/2012/02/03/object_calisthenics_summary/)
+
+## 다이어그램(설명)
+![img_1.png](img_1.png)
+
+## 체크 리스트
+- 기능 목록
+  - [x] 메뉴 등록 : registerMenuItem()
+  - [x] 수량 등록 : setStock()
+  - [x] 가격 변경 : changePrice()
+  - [x] 주문 내역 확인 : checkOrderHistory()
+  - [x] 쿠폰 내역 확인 : checkCouponHistory()
+  - [ ] 메뉴 주문 : orderMenu()
+  - [ ] 쿠폰 사용 : useCoupon()
+  - [ ] 주문 받기 : takeOrder()
+  - [ ] 쿠폰 적용 : applyCoupon()
+
+  
+- 클래스
+  - [ ] 손님 : orderMenu(), useCoupon()
+  - [x] 카페 : checkOrderHistory(), checkCouponHistory()
+  - [x] 메뉴 : registerMenuItem(), setStock(), changePrice()
+  - [ ] 바리스타 : takeOrder(), applyCoupon()
