@@ -2,6 +2,7 @@ package domain.order;
 
 import java.math.BigDecimal;
 import domain.menu.MenuItem;
+import java.util.Objects;
 
 public class Order implements Comparable<Order> {
 
@@ -29,13 +30,23 @@ public class Order implements Comparable<Order> {
         return count;
     }
 
-    public void applyCoupon() {
-        this.usedCoupon = true;
-        price = price.subtract(menuItem.getPrice());
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Order order = (Order) o;
+        return count == order.count && usedCoupon == order.usedCoupon && menuItem.equals(
+                order.menuItem)
+                && price.equals(order.price);
     }
 
-    public boolean isUsedCoupon() {
-        return usedCoupon;
+    @Override
+    public int hashCode() {
+        return Objects.hash(menuItem, count, price, usedCoupon);
     }
 
     @Override
@@ -45,5 +56,14 @@ public class Order implements Comparable<Order> {
         }
         return menuItem.getMenuCategory().getCategoryNumber() -
                 order.menuItem.getMenuCategory().getCategoryNumber();
+    }
+
+    public void applyCoupon() {
+        this.usedCoupon = true;
+        price = price.subtract(menuItem.getPrice());
+    }
+
+    public boolean isUsedCoupon() {
+        return usedCoupon;
     }
 }

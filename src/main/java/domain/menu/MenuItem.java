@@ -1,6 +1,7 @@
 package domain.menu;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class MenuItem {
     private static final int INITIAL_STOCK = 10;
@@ -9,6 +10,24 @@ public class MenuItem {
     private final String menuName;
     private BigDecimal price;
     private int stock;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        MenuItem menuItem = (MenuItem) o;
+        return menuNumber == menuItem.menuNumber && menuCategory == menuItem.menuCategory
+                && menuName.equals(menuItem.menuName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menuCategory, menuNumber, menuName);
+    }
 
     public MenuItem(MenuCategory menuCategory, int menuNumber, String menuName, BigDecimal price) {
         this.menuCategory = menuCategory;
