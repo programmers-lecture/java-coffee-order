@@ -1,5 +1,7 @@
 package menu;
 
+import domain.menu.MenuCategory;
+import domain.menu.MenuItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

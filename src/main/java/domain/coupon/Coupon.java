@@ -1,7 +1,7 @@
-package coupon;
+package domain.coupon;
 
 public class Coupon {
-    private String phoneNumber;
+    private final String phoneNumber;
 
     public Coupon(String phoneNumber) {
         this.phoneNumber = phoneNumber;

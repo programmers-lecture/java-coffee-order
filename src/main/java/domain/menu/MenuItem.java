@@ -1,13 +1,13 @@
-package menu;
+package domain.menu;
 
 import java.math.BigDecimal;
 
-public class MenuItem extends Menu {
+public class MenuItem {
     private static final int INITIAL_STOCK = 10;
-    private MenuCategory menuCategory;
-    private String menuName;
+    private final MenuCategory menuCategory;
+    private final int menuNumber;
+    private final String menuName;
     private BigDecimal price;
-    private int menuNumber;
     private int stock;
 
     public MenuItem(MenuCategory menuCategory, int menuNumber, String menuName, BigDecimal price) {
@@ -30,6 +30,14 @@ public class MenuItem extends Menu {
         return price;
     }
 
+    public int getMenuNumber() {
+        return menuNumber;
+    }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
     public void setStock(int stock) {
         this.stock = stock;
     }
@@ -42,8 +50,7 @@ public class MenuItem extends Menu {
         return price.multiply(BigDecimal.valueOf(count));
     }
 
-    @Override
-    public String toString() {
-        return menuCategory.getCategoryNumber() + "-" + menuNumber + " " + menuName;
+    public void reduceStock(int count) {
+        stock -= count;
     }
 }

@@ -1,107 +1,77 @@
 package io.input;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+import domain.order.Order;
+import domain.order.OrderList;
+import domain.coupon.Coupon;
+import io.input.information.ChangePriceInformation;
+import io.input.information.SetStockInformation;
 import java.util.Scanner;
-import menu.MenuCategory;
-import menu.MenuItem;
+import domain.menu.Menu;
+import domain.menu.MenuItem;
+import domain.selection.AdditionalOrderSelection;
+import domain.selection.UseCouponSelection;
+import domain.selection.EarnCouponSelection;
+import domain.selection.BaristaSelection;
+import domain.selection.UserSelection;
 
 public class Input {
-    private static final String SPACE = " ";
-    private static final int FIRST_CATEGORY_NUMBER = 0;
-    private static final int CATEGORY_NAME = 1;
-    private static final int MENU_NUMBER = 3;
-    private static final int MENU_NAME = 4;
-    private static final int MENU_PRICE = 5;
-    private static final String PERIOD = ".";
-    private static final String COMMA = ",";
-    private static final String DELETE = "";
-    private static final String HYPHEN = "-";
+    private static final InputDataManagement inputDataManager = new InputDataManagement();
+    private Input() {
+    }
 
-    public static int getChoice() {
+    public static UserSelection getUserSelection() {
         Scanner kb = new Scanner(System.in);
-        return kb.nextInt();
+        return inputDataManager.intToUserSelection(kb.nextInt());
+    }
+
+    public static BaristaSelection getBaristaSelection() {
+        Scanner kb = new Scanner(System.in);
+        return inputDataManager.intToBaristaSelection(kb.nextInt());
     }
 
     public static MenuItem getMenuItem() {
         Scanner kb = new Scanner(System.in);
-        String input = kb.nextLine();
-        return stringToMenuItem(input);
+        return inputDataManager.stringToMenuItem(kb.nextLine());
     }
 
-    public static String getInformationForSetStock() {
+    public static SetStockInformation getInformationForSetStock() {
         Scanner kb = new Scanner(System.in);
-        return kb.nextLine();
+        return inputDataManager.getInformationForSetStock(kb.nextLine());
     }
 
-    public static String getInformationForChangePrice() {
+    public static ChangePriceInformation getInformationForChangePrice() {
         Scanner kb = new Scanner(System.in);
-        return kb.nextLine();
+        return inputDataManager.getInformationForChangePrice(kb.nextLine());
     }
 
-    private static MenuItem stringToMenuItem(String input) {
-        List<String> menuItemElements = stringToMenuItemElements(input);
-
-        int categoryNumber = getCategoryNumber(menuItemElements);
-        String categoryName = getCategoryName(menuItemElements);
-        int menuNumber = getMenuNumber(menuItemElements);
-        String menuName = getMenuName(menuItemElements);
-        BigDecimal menuPrice = getMenuPrice(menuItemElements);
-
-        validCategoryNumberAndName(categoryNumber, categoryName);
-        MenuCategory menuCategory = MenuCategory.getMenuCategory(categoryName);
-
-        return new MenuItem(menuCategory, menuNumber, menuName, menuPrice);
+    public static Order getOrder(Menu menu) {
+        Scanner kb = new Scanner(System.in);
+        return inputDataManager.getOrder(kb.nextLine(), menu);
     }
 
-    private static List<String> stringToMenuItemElements(String input) {
-        return Arrays.asList(
-                input.replace(PERIOD, COMMA)
-                        .replace(SPACE, DELETE)
-                        .replace(HYPHEN, COMMA)
-                        .split(COMMA)
-        );
+    public static EarnCouponSelection getEarnCouponSelection() {
+        Scanner kb = new Scanner(System.in);
+        return EarnCouponSelection.getEarnCouponSelection(kb.nextInt());
     }
 
-    private static int getCategoryNumber(List<String> menuItemElements) {
-        return Integer.valueOf(menuItemElements.get(FIRST_CATEGORY_NUMBER));
+    public static Coupon getCoupon() {
+        Scanner kb = new Scanner(System.in);
+        String phoneNumber = kb.nextLine();
+        return new Coupon(phoneNumber);
     }
 
-    private static String getCategoryName(List<String> menuItemElements) {
-        return menuItemElements.get(CATEGORY_NAME);
+    public static UseCouponSelection getApplyCouponSelection() {
+        Scanner kb = new Scanner(System.in);
+        return UseCouponSelection.getApplyCouponSelection(kb.nextInt());
     }
 
-    private static int getMenuNumber(List<String> menuItemElements) {
-        return Integer.valueOf(menuItemElements.get(MENU_NUMBER));
+    public static Order getOrderForCoupon(OrderList orderList) {
+        Scanner kb = new Scanner(System.in);
+        return inputDataManager.getOrderForCoupon(kb.nextLine(), orderList);
     }
 
-    private static String getMenuName(List<String> menuItemElements) {
-        return menuItemElements.get(MENU_NAME);
-    }
-
-    private static BigDecimal getMenuPrice(List<String> menuItemElements) {
-        Integer menuPrice = Integer.valueOf(menuItemElements.get(MENU_PRICE));
-        return BigDecimal.valueOf(menuPrice);
-    }
-
-    private static void validCategoryNumberAndName(int categoryNumber, String categoryName) {
-        validCategoryNumber(categoryNumber);
-        validCategoryName(categoryName);
-        if (MenuCategory.getMenuCategory(categoryName).getCategoryNumber() != categoryNumber) {
-            throw new IllegalArgumentException("Category number is not matched with category name");
-        }
-    }
-
-    private static void validCategoryNumber(int categoryNumber) {
-        if (Arrays.asList(MenuCategory.values())
-                .stream()
-                .noneMatch(menuCategory -> menuCategory.getCategoryNumber() == categoryNumber)) {
-            throw new IllegalArgumentException("Invalid Category Number : " + categoryNumber);
-        }
-    }
-
-    private static void validCategoryName(String categoryName) {
-        MenuCategory.getMenuCategory(categoryName);
+    public static AdditionalOrderSelection getAdditionalOrderSelection() {
+        Scanner kb = new Scanner(System.in);
+        return AdditionalOrderSelection.getAdditionalOrder(kb.nextInt());
     }
 }

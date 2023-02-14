@@ -2,6 +2,12 @@ package menu;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.menu.Menu;
+import domain.menu.MenuCategory;
+import domain.menu.MenuItem;
+import io.input.information.ChangePriceInformation;
+import io.input.InputDataManagement;
+import io.input.information.SetStockInformation;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -20,19 +26,19 @@ public class MenuTest {
         menuItem1 = new MenuItem(MenuCategory.COFFEE,
                 1,
                 "에스프레소",
-                BigDecimal.valueOf(2000.0));
+                BigDecimal.valueOf(2500));
         menuItem2 = new MenuItem(MenuCategory.TEA,
                 1,
                 "녹차",
-                BigDecimal.valueOf(2000.0));
+                BigDecimal.valueOf(3000));
         menuItem3 = new MenuItem(MenuCategory.DESSERT,
                 1,
                 "브라우니",
-                BigDecimal.valueOf(2000.0));
+                BigDecimal.valueOf(6000));
         menuItem4 = new MenuItem(MenuCategory.COFFEE,
                 2,
                 "아메리카노",
-                BigDecimal.valueOf(2000.0));
+                BigDecimal.valueOf(2000));
     }
 
 
@@ -64,9 +70,14 @@ public class MenuTest {
         menu.registerMenuItem(menuItem2);
         menu.registerMenuItem(menuItem3);
 
-        menu.setStock(MenuCategory.COFFEE, 1, 5);
-        menu.setStock(MenuCategory.TEA, 1, 0);
-        menu.setStock(MenuCategory.DESSERT, 1, 1);
+        InputDataManagement inputDataManager = new InputDataManagement();
+        SetStockInformation setStockInformation1 = inputDataManager.getInformationForSetStock("1-1, 5");
+        SetStockInformation setStockInformation2 = inputDataManager.getInformationForSetStock("2-1, 0");
+        SetStockInformation setStockInformation3 = inputDataManager.getInformationForSetStock("3-1, 1");
+
+        menu.setStock(setStockInformation1);
+        menu.setStock(setStockInformation2);
+        menu.setStock(setStockInformation3);
 
         assertThat(menu.getMenuItems()
                 .get(MenuCategory.COFFEE)
@@ -92,34 +103,52 @@ public class MenuTest {
         menu.registerMenuItem(menuItem2);
         menu.registerMenuItem(menuItem3);
 
-        menu.changePrice(MenuCategory.COFFEE, 1, BigDecimal.valueOf(1000.0));
-        menu.changePrice(MenuCategory.TEA, 1, BigDecimal.valueOf(10000.0));
-        menu.changePrice(MenuCategory.DESSERT, 1, BigDecimal.valueOf(1600.0));
+        InputDataManagement inputDataManager = new InputDataManagement();
+        ChangePriceInformation changePriceInformation1 =
+                inputDataManager.getInformationForChangePrice("1-1, 1000");
+        ChangePriceInformation changePriceInformation2 =
+                inputDataManager.getInformationForChangePrice("2-1, 10000");
+        ChangePriceInformation changePriceInformation3 =
+                inputDataManager.getInformationForChangePrice("3-1, 1600");
+
+        menu.changePrice(changePriceInformation1);
+        menu.changePrice(changePriceInformation2);
+        menu.changePrice(changePriceInformation3);
 
         assertThat(menu.getMenuItems()
                 .get(MenuCategory.COFFEE)
                 .get(0)
                 .getPrice())
-                .isEqualTo(BigDecimal.valueOf(1000.0));
+                .isEqualTo(BigDecimal.valueOf(1000));
         assertThat(menu.getMenuItems()
                 .get(MenuCategory.TEA)
                 .get(0)
                 .getPrice())
-                .isEqualTo(BigDecimal.valueOf(10000.0));
+                .isEqualTo(BigDecimal.valueOf(10000));
         assertThat(menu.getMenuItems()
                 .get(MenuCategory.DESSERT)
                 .get(0)
                 .getPrice())
-                .isEqualTo(BigDecimal.valueOf(1600.0));
+                .isEqualTo(BigDecimal.valueOf(1600));
     }
 
     @Test
-    void showMenuItems() {
+    void showPrice() {
         menu.registerMenuItem(menuItem1);
         menu.registerMenuItem(menuItem2);
         menu.registerMenuItem(menuItem3);
         menu.registerMenuItem(menuItem4);
 
-        menu.showMenuItems();
+        menu.showPrice();
+    }
+
+    @Test
+    void showStock() {
+        menu.registerMenuItem(menuItem1);
+        menu.registerMenuItem(menuItem2);
+        menu.registerMenuItem(menuItem3);
+        menu.registerMenuItem(menuItem4);
+
+        menu.showStock();
     }
 }
